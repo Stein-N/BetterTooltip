@@ -3,112 +3,58 @@
 -- ===================================== --
 BetterTooltipDB = {}
 
-
-
-
 -- ===================================== --
 -- ==         Addon Variablen         == --
 -- ===================================== --
 local frame = CreateFrame("Frame")
-local handlers = {}
-local ANCHOR_POSITION = "ANCHOR_CURSOR_RIGHT"
+local handler = {}
 
 
+-- ============================== --
+-- ==    Event Handler Logic   == --
+-- ============================== --
 
-
-
--- ===================================== --
--- ==        Behilfsfunktionen        == --
--- ===================================== --
--- Tooltips innerhalb des Bildschirms halten
-local function SetDefaultBehaviour(tip)
-    if not tip or tip:IsForbidden() then return end
-    if tip.SetClampedToScreen then
-        tip:SetClampedToScreen(true);
-    end
+-- Event Handler when fights starts
+function handler.PLAYER_REGEN_DISABLED()
+    BetterTooltip:HideTooltips()
 end
 
--- Tooltips deaktivieren
-local function HideTooltips()
-    if not BetterTooltipDB[hideTooltips["key"]] then return end
-
-    GameTooltip:Hide()
-    GameTooltip:SetScript("OnShow", GameTooltip.Hide)
+-- Event Handler when fights ends
+function handler.PLAYER_REGEN_ENABLED()
+    BetterTooltip:ShowTooltip()
 end
 
--- Tooltips reaktivieren
-local function ShowTooltips()
-    GameTooltip:Show()
-    GameTooltip:SetScript("OnShow", nil)
-end
-
--- Questlog ausblenden
-local function HideQuestlog()
-    if not BetterTooltipDB[hideQuestlog["key"]] then return end
-
-    if ObjectiveTrackerFrame then
-        ObjectiveTrackerFrame:Hide()
-    end
-end
-
--- Questlog einblenden
-local function ShowQuestlog()
-    if ObjectiveTrackerFrame then
-        ObjectiveTrackerFrame:Show()
-    end
-end
-
-
-
-
--- ===================================== --
--- ==     Aufbau der Event Handler    == --
--- ===================================== --
-
--- Handler für den Kampfbeginn
-function handlers.PLAYER_REGEN_DISABLED()
-    HideQuestlog()
-    HideTooltips()
-end
-
--- Handler für Kampfende
-function handlers.PLAYER_REGEN_ENABLED()
-    ShowQuestlog()
-    ShowTooltips()
-end
-
-
--- Alles was nach dem Laden des Addons passiert
-function handlers.ADDON_LOADED(name)
-    -- Aufbau des Optionsmenüs
+-- Build the OPtionstab when the Addon was loaded
+function handler.ADDON_LOADED(name)
     if name == BetterTooltipsData["addonName"] then
-        print("Ich habe was gemacht")
         BetterTooltipSettings:BuildSettingsTab()
     end
 end
-
 
 
 -- ============================== --
 -- ==     Core Addon Logic     == --
 -- ============================== --
 
--- Tooltip Anchor Point setzen
--- hooksecurefunc("GameTooltip_SetDefaultAnchor", function(tooltip, parent)
---     if BetterTooltipDB[toggleAnchor["key"]] then 
---         if not tooltip or tooltip:IsForbidden() then return end
---         SetDefaultBehaviour(tooltip) -- verhindert das Tooltips aus dem Bild ragen
---         tooltip:SetOwner(parent or UIParent, ANCHOR_POSITION)
---     end
--- end)
+hooksecurefunc("GameTooltip_SetDefaultAnchor", function(tooltip, parent)
+    local enabled = BetterTooltip:IsAnchorEnabled()
+    local anchor = BetterTooltip:GetAnchorPosition()
 
--- -- Kampf begin und end Event registrieren
--- frame:RegisterEvent("PLAYER_REGEN_DISABLED") -- Kampfbeginn
--- frame:RegisterEvent("PLAYER_REGEN_ENABLED")  -- Kampfende
-frame:RegisterEvent("ADDON_LOADED") -- Alle Addons wurden geladen
+    if enabled then
+        if not tooltip or tooltip:IsForbidden() then return end
 
--- Event Handler basierend auf Events ausführen
+        BetterTooltip:SetDefaultBehaviour(tooltip)
+        tooltip:SetOwner(parent or UIParent, anchor)
+    end
+end)
+
+-- Register Events to the Frame
+frame:RegisterEvent("PLAYER_REGEN_DISABLED") -- Fight begins
+frame:RegisterEvent("PLAYER_REGEN_ENABLED")  -- Fight ends
+frame:RegisterEvent("ADDON_LOADED") -- Addons loaded
+
+-- Execute all Event Handler
 frame:SetScript("OnEvent", function(self, event, ...)
-    local func = handlers[event]
+    local func = handler[event]
     if func then return func(...) end
 end)

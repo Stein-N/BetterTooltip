@@ -1,3 +1,9 @@
+-- ================================ --
+-- ==  Constains all Addon Data  == --
+-- ==   and Settings with Lang   == --
+-- ================================ --
+
+
 BetterTooltipsData = {
     ["addonName"] = "BetterTooltip"
 }
