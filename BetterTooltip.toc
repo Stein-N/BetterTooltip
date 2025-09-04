@@ -1,0 +1,6 @@
+## Interface: 110200
+## Title: Better Tooltip
+## Notes: Simple and configurable Tooltip Addon
+## SavedVariables: BetterTooltipDB
+
+BetterTooltip.lua
