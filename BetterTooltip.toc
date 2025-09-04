@@ -3,4 +3,6 @@
 ## Notes: Simple and configurable Tooltip Addon
 ## SavedVariables: BetterTooltipDB
 
+BetterTooltipData.lua
+
 BetterTooltip.lua
