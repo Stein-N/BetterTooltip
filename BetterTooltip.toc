@@ -1,8 +1,14 @@
 ## Interface: 110200
-## Title: Better Tooltip
+## Title: BetterTooltip
 ## Notes: Simple and configurable Tooltip Addon
 ## SavedVariables: BetterTooltipDB
 
+## Complete Data
 BetterTooltipData.lua
 
-BetterTooltip.lua
+## All functions that must be loaded before Main 
+BetterTooltipSettings.lua
+BetterTooltipHandler.lua
+
+## Main Entrypoint
+BetterTooltipCore.lua

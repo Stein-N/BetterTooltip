@@ -1,4 +1,8 @@
-BetterTooltipData = {
+BetterTooltipsData = {
+    ["addonName"] = "BetterTooltip"
+}
+
+BetterTooltipOptions = {
     toggleAnchor = {
         ["key"] = "Tooltip_Toggle_Anchor",
         ["default"] = false,
