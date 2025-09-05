@@ -72,3 +72,8 @@ end)
 TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, function(tooltip, data)
     if BetterTooltip:IsShowUnitIdEnabled() then BetterTooltip:AddUnitId(tooltip) end
 end)
+
+-- Add extra Data to the Tooltip when a Spell is hovered
+TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Spell, function(tooltip, data)
+    if BetterTooltip:IsShowSpellIdEnabled() then BetterTooltip:AddSpellId(tooltip) end
+end)
