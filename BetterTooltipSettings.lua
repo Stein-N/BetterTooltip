@@ -58,22 +58,25 @@ function BetterTooltipSettings:BuildSettingsTab()
     local anchorPosition = BetterTooltipOptions["anchorPosition"]
     local hideTooltips = BetterTooltipOptions["hideTooltips"]
     local hideTooltipHealthbar = BetterTooltipOptions["hideTooltipHealthbar"]
-    local showUnitIds = BetterTooltipOptions["showUnitId"]
-    local showSpellIds = BetterTooltipOptions["showSpellId"]
+    local showUnitId = BetterTooltipOptions["showUnitId"]
+    local showSpellId = BetterTooltipOptions["showSpellId"]
+    local showMountId = BetterTooltipOptions["showMountId"]
 
     SetDefaultSettings(toggleAnchor)
     SetDefaultSettings(anchorPosition)
     SetDefaultSettings(hideTooltips)
     SetDefaultSettings(hideTooltipHealthbar)
-    SetDefaultSettings(showUnitIds)
-    SetDefaultSettings(showSpellIds)
+    SetDefaultSettings(showUnitId)
+    SetDefaultSettings(showSpellId)
+    SetDefaultSettings(showMountId)
 
     RegisterCheckbox(category, toggleAnchor, toggleAnchor[langCode] or toggleAnchor["enEN"])
     RegisterDropdown(category, anchorPosition, anchorPosition[langCode] or anchorPosition["enEN"], BuildAnchorOptions)
     RegisterCheckbox(category, hideTooltips, hideTooltips[langCode] or hideTooltips["enEN"])
     RegisterCheckbox(category, hideTooltipHealthbar, hideTooltipHealthbar[langCode] or hideTooltipHealthbar["enEN"])
-    RegisterCheckbox(category, showUnitIds, showUnitIds[langCode] or showUnitIds["enEN"])
-    RegisterCheckbox(category, showSpellIds, showSpellIds[langCode] or showSpellIds["enEN"])
+    RegisterCheckbox(category, showUnitId, showUnitId[langCode] or showUnitId["enEN"])
+    RegisterCheckbox(category, showSpellId, showSpellId[langCode] or showSpellId["enEN"])
+    RegisterCheckbox(category, showMountId, showMountId[langCode] or showMountId["enEN"])
 
     Settings.RegisterAddOnCategory(category)
 end

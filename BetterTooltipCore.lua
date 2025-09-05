@@ -77,3 +77,8 @@ end)
 TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Spell, function(tooltip, data)
     if BetterTooltip:IsShowSpellIdEnabled() then BetterTooltip:AddSpellId(tooltip) end
 end)
+
+-- Add extra Data to the Tooltip when a Mount is hovered
+TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Mount, function(tooltip, data)
+    if BetterTooltip:IsShowMountIdEnabled() then BetterTooltip:AddMountId(tooltip, data) end
+end)

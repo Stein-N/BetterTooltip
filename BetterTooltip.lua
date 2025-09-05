@@ -34,6 +34,11 @@ function BetterTooltip:IsShowUnitIdEnabled()
     return GetOptionValue("showUnitId")
 end
 
+-- Returns the showMountIds from SavedVariables
+function BetterTooltip:IsShowMountIdEnabled()
+    return GetOptionValue("showMountId")
+end
+
 -- Returns the showSpellIds from SavedVariables
 function BetterTooltip:IsShowSpellIdEnabled()
     return GetOptionValue("showSpellId")
@@ -116,14 +121,24 @@ function BetterTooltip:AddUnitId(tooltip)
     local parts = BetterTooltipUtils:SplitString(guid, "%-")
     if parts == nil or parts == {} then return end
 
-    local prefix = GetIdPrefix("showUnitId") or "Unit"
+    local prefix = GetIdPrefix("showUnitId") or "Unit-ID"
     BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. parts[6])
 end
 
+-- Adds the Spell Id to the Tooltip
 function BetterTooltip:AddSpellId(tooltip)
     local _, spellId = tooltip:GetSpell()
     if not spellId then return end
 
-    local prefix = GetIdPrefix("showSpellId") or "Spell"
+    local prefix = GetIdPrefix("showSpellId") or "Spell-ID"
     BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. spellId)
+end
+
+-- Adds the Mount Id to the Tooltip
+function BetterTooltip:AddMountId(tooltip, data)
+    if not data.id then return end
+    local mountId = data.id
+
+    local prefix = GetIdPrefix("showMountId") or "Mount-ID"
+    BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. mountId)
 end
