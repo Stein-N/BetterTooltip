@@ -65,7 +65,7 @@ end)
 
 
 -- ============================ --
--- ==   Tooltip Data Manip   == --
+-- ==   Tooltip Extra Data   == --
 -- ============================ --
 
 -- Add extra Data to the Tooltip when a Unit is hovered
@@ -96,4 +96,9 @@ end)
 -- Add extra Data to the Tooltip when a Toy is hovered
 TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Toy, function(tooltip, data)
     if BetterTooltip:IsShowToyIdEnabled() then BetterTooltip:AddToyId(tooltip, data) end
+end)
+
+-- Add extra Data to the Tooltip when a Currency is hovered
+TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Currency, function(tooltip, data)
+    if BetterTooltip:IsShowCurrencyIdEnabled() then BetterTooltip:AddCurrencyId(tooltip, data) end
 end)

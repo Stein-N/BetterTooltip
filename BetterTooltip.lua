@@ -169,3 +169,12 @@ function BetterTooltip:AddToyId(tooltip, data)
     local prefix = GetIdPrefix("showToyId") or "Toy-ID"
     BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. toyId)
 end
+
+-- Adds the Toy Id to the Tooltip
+function BetterTooltip:AddCurrencyId(tooltip, data)
+    if not data.id then return end
+    local currencyId = data.id
+
+    local prefix = GetIdPrefix("showCurrencyId") or "Currency-ID"
+    BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. currencyId)
+end
