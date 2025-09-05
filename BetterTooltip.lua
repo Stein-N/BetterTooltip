@@ -4,7 +4,6 @@
 -- ================================ --
 
 BetterTooltip = {}
-HealthbarTexture = GameTooltipStatusBarTexture:GetTexture()
 
 -- Loads the given SavedVariables Key
 local function GetOptionValue(variable)
@@ -51,6 +50,6 @@ function BetterTooltip:HideHealthBar()
     if enabled then
         GameTooltipStatusBarTexture:SetTexture("")
     else 
-        GameTooltipStatusBarTexture:SetTexture(HealthbarTexture)
+        GameTooltipStatusBarTexture:SetTexture(137014)
     end
 end
