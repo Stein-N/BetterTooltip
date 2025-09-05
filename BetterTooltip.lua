@@ -187,3 +187,12 @@ function BetterTooltip:AddQuestId(tooltip, data)
     local prefix = GetIdPrefix("showQuestId") or "Quest-ID"
     BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. questId)
 end
+
+-- Adds the BatlePet Id to the Tooltip
+function BetterTooltip:AddBattlePet(tooltip, data)
+    if not data.id then return end
+    local petId = data.id
+
+    local prefix = GetIdPrefix("showBattlePetId") or "BattlePet-ID"
+    BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. petId)
+end

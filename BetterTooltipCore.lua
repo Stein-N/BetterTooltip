@@ -103,7 +103,7 @@ TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Currency, function(
     if BetterTooltip:IsShowCurrencyIdEnabled() then BetterTooltip:AddCurrencyId(tooltip, data) end
 end)
 
--- Add extra Data to the Tooltip when a Quest is clicked 
+-- Add extra Data to the Tooltip when a Quest is hovered in BtWQuest or a linked quest is clicked
 TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Quest, function(tooltip, data)
     if BetterTooltip:IsShowQuestIdEnabled() then BetterTooltip:AddQuestId(tooltip, data) end
 end)
@@ -112,4 +112,16 @@ end)
 hooksecurefunc("QuestMapLogTitleButton_OnEnter", function(button)
     local data = { id = button.questID} -- quick and dirty workaround to prevent duplicate code
     if BetterTooltip:IsShowQuestIdEnabled() then BetterTooltip:AddQuestId(GameTooltip, data) end
+end)
+
+-- Add extra Data to the Tooltip when a Companion Pet is hovered in your journal
+TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.CompanionPet, function(tooltip, data)
+    
+end)
+
+-- Adds the BattlePet id to the Tooltip
+-- Tooltip in Auctionhouse get overflowed a bit, but dont know why
+hooksecurefunc("BattlePetTooltipTemplate_SetBattlePet", function(tooltip, petData)
+    local data = { id = petData.speciesID}
+    if BetterTooltip:IsShowBattlePetIdEnabled() then BetterTooltip:AddBattlePet(tooltip, data) end
 end)

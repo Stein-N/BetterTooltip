@@ -66,6 +66,7 @@ function BetterTooltipSettings:BuildSettingsTab()
     local showToyId = BetterTooltipOptions["showToyId"]
     local showCurrencyId = BetterTooltipOptions["showCurrencyId"]
     local showQuestId = BetterTooltipOptions["showQuestId"]
+    local showBattlePetId = BetterTooltipOptions["showBattlePetId"]
 
     SetDefaultSettings(toggleAnchor)
     SetDefaultSettings(anchorPosition)
@@ -79,6 +80,7 @@ function BetterTooltipSettings:BuildSettingsTab()
     SetDefaultSettings(showToyId)
     SetDefaultSettings(showCurrencyId)
     SetDefaultSettings(showQuestId)
+    SetDefaultSettings(showBattlePetId)
 
     RegisterCheckbox(category, toggleAnchor, toggleAnchor[langCode] or toggleAnchor["enEN"])
     RegisterDropdown(category, anchorPosition, anchorPosition[langCode] or anchorPosition["enEN"], BuildAnchorOptions)
@@ -92,6 +94,7 @@ function BetterTooltipSettings:BuildSettingsTab()
     RegisterCheckbox(category, showToyId, showToyId[langCode] or showToyId["enEN"])
     RegisterCheckbox(category, showCurrencyId, showCurrencyId[langCode] or showCurrencyId["enEN"])
     RegisterCheckbox(category, showQuestId, showQuestId[langCode] or showQuestId["enEN"])
+    RegisterCheckbox(category, showBattlePetId, showBattlePetId[langCode] or showBattlePetId["enEN"])
 
     Settings.RegisterAddOnCategory(category)
 end
