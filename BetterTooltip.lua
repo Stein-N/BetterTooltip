@@ -44,7 +44,7 @@ function BetterTooltip:ShowTooltip()
     GameTooltip:SetScript("OnShow", nil)
 end
 
--- Deaktivate the Tooltip Healthbar
+-- Deactivate the Tooltip Healthbar
 function BetterTooltip:HideHealthBar()
     local enabled = GetOptionValue("hideTooltipHealthbar")
     if enabled then
