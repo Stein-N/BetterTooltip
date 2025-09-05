@@ -47,7 +47,6 @@ end
 
 -- Deaktivate the Tooltip Healthbar
 function BetterTooltip:HideHealthBar()
-    print(HealthbarTexture)
     local enabled = GetOptionValue("hideTooltipHealthbar")
     if enabled then
         GameTooltipStatusBarTexture:SetTexture("")
