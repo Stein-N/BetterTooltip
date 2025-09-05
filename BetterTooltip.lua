@@ -4,6 +4,7 @@
 -- ================================ --
 
 BetterTooltip = {}
+HealthbarTexture = GameTooltipStatusBarTexture:GetTexture()
 
 -- Loads the given SavedVariables Key
 local function GetOptionValue(variable)
@@ -42,4 +43,15 @@ end
 function BetterTooltip:ShowTooltip()
     GameTooltip:Show()
     GameTooltip:SetScript("OnShow", nil)
+end
+
+-- Deaktivate the Tooltip Healthbar
+function BetterTooltip:HideHealthBar()
+    print(HealthbarTexture)
+    local enabled = GetOptionValue("hideTooltipHealthbar")
+    if enabled then
+        GameTooltipStatusBarTexture:SetTexture("")
+    else 
+        GameTooltipStatusBarTexture:SetTexture(HealthbarTexture)
+    end
 end

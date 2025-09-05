@@ -3,8 +3,9 @@
 -- ===================================== --
 BetterTooltipDB = {}
 
+
 -- ===================================== --
--- ==         Addon Variablen         == --
+-- ==         Addon Variables         == --
 -- ===================================== --
 local frame = CreateFrame("Frame")
 local handler = {}
@@ -46,6 +47,8 @@ hooksecurefunc("GameTooltip_SetDefaultAnchor", function(tooltip, parent)
         BetterTooltip:SetDefaultBehaviour(tooltip)
         tooltip:SetOwner(parent or UIParent, anchor)
     end
+
+    BetterTooltip:HideHealthBar()
 end)
 
 -- Register Events to the Frame

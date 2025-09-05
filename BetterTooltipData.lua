@@ -35,6 +35,19 @@ BetterTooltipOptions = {
         }
     },
 
+    hideTooltipHealthbar = {
+        ["key"] = "Tooltip_Hide_Healthbar",
+        ["default"] = false,
+        ["deDE"] = {
+            ["name"] = "Lebensbalken verstecken",
+            ["tooltip"] = "Deaktiviere den Lebensbalken am Tooltip"
+        },
+        ["enEN"] = {
+            ["name"] = "Hide Healthbar",
+            ["tooltip"] = "Hide the Healthbar"
+        }
+    },
+
     hideTooltips = {
         ["key"] = "Tooltip_Hide",
         ["default"] = false,
@@ -45,6 +58,6 @@ BetterTooltipOptions = {
         ["enEN"] = {
             ["name"] = "Hide Tooltips",
             ["tooltip"] = "Hide all toolitps while fighting"
-        } 
+        }
     }
 }
