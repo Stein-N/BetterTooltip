@@ -54,47 +54,15 @@ function BetterTooltipSettings:BuildSettingsTab()
     local langCode = GetLocale()
     local category, layout = Settings.RegisterVerticalLayoutCategory(BetterTooltipsData["addonName"])
 
-    local toggleAnchor = BetterTooltipOptions["toggleAnchor"]
-    local anchorPosition = BetterTooltipOptions["anchorPosition"]
-    local hideTooltips = BetterTooltipOptions["hideTooltips"]
-    local hideTooltipHealthbar = BetterTooltipOptions["hideTooltipHealthbar"]
-    local showUnitId = BetterTooltipOptions["showUnitId"]
-    local showSpellId = BetterTooltipOptions["showSpellId"]
-    local showMountId = BetterTooltipOptions["showMountId"]
-    local showAuraId = BetterTooltipOptions["showAuraId"]
-    local showItemId = BetterTooltipOptions["showItemId"]
-    local showToyId = BetterTooltipOptions["showToyId"]
-    local showCurrencyId = BetterTooltipOptions["showCurrencyId"]
-    local showQuestId = BetterTooltipOptions["showQuestId"]
-    local showBattlePetId = BetterTooltipOptions["showBattlePetId"]
+    for key, option in pairs(BetterTooltipOptions) do
+        SetDefaultSettings(option)
 
-    SetDefaultSettings(toggleAnchor)
-    SetDefaultSettings(anchorPosition)
-    SetDefaultSettings(hideTooltips)
-    SetDefaultSettings(hideTooltipHealthbar)
-    SetDefaultSettings(showUnitId)
-    SetDefaultSettings(showSpellId)
-    SetDefaultSettings(showMountId)
-    SetDefaultSettings(showAuraId)
-    SetDefaultSettings(showItemId)
-    SetDefaultSettings(showToyId)
-    SetDefaultSettings(showCurrencyId)
-    SetDefaultSettings(showQuestId)
-    SetDefaultSettings(showBattlePetId)
-
-    RegisterCheckbox(category, toggleAnchor, toggleAnchor[langCode] or toggleAnchor["enEN"])
-    RegisterDropdown(category, anchorPosition, anchorPosition[langCode] or anchorPosition["enEN"], BuildAnchorOptions)
-    RegisterCheckbox(category, hideTooltips, hideTooltips[langCode] or hideTooltips["enEN"])
-    RegisterCheckbox(category, hideTooltipHealthbar, hideTooltipHealthbar[langCode] or hideTooltipHealthbar["enEN"])
-    RegisterCheckbox(category, showUnitId, showUnitId[langCode] or showUnitId["enEN"])
-    RegisterCheckbox(category, showSpellId, showSpellId[langCode] or showSpellId["enEN"])
-    RegisterCheckbox(category, showMountId, showMountId[langCode] or showMountId["enEN"])
-    RegisterCheckbox(category, showAuraId, showAuraId[langCode] or showAuraId["enEN"])
-    RegisterCheckbox(category, showItemId, showItemId[langCode] or showItemId["enEN"])
-    RegisterCheckbox(category, showToyId, showToyId[langCode] or showToyId["enEN"])
-    RegisterCheckbox(category, showCurrencyId, showCurrencyId[langCode] or showCurrencyId["enEN"])
-    RegisterCheckbox(category, showQuestId, showQuestId[langCode] or showQuestId["enEN"])
-    RegisterCheckbox(category, showBattlePetId, showBattlePetId[langCode] or showBattlePetId["enEN"])
+        if type(option["default"]) == "boolean" then
+            RegisterCheckbox(category, option, option[langCode] or option["enEN"])
+        else
+            RegisterDropdown(category, option, option[langCode] or option["enEN"], BuildAnchorOptions)
+        end
+    end
 
     Settings.RegisterAddOnCategory(category)
 end

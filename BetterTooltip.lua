@@ -19,61 +19,15 @@ local function GetIdPrefix(variable)
     return langObj["prefix"]
 end
 
--- Returns the toggleAnchor from SavedVariables
-function BetterTooltip:IsAnchorEnabled()
-    return GetOptionValue("toggleAnchor")
+-- Returns the SavedVariable for the given variable
+function BetterTooltip:IsEnabled(variable)
+    return GetOptionValue(variable)
 end
 
 -- Returns the anchorPosition from SavedVariables
 function BetterTooltip:GetAnchorPosition()
     return GetOptionValue("anchorPosition")
 end
-
--- Returns the showUnitIds from SavedVariables
-function BetterTooltip:IsShowUnitIdEnabled()
-    return GetOptionValue("showUnitId")
-end
-
--- Returns the showSpellIds from SavedVariables
-function BetterTooltip:IsShowSpellIdEnabled()
-    return GetOptionValue("showSpellId")
-end
-
--- Returns the showMountIds from SavedVariables
-function BetterTooltip:IsShowMountIdEnabled()
-    return GetOptionValue("showMountId")
-end
-
--- Returns the showAuraId from SavedVariables
-function BetterTooltip:IsShowAuraIdEnabled()
-    return GetOptionValue("showAuraId")
-end
-
--- Returns the showItemId from SavedVariables
-function BetterTooltip:IsShowItemtIdEnabled()
-    return GetOptionValue("showItemId")
-end
-
--- Returns the showToytId from SavedVariables
-function BetterTooltip:IsShowToyIdEnabled()
-    return GetOptionValue("showToyId")
-end
-
--- Returns the showCurrencyId from SavedVariables
-function BetterTooltip:IsShowCurrencyIdEnabled()
-    return GetOptionValue("showCurrencyId")
-end
-
--- Returns the showQuestId from SavedVariables
-function BetterTooltip:IsShowQuestIdEnabled()
-    return GetOptionValue("showQuestId")
-end
-
--- Returns the showBattlePetId from SavedVariables
-function BetterTooltip:IsShowBattlePetIdEnabled()
-    return GetOptionValue("showBattlePetId")
-end
-
 
 -- Tooltip cant be outside the Screen
 function BetterTooltip:SetDefaultBehaviour(tooltip)
@@ -125,74 +79,9 @@ function BetterTooltip:AddUnitId(tooltip)
     BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. parts[6])
 end
 
--- Adds the Spell Id to the Tooltip
-function BetterTooltip:AddSpellId(tooltip)
-    local _, spellId = tooltip:GetSpell()
-    if not spellId then return end
-
-    local prefix = GetIdPrefix("showSpellId") or "Spell-ID"
-    BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. spellId)
-end
-
--- Adds the Mount Id to the Tooltip
-function BetterTooltip:AddMountId(tooltip, data)
+function BetterTooltip:AddId(tooltip, data, prefixKey, defaultPrefix)
     if not data.id then return end
-    local mountId = data.id
 
-    local prefix = GetIdPrefix("showMountId") or "Mount-ID"
-    BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. mountId)
-end
-
--- Adds the Aura Id to the Tooltip
-function BetterTooltip:AddAuraId(tooltip, data)
-    if not data.id then return end
-    local auraId = data.id
-
-    local prefix = GetIdPrefix("showAuraId") or "Aura-ID"
-    BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. auraId)
-end
-
--- Adds the Item Id to the Tooltip
-function BetterTooltip:AddItemId(tooltip, data)
-    if not data.id then return end
-    local itemId = data.id
-
-    local prefix = GetIdPrefix("showItemId") or "Item-ID"
-    BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. itemId)
-end
-
--- Adds the Toy Id to the Tooltip
-function BetterTooltip:AddToyId(tooltip, data)
-    if not data.id then return end
-    local toyId = data.id
-
-    local prefix = GetIdPrefix("showToyId") or "Toy-ID"
-    BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. toyId)
-end
-
--- Adds the Currency Id to the Tooltip
-function BetterTooltip:AddCurrencyId(tooltip, data)
-    if not data.id then return end
-    local currencyId = data.id
-
-    local prefix = GetIdPrefix("showCurrencyId") or "Currency-ID"
-    BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. currencyId)
-end
-
--- Adds the Quest Id to the Tooltip
-function BetterTooltip:AddQuestId(tooltip, data)
-    if not data.id then return end
-    local questId = data.id
-
-    local prefix = GetIdPrefix("showQuestId") or "Quest-ID"
-    BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. questId)
-end
-
--- Adds the BatlePet Id to the Tooltip
-function BetterTooltip:AddBattlePet(tooltip, data)
-    if not data.id then return end
-    local petId = data.id
-
-    local prefix = GetIdPrefix("showBattlePetId") or "BattlePet-ID"
-    BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. petId)
+    local prefix = GetIdPrefix(prefixKey) or defaultPrefix
+    BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. data.id)
 end
