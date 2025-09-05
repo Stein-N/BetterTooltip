@@ -53,3 +53,19 @@ function BetterTooltip:HideHealthBar()
         GameTooltipStatusBarTexture:SetTexture(137014)
     end
 end
+
+-- Adds the Unit Id to the Tooltip
+function BetterTooltip:AddUnitId(tooltip)
+    if not tooltip or BetterTooltipUtils:IsPlayerHovered(tooltip) 
+    then return end
+
+    local _, unit = tooltip:GetUnit()
+
+    local guid = UnitGUID(unit)
+    if guid == nil or guid == "" then return end
+
+    local parts = BetterTooltipUtils:SplitString(guid, "%-")
+    if parts == nil or parts == {} then return end
+
+    BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. "Unit ID: |r" .. parts[6])
+end

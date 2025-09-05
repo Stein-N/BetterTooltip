@@ -8,6 +8,7 @@ BetterTooltipData.lua
 
 ## All functions that must be loaded before Main 
 BetterTooltipSettings.lua
+BetterTooltipUtils.lua
 BetterTooltip.lua
 
 ## Main Entrypoint

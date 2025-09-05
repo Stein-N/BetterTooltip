@@ -37,6 +37,7 @@ end
 -- ==     Core Addon Logic     == --
 -- ============================== --
 
+-- Apply the Tooltip Anchor Position
 hooksecurefunc("GameTooltip_SetDefaultAnchor", function(tooltip, parent)
     local enabled = BetterTooltip:IsAnchorEnabled()
     local anchor = BetterTooltip:GetAnchorPosition()
@@ -60,4 +61,14 @@ frame:RegisterEvent("ADDON_LOADED") -- Addons loaded
 frame:SetScript("OnEvent", function(self, event, ...)
     local func = handler[event]
     if func then return func(...) end
+end)
+
+
+-- ============================ --
+-- ==   Tooltip Data Manip   == --
+-- ============================ --
+
+-- Add extra Data to the Tooltip when a Unit is hovered
+TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, function(tooltip, data)
+    BetterTooltip:AddUnitId(tooltip)
 end)

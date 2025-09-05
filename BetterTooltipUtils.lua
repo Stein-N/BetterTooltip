@@ -12,7 +12,7 @@ function BetterTooltipUtils:AddTooltipIdText(tooltip, text)
     if not tooltip or tooltip:IsForbidden() then return end
     if text == nil or text == "" then return end
 
-    tooltip:AddLine(text)
+    tooltip:AddLine(text, 1, 1, 1)
     tooltip:Show()
 end
 
