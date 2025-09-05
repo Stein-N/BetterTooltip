@@ -34,14 +34,14 @@ function BetterTooltip:IsShowUnitIdEnabled()
     return GetOptionValue("showUnitId")
 end
 
--- Returns the showMountIds from SavedVariables
-function BetterTooltip:IsShowMountIdEnabled()
-    return GetOptionValue("showMountId")
-end
-
 -- Returns the showSpellIds from SavedVariables
 function BetterTooltip:IsShowSpellIdEnabled()
     return GetOptionValue("showSpellId")
+end
+
+-- Returns the showMountIds from SavedVariables
+function BetterTooltip:IsShowMountIdEnabled()
+    return GetOptionValue("showMountId")
 end
 
 -- Returns the showAuraId from SavedVariables
@@ -141,4 +141,13 @@ function BetterTooltip:AddMountId(tooltip, data)
 
     local prefix = GetIdPrefix("showMountId") or "Mount-ID"
     BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. mountId)
+end
+
+-- Adds the Aura Id to the Tooltip
+function BetterTooltip:AddAuraId(tooltip, data)
+    if not data.id then return end
+    local auraId = data.id
+
+    local prefix = GetIdPrefix("showAuraId") or "Aura-ID"
+    BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. auraId)
 end
