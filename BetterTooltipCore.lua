@@ -92,3 +92,8 @@ end)
 TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, function(tooltip, data)
     if BetterTooltip:IsShowItemtIdEnabled() then BetterTooltip:AddItemId(tooltip, data) end
 end)
+
+-- Add extra Data to the Tooltip when a Toy is hovered
+TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Toy, function(tooltip, data)
+    if BetterTooltip:IsShowToyIdEnabled() then BetterTooltip:AddToyId(tooltip, data) end
+end)
