@@ -102,3 +102,14 @@ end)
 TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Currency, function(tooltip, data)
     if BetterTooltip:IsShowCurrencyIdEnabled() then BetterTooltip:AddCurrencyId(tooltip, data) end
 end)
+
+-- Add extra Data to the Tooltip when a Quest is clicked 
+TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Quest, function(tooltip, data)
+    if BetterTooltip:IsShowQuestIdEnabled() then BetterTooltip:AddQuestId(tooltip, data) end
+end)
+
+-- Adds the Quest Id to the Quest Tooltip inside the Questlog
+hooksecurefunc("QuestMapLogTitleButton_OnEnter", function(button)
+    local data = { id = button.questID} -- quick and dirty workaround to prevent duplicate code
+    if BetterTooltip:IsShowQuestIdEnabled() then BetterTooltip:AddQuestId(GameTooltip, data) end
+end)

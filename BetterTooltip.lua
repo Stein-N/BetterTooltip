@@ -170,11 +170,20 @@ function BetterTooltip:AddToyId(tooltip, data)
     BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. toyId)
 end
 
--- Adds the Toy Id to the Tooltip
+-- Adds the Currency Id to the Tooltip
 function BetterTooltip:AddCurrencyId(tooltip, data)
     if not data.id then return end
     local currencyId = data.id
 
     local prefix = GetIdPrefix("showCurrencyId") or "Currency-ID"
     BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. currencyId)
+end
+
+-- Adds the Quest Id to the Tooltip
+function BetterTooltip:AddQuestId(tooltip, data)
+    if not data.id then return end
+    local questId = data.id
+
+    local prefix = GetIdPrefix("showQuestId") or "Quest-ID"
+    BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. questId)
 end
