@@ -83,7 +83,12 @@ TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Mount, function(too
     if BetterTooltip:IsShowMountIdEnabled() then BetterTooltip:AddMountId(tooltip, data) end
 end)
 
--- Add extra Data to the Tooltip when a Mount is hovered
+-- Add extra Data to the Tooltip when a UnitAura is hovered
 TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.UnitAura, function(tooltip, data)
     if BetterTooltip:IsShowAuraIdEnabled() then BetterTooltip:AddAuraId(tooltip, data) end
+end)
+
+-- Add extra Data to the Tooltip when a Item is hovered
+TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, function(tooltip, data)
+    if BetterTooltip:IsShowItemtIdEnabled() then BetterTooltip:AddItemId(tooltip, data) end
 end)

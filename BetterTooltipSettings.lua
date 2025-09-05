@@ -62,6 +62,7 @@ function BetterTooltipSettings:BuildSettingsTab()
     local showSpellId = BetterTooltipOptions["showSpellId"]
     local showMountId = BetterTooltipOptions["showMountId"]
     local showAuraId = BetterTooltipOptions["showAuraId"]
+    local showItemId = BetterTooltipOptions["showItemId"]
 
     SetDefaultSettings(toggleAnchor)
     SetDefaultSettings(anchorPosition)
@@ -71,6 +72,7 @@ function BetterTooltipSettings:BuildSettingsTab()
     SetDefaultSettings(showSpellId)
     SetDefaultSettings(showMountId)
     SetDefaultSettings(showAuraId)
+    SetDefaultSettings(showItemId)
 
     RegisterCheckbox(category, toggleAnchor, toggleAnchor[langCode] or toggleAnchor["enEN"])
     RegisterDropdown(category, anchorPosition, anchorPosition[langCode] or anchorPosition["enEN"], BuildAnchorOptions)
@@ -80,6 +82,7 @@ function BetterTooltipSettings:BuildSettingsTab()
     RegisterCheckbox(category, showSpellId, showSpellId[langCode] or showSpellId["enEN"])
     RegisterCheckbox(category, showMountId, showMountId[langCode] or showMountId["enEN"])
     RegisterCheckbox(category, showAuraId, showAuraId[langCode] or showAuraId["enEN"])
+    RegisterCheckbox(category, showItemId, showItemId[langCode] or showItemId["enEN"])
 
     Settings.RegisterAddOnCategory(category)
 end

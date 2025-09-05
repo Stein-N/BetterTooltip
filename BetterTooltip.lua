@@ -151,3 +151,12 @@ function BetterTooltip:AddAuraId(tooltip, data)
     local prefix = GetIdPrefix("showAuraId") or "Aura-ID"
     BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. auraId)
 end
+
+-- Adds the Item Id to the Tooltip
+function BetterTooltip:AddItemId(tooltip, data)
+    if not data.id then return end
+    local itemId = data.id
+
+    local prefix = GetIdPrefix("showItemId") or "Item-ID"
+    BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. itemId)
+end
