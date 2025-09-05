@@ -19,12 +19,34 @@ local function RegisterSetting(category, settingObj, langObj)
     return Settings.RegisterAddOnSetting(category, variable, variable, BetterTooltipDB, type(settingObj["default"]), langObj["name"], BetterTooltipDB[variable])
 end
 
--- function to register a new Checkbox
+-- Register a new Checkbox Setting
 local function RegisterCheckbox(category, settingObj, langObj)
     local setting = RegisterSetting(category, settingObj, langObj)
     setting:SetValueChangedCallback(UpdateSetting)
 
     Settings.CreateCheckbox(category, setting, langObj["tooltip"])
+end
+
+-- Register a Dropdown Setting
+local function RegisterDropdown(category, settingObj, langObj, func)
+    local setting = RegisterSetting(category, settingObj, langObj)
+    setting:SetValueChangedCallback(UpdateSetting)
+
+    Settings.CreateDropdown(category, setting, func, langObj["tooltip"])
+end
+
+-- Build Dropdown menu for anchor position option
+local function BuildAnchorOptions()
+    local container = Settings.CreateControlTextContainer()
+    local setting = BetterTooltipOptions["anchorPosition"]
+    local langObj = setting[GetLocale()] or setting["enEN"]
+    local options = langObj["options"]
+
+    container:Add("ANCHOR_CURSOR_RIGHT", options[1])
+    container:Add("ANCHOR_CURSOR", options[2])
+    container:Add("ANCHOR_CURSOR_LEFT", options[3])
+
+    return container:GetData()
 end
 
 -- Build the Settings tab
@@ -43,6 +65,7 @@ function BetterTooltipSettings:BuildSettingsTab()
     SetDefaultSettings(hideTooltipHealthbar)
 
     RegisterCheckbox(category, toggleAnchor, toggleAnchor[langCode] or toggleAnchor["enEN"])
+    RegisterDropdown(category, anchorPosition, anchorPosition[langCode] or anchorPosition["enEN"], BuildAnchorOptions)
     RegisterCheckbox(category, hideTooltips, hideTooltips[langCode] or hideTooltips["enEN"])
     RegisterCheckbox(category, hideTooltipHealthbar, hideTooltipHealthbar[langCode] or hideTooltipHealthbar["enEN"])
 

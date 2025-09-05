@@ -1,5 +1,5 @@
 -- ================================ --
--- ==  Constains all Addon Data  == --
+-- ==   Contains all Addon Data  == --
 -- ==   and Settings with Lang   == --
 -- ================================ --
 
@@ -27,11 +27,13 @@ BetterTooltipOptions = {
         ["default"] = "ANCHOR_CURSOR_RIGHT",
         ["deDE"] = {
             ["name"] = "Tooltip Position",
-            ["tooltip"] = "Wähle die Position, an welcher der Tooltip befestigt wird."
+            ["tooltip"] = "Wähle die Position, an welcher der Tooltip befestigt wird.",
+            ["options"] = {"Rechts", "Mitte", "Links"}
         },
         ["enEN"] = {
             ["name"] = "Tooltip position",
-            ["tooltip"] = "Choose the anchor position."
+            ["tooltip"] = "Choose the anchor position.",
+            ["options"] = {"Right", "Center", "Left"}
         }
     },
 
