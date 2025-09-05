@@ -79,6 +79,7 @@ function BetterTooltip:AddUnitId(tooltip)
     BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. parts[6])
 end
 
+-- Generic function to add the Id to the Tooltip
 function BetterTooltip:AddId(tooltip, data, prefixKey, defaultPrefix)
     if not data.id then return end
 

@@ -54,7 +54,9 @@ function BetterTooltipSettings:BuildSettingsTab()
     local langCode = GetLocale()
     local category, layout = Settings.RegisterVerticalLayoutCategory(BetterTooltipsData["addonName"])
 
-    for key, option in pairs(BetterTooltipOptions) do
+    for _, key in ipairs(BetterTooltipOptions["order"]) do
+        local option = BetterTooltipOptions[key]
+
         SetDefaultSettings(option)
 
         if type(option["default"]) == "boolean" then

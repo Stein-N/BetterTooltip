@@ -9,6 +9,11 @@ BetterTooltipsData = {
 }
 
 BetterTooltipOptions = {
+    order = {
+        "toggleAnchor", "anchorPosition", "hideTooltipHealthbar", "hideTooltips", "showUnitId", "showSpellId",
+        "showMountId", "showAuraId", "showItemId", "showToyId", "showCurrencyId", "showQuestId", "showBattlePetId"
+    },
+
     toggleAnchor = {
         ["key"] = "Tooltip_Toggle_Anchor",
         ["default"] = true,
