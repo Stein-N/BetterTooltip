@@ -61,5 +61,18 @@ BetterTooltipOptions = {
             ["name"] = "Hide Tooltips",
             ["tooltip"] = "Hide all toolitps while fighting"
         }
+    },
+
+    showUnitIds = {
+        ["key"] = "Tooltip_Show_Unit_ID",
+        ["default"] = false,
+        ["deDE"] = {
+            ["name"] = "Zeige Einheiten ID",
+            ["tooltip"] = "Fügt dem Tooltip die Einheiten ID hinzu"
+        },
+        ["enEN"] = {
+            ["name"] = "Show Unit ID",
+            ["tooltip"] = "Adds the Unit Id to the Tooltip"
+        }
     }
 }

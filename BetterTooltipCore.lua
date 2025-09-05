@@ -70,5 +70,5 @@ end)
 
 -- Add extra Data to the Tooltip when a Unit is hovered
 TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, function(tooltip, data)
-    BetterTooltip:AddUnitId(tooltip)
+    if BetterTooltip:IsShowUnitIdEnabled() then BetterTooltip:AddUnitId(tooltip) end
 end)

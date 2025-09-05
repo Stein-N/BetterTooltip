@@ -58,16 +58,19 @@ function BetterTooltipSettings:BuildSettingsTab()
     local anchorPosition = BetterTooltipOptions["anchorPosition"]
     local hideTooltips = BetterTooltipOptions["hideTooltips"]
     local hideTooltipHealthbar = BetterTooltipOptions["hideTooltipHealthbar"]
+    local showUnitIds = BetterTooltipOptions["showUnitIds"]
 
     SetDefaultSettings(toggleAnchor)
     SetDefaultSettings(anchorPosition)
     SetDefaultSettings(hideTooltips)
     SetDefaultSettings(hideTooltipHealthbar)
+    SetDefaultSettings(showUnitIds)
 
     RegisterCheckbox(category, toggleAnchor, toggleAnchor[langCode] or toggleAnchor["enEN"])
     RegisterDropdown(category, anchorPosition, anchorPosition[langCode] or anchorPosition["enEN"], BuildAnchorOptions)
     RegisterCheckbox(category, hideTooltips, hideTooltips[langCode] or hideTooltips["enEN"])
     RegisterCheckbox(category, hideTooltipHealthbar, hideTooltipHealthbar[langCode] or hideTooltipHealthbar["enEN"])
+    RegisterCheckbox(category, showUnitIds, showUnitIds[langCode] or showUnitIds["enEN"])
 
     Settings.RegisterAddOnCategory(category)
 end

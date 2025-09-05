@@ -21,6 +21,11 @@ function BetterTooltip:GetAnchorPosition()
     return GetOptionValue("anchorPosition")
 end
 
+-- Returns the showUnitIds from SavedVariables
+function BetterTooltip:IsShowUnitIdEnabled()
+    return GetOptionValue("showUnitIds")
+end
+
 -- Tooltip cant be outside the Screen
 function BetterTooltip:SetDefaultBehaviour(tooltip)
     if not tooltip or tooltip:IsForbidden() then return end
