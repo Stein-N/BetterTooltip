@@ -52,19 +52,27 @@ end
 -- Build the Settings tab
 function BetterTooltipSettings:BuildSettingsTab()
     local langCode = GetLocale()
-    local category, layout = Settings.RegisterVerticalLayoutCategory(BetterTooltipsData["addonName"])
 
-    for _, key in ipairs(BetterTooltipOptions["order"]) do
+    local addonOptions = Settings.RegisterVerticalLayoutCategory(BetterTooltipsData["addonName"])
+    local visableIds, visualsLayout = Settings.RegisterVerticalLayoutSubcategory(addonOptions, "Visable IDs")
+
+    for _, key in ipairs(BetterTooltipOptions["general"]) do
         local option = BetterTooltipOptions[key]
 
         SetDefaultSettings(option)
-
         if type(option["default"]) == "boolean" then
-            RegisterCheckbox(category, option, option[langCode] or option["enEN"])
+            RegisterCheckbox(addonOptions, option, option[langCode] or option["enEN"])
         else
-            RegisterDropdown(category, option, option[langCode] or option["enEN"], BuildAnchorOptions)
+            RegisterDropdown(addonOptions, option, option[langCode] or option["enEN"], BuildAnchorOptions)
         end
     end
 
-    Settings.RegisterAddOnCategory(category)
+    for _, key in ipairs(BetterTooltipOptions["visableIds"]) do
+        local option = BetterTooltipOptions[key]
+
+        SetDefaultSettings(option)
+        RegisterCheckbox(visableIds, option, option[langCode] or option["enEN"] )
+    end
+
+    Settings.RegisterAddOnCategory(addonOptions)
 end

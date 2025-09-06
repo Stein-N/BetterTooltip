@@ -39,8 +39,7 @@ end
 
 -- Disables all Tooltips, also sets a Script that disables the Tooltip when the OnShow Event is triggered
 function BetterTooltip:HideTooltips()
-    local enabled = GetOptionValue("hideTooltips")
-    if enabled then
+    if BetterTooltip:IsEnabled("hideTooltips") then
         GameTooltip:Hide()
         GameTooltip:SetScript("OnShow", GameTooltip.Hide)
     end
@@ -54,17 +53,16 @@ end
 
 -- Deactivate the Tooltip Healthbar
 function BetterTooltip:HideHealthBar()
-    local enabled = GetOptionValue("hideTooltipHealthbar")
-    if enabled then
+    if BetterTooltip:IsEnabled("hideTooltipHealthbar") then
         GameTooltipStatusBarTexture:SetTexture("")
-    else 
+    else
         GameTooltipStatusBarTexture:SetTexture(137014)
     end
 end
 
 -- Adds the Unit Id to the Tooltip
 function BetterTooltip:AddUnitId(tooltip)
-    if not tooltip or BetterTooltipUtils:IsPlayerHovered(tooltip) 
+    if not tooltip or BetterTooltipUtils:IsPlayerHovered(tooltip)
     then return end
 
     local _, unit = tooltip:GetUnit()
