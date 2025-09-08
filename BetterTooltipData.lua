@@ -5,7 +5,17 @@
 
 
 BetterTooltipsData = {
-    ["addonName"] = "BetterTooltip"
+    ["addonName"] = "BetterTooltip",
+    ["optionCategories"] = {
+        ["deDE"] = {
+            ["visibleIds"] = "Sichtbare IDs",
+            ["playerInfos"] = "Spieler Informationen"
+        },
+        ["enEN"] = {
+            ["visibleIds"] = "Visible IDs",
+            ["playerInfos"] = "Player Informations"
+        }
+    }
 }
 
 BetterTooltipOptions = {
@@ -16,6 +26,9 @@ BetterTooltipOptions = {
     visableIds = {
         "showUnitId", "showSpellId", "showMountId", "showAuraId", "showItemId", 
         "showToyId", "showCurrencyId", "showQuestId", "showBattlePetId"
+    },
+    extraInfos = {
+        "showMythicPlusScore"
     },
 
     toggleAnchor = {
@@ -204,6 +217,21 @@ BetterTooltipOptions = {
             ["name"] = "Show Battle Pet ID",
             ["tooltip"] = "Adds the Battle Pet Id to the Tooltip",
             ["prefix"] = "Battlepet-ID"
+        }
+    },
+
+    showMythicPlusScore = {
+        ["key"] = "Tooltip_Show_Mythic_Plus_Score",
+        ["default"] = true,
+        ["deDE"] = {
+            ["name"] = "Zeige den Mythisch+ Score",
+            ["tooltip"] = "Fügt dem Tooltip den Mythisch+ Score hinzu",
+            ["prefix"] = "Mythisch+ Score"
+        },
+        ["enEN"] = {
+            ["name"] = "Show Mythic+ Score",
+            ["tooltip"] = "Adds the Mythic+ Score to the Tooltip",
+            ["prefix"] = "Mythic+ Score"
         }
     }
 }
