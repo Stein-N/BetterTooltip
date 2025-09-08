@@ -11,7 +11,7 @@ local function GetOptionValue(variable)
     return BetterTooltipDB[setting["key"]]
 end
 
-local function GetIdPrefix(variable)
+local function GetPrefix(variable)
     local langCode = GetLocale()
     local setting = BetterTooltipOptions[variable]
     local langObj = setting[langCode] or setting["enEN"]
@@ -73,7 +73,7 @@ function BetterTooltip:AddUnitId(tooltip)
     local parts = BetterTooltipUtils:SplitString(guid, "%-")
     if parts == nil or parts == {} then return end
 
-    local prefix = GetIdPrefix("showUnitId") or "Unit-ID"
+    local prefix = GetPrefix("showUnitId") or "Unit-ID"
     BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. parts[6])
 end
 
@@ -81,6 +81,17 @@ end
 function BetterTooltip:AddId(tooltip, data, prefixKey, defaultPrefix)
     if not data.id then return end
 
-    local prefix = GetIdPrefix(prefixKey) or defaultPrefix
+    local prefix = GetPrefix(prefixKey) or defaultPrefix
     BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. data.id)
+end
+
+function BetterTooltip:AddMythicScore(tooltip, data)
+    if BetterTooltipUtils:IsPlayerHovered(tooltip) then
+        local summary = C_PlayerInfo.GetPlayerMythicPlusRatingSummary("mouseover")
+
+        local prefix = GetPrefix("showMythicPlusScore")
+        if summary then
+            BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. summary.currentSeasonScore)
+        end
+    end
 end
