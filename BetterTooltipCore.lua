@@ -9,6 +9,7 @@ BetterTooltipDB = {}
 -- ===================================== --
 local frame = CreateFrame("Frame")
 local handler = {}
+local inFight = false
 
 
 -- ============================== --
@@ -18,11 +19,13 @@ local handler = {}
 -- Event Handler when fights starts
 function handler.PLAYER_REGEN_DISABLED()
     BetterTooltip:HideTooltips()
+    inFight = true
 end
 
 -- Event Handler when fights ends
 function handler.PLAYER_REGEN_ENABLED()
     BetterTooltip:ShowTooltip()
+    inFight = false
 end
 
 -- Build the OPtionstab when the Addon was loaded
@@ -68,44 +71,30 @@ end)
 -- ==   Tooltip Extra Data   == --
 -- ============================ --
 
+local modifications = {
+    { type = Enum.TooltipDataType.Spell, option = "showSpellId", fallback = "Spell-ID" },
+    { type = Enum.TooltipDataType.Mount, option = "showMountId", fallback = "Mount-ID" },
+    { type = Enum.TooltipDataType.UnitAura, option = "showAuraId", fallback = "Aura-ID" },
+    { type = Enum.TooltipDataType.Item, option = "showItemId", fallback = "Item-ID" },
+    { type = Enum.TooltipDataType.Toy, option = "showToyId", fallback = "Toy-ID" },
+    { type = Enum.TooltipDataType.Currency, option = "showCurrencyId", fallback = "Currency-ID" },
+    { type = Enum.TooltipDataType.Quest, option = "showQuestId", fallback = "Quest-ID" }
+}
+
+-- Apply TooltipModififcations
+for _, modifier in ipairs(modifications) do
+    TooltipDataProcessor.AddTooltipPostCall(modifier.type, function(tooltip, data) 
+        if BetterTooltip:IsEnabled(modifier.option) then
+            BetterTooltip:AddId(tooltip, data, modifier.option, modifier.fallback)
+        end
+    end)
+end
+
 -- Add extra Data to the Tooltip when a Unit is hovered
 TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, function(tooltip, data)
+    if inFight then return end
+
     if BetterTooltip:IsEnabled("showUnitId") then BetterTooltip:AddUnitId(tooltip) end
-end)
-
--- Add extra Data to the Tooltip when a Spell is hovered
-TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Spell, function(tooltip, data)
-    if BetterTooltip:IsEnabled("showSpellId") then BetterTooltip:AddId(tooltip, data, "showSpellId", "Spell-ID") end
-end)
-
--- Add extra Data to the Tooltip when a Mount is hovered
-TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Mount, function(tooltip, data)
-    if BetterTooltip:IsEnabled("showMountId") then BetterTooltip:AddId(tooltip, data, "showMountId", "Mount-ID") end
-end)
-
--- Add extra Data to the Tooltip when a UnitAura is hovered
-TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.UnitAura, function(tooltip, data)
-    if BetterTooltip:IsEnabled("showAuraId") then BetterTooltip:AddId(tooltip, data, "showAuraId", "Aura-ID") end
-end)
-
--- Add extra Data to the Tooltip when a Item is hovered
-TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, function(tooltip, data)
-    if BetterTooltip:IsEnabled("showItemId") then BetterTooltip:AddId(tooltip, data, "showItemId", "Item-ID") end
-end)
-
--- Add extra Data to the Tooltip when a Toy is hovered
-TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Toy, function(tooltip, data)
-    if BetterTooltip:IsEnabled("showToyId") then BetterTooltip:AddId(tooltip, data, "showToyId", "Toy-ID") end
-end)
-
--- Add extra Data to the Tooltip when a Currency is hovered
-TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Currency, function(tooltip, data)
-    if BetterTooltip:IsEnabled("showCurrencyId") then BetterTooltip:AddId(tooltip, data, "showCurrencyId", "Currency-ID") end
-end)
-
--- Add extra Data to the Tooltip when a Quest is hovered in BtWQuest or a linked quest is clicked
-TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Quest, function(tooltip, data)
-    if BetterTooltip:IsEnabled("showQuestId") then BetterTooltip:AddId(tooltip, data, "showQuestId", "Quest-ID") end
 end)
 
 -- Adds the Quest Id to the Quest Tooltip inside the Questlog
