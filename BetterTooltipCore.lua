@@ -94,9 +94,11 @@ TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, function(tool
 
     if BetterTooltip:IsEnabled("showUnitId") then BetterTooltip:AddUnitId(tooltip) end
 
-    if BetterTooltip:IsEnabled("showMythicPlusScore") then BetterTooltip:AddMythicScore(tooltip, data) end
+    if BetterTooltip:IsEnabled("showMythicPlusScore") then BetterTooltip:AddMythicScore(tooltip) end
 
-    if BetterTooltip:IsEnabled("showPlayerMount") then BetterTooltip:AddPlayerMount(tooltip, data) end
+    if BetterTooltip:IsEnabled("showPlayerMount") then BetterTooltip:AddPlayerMount(tooltip) end
+
+    if BetterTooltip:IsEnabled("showPlayerTarget") then BetterTooltip:AddPlayerTarget(tooltip) end
 end)
 
 -- Adds the Quest Id to the Quest Tooltip inside the Questlog

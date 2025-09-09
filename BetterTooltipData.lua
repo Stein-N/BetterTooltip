@@ -28,7 +28,7 @@ BetterTooltipOptions = {
         "showToyId", "showCurrencyId", "showQuestId", "showBattlePetId", "showMacroId"
     },
     extraInfos = {
-        "showMythicPlusScore", "showPlayerMount"
+        "showMythicPlusScore", "showPlayerMount", "showPlayerTarget"
     },
 
     toggleAnchor = {
@@ -262,6 +262,21 @@ BetterTooltipOptions = {
             ["name"] = "Show Player Mount",
             ["tooltip"] = "Adds the current Player Mount to the Tooltip",
             ["prefix"] = "Mount"
+        }
+    },
+
+    showPlayerTarget = {
+        ["key"] = "Tooltip_Show_Player_Target",
+        ["default"] = true,
+        ["deDE"] = {
+            ["name"] = "Zeige Ziel des Spielers",
+            ["tooltip"] = "Fügt dem Tooltip anderer Spieler das aktuelle Ziel hinzu",
+            ["prefix"] = "Ziel"
+        },
+        ["enEN"] = {
+            ["name"] = "Show Player Target",
+            ["tooltip"] = "Adds the current Target of other Players to the Tooltip",
+            ["prefix"] = "Target"
         }
     }
 }

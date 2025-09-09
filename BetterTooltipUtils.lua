@@ -16,7 +16,7 @@ function BetterTooltipUtils:AddTooltipIdText(tooltip, text)
     tooltip:Show()
 end
 
-function BetterTooltipUtils:AddPrefixedId(tooltip, prefix, id)
+function BetterTooltipUtils:AddPrefixedText(tooltip, prefix, id)
     if not tooltip or tooltip:IsForbidden() then return end
     if prefix == nil or prefix == "" or id == nil or id == "" then return end
 
