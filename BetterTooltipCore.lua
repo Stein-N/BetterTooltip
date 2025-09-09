@@ -9,7 +9,6 @@ BetterTooltipDB = {}
 -- ===================================== --
 local frame = CreateFrame("Frame")
 local handler = {}
-local inFight = false
 
 
 -- ============================== --
@@ -19,13 +18,11 @@ local inFight = false
 -- Event Handler when fights starts
 function handler.PLAYER_REGEN_DISABLED()
     BetterTooltip:HideTooltips()
-    inFight = true
 end
 
 -- Event Handler when fights ends
 function handler.PLAYER_REGEN_ENABLED()
     BetterTooltip:ShowTooltip()
-    inFight = false
 end
 
 -- Build the OPtionstab when the Addon was loaded
@@ -93,7 +90,7 @@ end
 
 -- Add extra Data to the Tooltip when a Unit is hovered
 TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, function(tooltip, data)
-    if inFight then return end
+    if UnitAffectingCombat("player") then return end
 
     if BetterTooltip:IsEnabled("showUnitId") then BetterTooltip:AddUnitId(tooltip) end
 
