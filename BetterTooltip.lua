@@ -118,8 +118,8 @@ function BetterTooltip:AddPlayerTarget(tooltip)
     if not BetterTooltipUtils:IsPlayerHovered(tooltip) then return end
 
     if not UnitIsUnit("player", tooltip:GetUnit()) then
-        local targetName = UnitName("targettarget")
-        if not targetName then return end
+        local unitName, unitId = tooltip:GetUnit()
+        local targetName = UnitName(unitId .. "target")
 
         local prefix = GetPrefix("showPlayerTarget")
         BetterTooltipUtils:AddPrefixedText(tooltip, prefix, targetName)
