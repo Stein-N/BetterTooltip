@@ -28,7 +28,7 @@ end
 -- Build the OPtionstab when the Addon was loaded
 function handler.ADDON_LOADED(name)
     if name == BetterTooltipsData["addonName"] then
-        BetterTooltipSettings:BuildSettingsTab()
+        BetterTooltipSettings:BuildOptionsMenu()
     end
 end
 

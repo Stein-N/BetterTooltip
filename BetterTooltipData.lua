@@ -15,22 +15,20 @@ BetterTooltipsData = {
             ["visibleIds"] = "Visible IDs",
             ["playerInfos"] = "Player Informations"
         }
+    },
+    ["playerInfoHeader"] = {
+        ["deDE"] = {
+            ["general"] = "Generelle Informationen",
+            ["mythic"] = "Mythisch Plus"
+        },
+        ["enEN"] = {
+            ["general"] = "General Informations",
+            ["mythic"] = "Mythic Plus"
+        }
     }
 }
 
 BetterTooltipOptions = {
-    -- Settings Tab Ordering
-    general = {
-        "toggleAnchor", "anchorPosition", "hideTooltipHealthbar", "hideTooltips"
-    },
-    visableIds = {
-        "showUnitId", "showSpellId", "showMountId", "showAuraId", "showItemId",
-        "showToyId", "showCurrencyId", "showQuestId", "showBattlePetId", "showMacroId"
-    },
-    extraInfos = {
-        "showMythicPlusScore", "showPlayerMount", "showPlayerTarget"
-    },
-
     toggleAnchor = {
         ["key"] = "Tooltip_Toggle_Anchor",
         ["default"] = true,
@@ -50,12 +48,12 @@ BetterTooltipOptions = {
         ["deDE"] = {
             ["name"] = "Tooltip Position",
             ["tooltip"] = "Wähle die Position, an welcher der Tooltip befestigt wird.",
-            ["options"] = {"Rechts", "Mitte", "Links"}
+            ["values"] = {"Rechts", "Mitte", "Links"}
         },
         ["enEN"] = {
             ["name"] = "Tooltip position",
             ["tooltip"] = "Choose the anchor position.",
-            ["options"] = {"Right", "Center", "Left"}
+            ["values"] = {"Right", "Center", "Left"}
         }
     },
 

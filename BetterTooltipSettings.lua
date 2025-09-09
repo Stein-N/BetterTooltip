@@ -1,88 +1,142 @@
 BetterTooltipSettings = {}
+local langCode = GetLocale()
 
--- sets the default values inside the SavedVariables
-local function SetDefaultSettings(settingObj)
-    local key = settingObj["key"]
-    if BetterTooltipDB[key] == nil then
-        BetterTooltipDB[key] = settingObj["default"]
-    end
+-- ====================== --
+-- ==  Helper Methods  == --
+-- ====================== --
+
+-- Set the default value for an Option inside the SavedVariables
+local function SetDefault(option)
+    local key = option["key"]
+    if BetterTooltipDB[key] then return end
+
+    BetterTooltipDB[key] = option["default"]
 end
 
--- simple function to update savedVariables
+-- Basic function to update the Option Value
 local function UpdateSetting(setting, value)
     BetterTooltipDB[setting:GetVariable()] = value
 end
 
--- function to register a new option to the given categroy
-local function RegisterSetting(category, settingObj, langObj)
-    local variable = settingObj["key"]
-    return Settings.RegisterAddOnSetting(category, variable, variable, BetterTooltipDB, type(settingObj["default"]), langObj["name"], BetterTooltipDB[variable])
+-- Register the given Option inside the Category
+local function RegisterSetting(category, option, lang)
+    local variable = option["key"]
+    return Settings.RegisterAddOnSetting(
+        category, -- Given Category, can also be a Subcategory
+        variable, -- Option Variable
+        variable, -- Option Variable
+        BetterTooltipDB, -- AddOn Options Database
+        type(option["default"]), -- Gets the Option Datatype from the default Value
+        lang["name"], -- Option Name visible in the UI
+        option["default"] -- Default value
+    )
 end
 
--- Register a new Checkbox Setting
-local function RegisterCheckbox(category, settingObj, langObj)
-    local setting = RegisterSetting(category, settingObj, langObj)
+-- Loads the Option and Lang Object from the Database
+local function GetOption(optionKey)
+    local option = BetterTooltipOptions[optionKey]
+    local lang = option[langCode] or option["enEN"]
+    return option, lang
+end
+
+-- Load all AddOn Option Categories
+local function GetCategories()
+    local categories = BetterTooltipsData["optionCategories"]
+    return categories[langCode] or categories["enEN"]
+end
+
+-- Load all PlayerInfo Header
+local function GetPlayerHeader()
+    local header = BetterTooltipsData["playerInfoHeader"]
+    return header[langCode] or header["enEN"]
+end
+
+-- =========================== --
+-- ==  UI Element Creation  == --
+-- =========================== --
+
+-- Create a new Checkbox inside the given Category
+local function RegisterCheckbox(category, optionKey)
+    local option, lang = GetOption(optionKey)
+    local setting = RegisterSetting(category, option, lang)
     setting:SetValueChangedCallback(UpdateSetting)
 
-    Settings.CreateCheckbox(category, setting, langObj["tooltip"])
+    Settings.CreateCheckbox(category, setting, lang["tooltip"])
 end
 
--- Register a Dropdown Setting
-local function RegisterDropdown(category, settingObj, langObj, func)
-    local setting = RegisterSetting(category, settingObj, langObj)
+-- Create a new Dropdown Menu inside the given Category
+local function RegisterDropdown(category, optionKey, func)
+    local option, lang = GetOption(optionKey)
+    local setting = RegisterSetting(category, option, lang)
     setting:SetValueChangedCallback(UpdateSetting)
 
-    Settings.CreateDropdown(category, setting, func, langObj["tooltip"])
+    Settings.CreateDropdown(category, setting, func, lang["tooltip"])
 end
 
--- Build Dropdown menu for anchor position option
+
+
+-- =========================== --
+-- ==   Dropdown Builder    == --
+-- =========================== --
+
+-- Dropdown Options for AnchorPositions
 local function BuildAnchorOptions()
     local container = Settings.CreateControlTextContainer()
-    local setting = BetterTooltipOptions["anchorPosition"]
-    local langObj = setting[GetLocale()] or setting["enEN"]
-    local options = langObj["options"]
+    local option, lang = GetOption("anchorPosition")
+    local values = option["values"]
 
-    container:Add("ANCHOR_CURSOR_RIGHT", options[1])
-    container:Add("ANCHOR_CURSOR", options[2])
-    container:Add("ANCHOR_CURSOR_LEFT", options[3])
+    container:Add("ANCHOR_CURSOR_RIGHT", values[1])
+    container:Add("ANCHOR_CURSOR", values[2])
+    container:Add("ANCHOR_CURSOR_LEFT", values[3])
 
     return container:GetData()
 end
 
--- Build the Settings tab
-function BetterTooltipSettings:BuildSettingsTab()
-    local langCode = GetLocale()
-    local categories = BetterTooltipsData["optionCategories"]
-    local categoriesLang = categories[langCode] or categories["enEN"]
 
-    local addonOptions = Settings.RegisterVerticalLayoutCategory(BetterTooltipsData["addonName"])
-    local visableIds, visualsLayout = Settings.RegisterVerticalLayoutSubcategory(addonOptions, categoriesLang["visibleIds"])
-    local extraInfos, extraInfosLayout = Settings.RegisterVerticalLayoutSubcategory(addonOptions, categoriesLang["playerInfos"])
 
-    for _, key in ipairs(BetterTooltipOptions["general"]) do
+-- =========================== --
+-- ==  Option Menu Builder  == --
+-- =========================== --
+
+function BetterTooltipSettings:BuildOptionsMenu()
+    local categories = GetCategories()
+
+    local general = Settings.RegisterVerticalLayoutCategory(BetterTooltipsData["addonName"])
+    local visibles, visiblesLayout = Settings.RegisterVerticalLayoutSubcategory(general, categories["visibleIds"])
+    local playerInfo, playerInfoLayout = Settings.RegisterVerticalLayoutSubcategory(general, categories["playerInfos"])
+
+    -- Register all Default Values
+    for _, key in ipairs(BetterTooltipOptions) do
         local option = BetterTooltipOptions[key]
-
-        SetDefaultSettings(option)
-        if type(option["default"]) == "boolean" then
-            RegisterCheckbox(addonOptions, option, option[langCode] or option["enEN"])
-        else
-            RegisterDropdown(addonOptions, option, option[langCode] or option["enEN"], BuildAnchorOptions)
-        end
+        SetDefault(option)
     end
 
-    for _, key in ipairs(BetterTooltipOptions["visableIds"]) do
-        local option = BetterTooltipOptions[key]
+    -- == General Tab == --
+    RegisterCheckbox(general, "toggleAnchor")
+    RegisterDropdown(general, "anchorPosition", BuildAnchorOptions)
+    RegisterCheckbox(general, "hideTooltipHealthbar")
+    RegisterCheckbox(general, "hideTooltips")
 
-        SetDefaultSettings(option)
-        RegisterCheckbox(visableIds, option, option[langCode] or option["enEN"] )
-    end
+    -- == Visibles Tab == --
+    RegisterCheckbox(visibles, "showUnitId")
+    RegisterCheckbox(visibles, "showSpellId")
+    RegisterCheckbox(visibles, "showMountId")
+    RegisterCheckbox(visibles, "showAuraId")
+    RegisterCheckbox(visibles, "showItemId")
+    RegisterCheckbox(visibles, "showToyId")
+    RegisterCheckbox(visibles, "showCurrencyId")
+    RegisterCheckbox(visibles, "showQuestId")
+    RegisterCheckbox(visibles, "showBattlePetId")
+    RegisterCheckbox(visibles, "showMacroId")
 
-    for _, key in ipairs(BetterTooltipOptions["extraInfos"]) do
-        local option = BetterTooltipOptions[key]
+    -- == PlayerInfo Tab == --
+    local headers = GetPlayerHeader()
+    playerInfoLayout:AddInitializer(CreateSettingsListSectionHeaderInitializer(headers["general"]))
+    RegisterCheckbox(playerInfo, "showPlayerMount")
+    RegisterCheckbox(playerInfo, "showPlayerTarget")
 
-        SetDefaultSettings(option)
-        RegisterCheckbox(extraInfos, option, option[langCode] or option["enEN"] )
-    end
+    playerInfoLayout:AddInitializer(CreateSettingsListSectionHeaderInitializer(headers["mythic"]))
+    RegisterCheckbox(playerInfo, "showMythicPlusScore")
 
-    Settings.RegisterAddOnCategory(addonOptions)
+    Settings.RegisterAddOnCategory(general)
 end
