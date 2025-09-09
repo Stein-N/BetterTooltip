@@ -24,11 +24,11 @@ BetterTooltipOptions = {
         "toggleAnchor", "anchorPosition", "hideTooltipHealthbar", "hideTooltips"
     },
     visableIds = {
-        "showUnitId", "showSpellId", "showMountId", "showAuraId", "showItemId", 
+        "showUnitId", "showSpellId", "showMountId", "showAuraId", "showItemId",
         "showToyId", "showCurrencyId", "showQuestId", "showBattlePetId"
     },
     extraInfos = {
-        "showMythicPlusScore"
+        "showMythicPlusScore", "showPlayerMount"
     },
 
     toggleAnchor = {
@@ -232,6 +232,21 @@ BetterTooltipOptions = {
             ["name"] = "Show Mythic+ Score",
             ["tooltip"] = "Adds the Mythic+ Score to the Tooltip",
             ["prefix"] = "Mythic+ Score"
+        }
+    },
+
+    showPlayerMount = {
+        ["key"] = "Tooltip_Show_Player_Mount",
+        ["default"] = true,
+        ["deDE"] = {
+            ["name"] = "Zeige Spieler Reittier",
+            ["tooltip"] = "Fügt dem Tooltip das aktuelle Reittier des Spielers hinzu",
+            ["prefix"] = "Reittier"
+        },
+        ["enEN"] = {
+            ["name"] = "Show Player Mount",
+            ["tooltip"] = "Adds the current Player Mount to the Tooltip",
+            ["prefix"] = "Mount"
         }
     }
 }

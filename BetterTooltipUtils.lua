@@ -27,3 +27,15 @@ function BetterTooltipUtils:SplitString(input, sep)
 
     return result
 end
+
+-- Checks if the given Aura is a Mount
+function BetterTooltipUtils:IsAuraMount(aura)
+    if not aura.spellId then return false end
+
+    for i = 1, C_MountJournal.GetNumMounts() do
+        local mountId = C_MountJournal.GetMountFromSpell(aura.spellId)
+        if mountId then return true end
+    end
+
+    return false
+end

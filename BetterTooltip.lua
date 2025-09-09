@@ -85,6 +85,7 @@ function BetterTooltip:AddId(tooltip, data, prefixKey, defaultPrefix)
     BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. data.id)
 end
 
+-- Add the current Mythic+ Score to the Tooltip
 function BetterTooltip:AddMythicScore(tooltip, data)
     if BetterTooltipUtils:IsPlayerHovered(tooltip) then
         local summary = C_PlayerInfo.GetPlayerMythicPlusRatingSummary("mouseover")
@@ -92,6 +93,22 @@ function BetterTooltip:AddMythicScore(tooltip, data)
         local prefix = GetPrefix("showMythicPlusScore")
         if summary then
             BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. summary.currentSeasonScore)
+        end
+    end
+end
+
+-- Add Player Mount to the Tooltip
+function BetterTooltip:AddPlayerMount(tooltip, data)
+    if BetterTooltipUtils:IsPlayerHovered(tooltip) then
+        for i = 1, 40 do
+            local aura = C_UnitAuras.GetAuraDataByIndex("mouseover", i)
+
+            if not aura then break end
+
+            if BetterTooltipUtils:IsAuraMount(aura) then
+                local prefix = GetPrefix("showPlayerMount")
+                BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. aura.name)
+            end
         end
     end
 end
