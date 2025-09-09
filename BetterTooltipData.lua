@@ -220,6 +220,21 @@ BetterTooltipOptions = {
         }
     },
 
+    showMacroId = {
+        ["key"] = "Tooltip_Show_Macro_ID",
+        ["default"] = false,
+        ["deDE"] = {
+            ["name"] = "Zeige Makro ID",
+            ["tooltip"] = "Fügt dem Tooltip die Makro ID hinzu",
+            ["prefix"] = "Makro-ID"
+        },
+        ["enEN"] = {
+            ["name"] = "Show Macro ID",
+            ["tooltip"] = "Adds the Macro ID to the Tooltip",
+            ["prefix"] = "Macro-ID"
+        }
+    },
+
     showMythicPlusScore = {
         ["key"] = "Tooltip_Show_Mythic_Plus_Score",
         ["default"] = true,
@@ -247,21 +262,6 @@ BetterTooltipOptions = {
             ["name"] = "Show Player Mount",
             ["tooltip"] = "Adds the current Player Mount to the Tooltip",
             ["prefix"] = "Mount"
-        }
-    },
-
-    showMacroId = {
-        ["key"] = "Tooltip_Show_Macro_ID",
-        ["default"] = false,
-        ["deDE"] = {
-            ["name"] = "Zeige Makro ID",
-            ["tooltip"] = "Fügt dem Tooltip die Makro ID hinzu",
-            ["prefix"] = "Makro-ID"
-        },
-        ["enEN"] = {
-            ["name"] = "Show Macro ID",
-            ["tooltip"] = "Adds the Macro ID to the Tooltip",
-            ["prefix"] = "Macro-ID"
         }
     }
 }

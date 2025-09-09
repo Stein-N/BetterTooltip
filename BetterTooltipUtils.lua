@@ -21,6 +21,7 @@ function BetterTooltipUtils:AddPrefixedId(tooltip, prefix, id)
     if prefix == nil or prefix == "" or id == nil or id == "" then return end
 
     tooltip:AddDoubleLine("|cffffd100" .. prefix .. ":", "|cffffffff" .. id)
+    tooltip:Show()
 end
 
 -- Simple Split Function
