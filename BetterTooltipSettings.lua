@@ -83,7 +83,7 @@ end
 local function BuildAnchorOptions()
     local container = Settings.CreateControlTextContainer()
     local option, lang = GetOption("anchorPosition")
-    local values = option["values"]
+    local values = lang["values"]
 
     container:Add("ANCHOR_CURSOR_RIGHT", values[1])
     container:Add("ANCHOR_CURSOR", values[2])
@@ -102,8 +102,7 @@ function BetterTooltipSettings:BuildOptionsMenu()
     local categories = GetCategories()
 
     local general = Settings.RegisterVerticalLayoutCategory(BetterTooltipsData["addonName"])
-    local visibles, visiblesLayout = Settings.RegisterVerticalLayoutSubcategory(general, categories["visibleIds"])
-    local playerInfo, playerInfoLayout = Settings.RegisterVerticalLayoutSubcategory(general, categories["playerInfos"])
+    local extraInfos, extraInfosLayout = Settings.RegisterVerticalLayoutSubcategory(general, categories["extraInfos"])
 
     -- Register all Default Values
     for _, key in ipairs(BetterTooltipOptions) do
@@ -117,26 +116,28 @@ function BetterTooltipSettings:BuildOptionsMenu()
     RegisterCheckbox(general, "hideTooltipHealthbar")
     RegisterCheckbox(general, "hideTooltips")
 
-    -- == Visibles Tab == --
-    RegisterCheckbox(visibles, "showUnitId")
-    RegisterCheckbox(visibles, "showSpellId")
-    RegisterCheckbox(visibles, "showMountId")
-    RegisterCheckbox(visibles, "showAuraId")
-    RegisterCheckbox(visibles, "showItemId")
-    RegisterCheckbox(visibles, "showToyId")
-    RegisterCheckbox(visibles, "showCurrencyId")
-    RegisterCheckbox(visibles, "showQuestId")
-    RegisterCheckbox(visibles, "showBattlePetId")
-    RegisterCheckbox(visibles, "showMacroId")
-
-    -- == PlayerInfo Tab == --
+    -- == Extra Info Tab == --
     local headers = GetPlayerHeader()
-    playerInfoLayout:AddInitializer(CreateSettingsListSectionHeaderInitializer(headers["general"]))
-    RegisterCheckbox(playerInfo, "showPlayerMount")
-    RegisterCheckbox(playerInfo, "showPlayerTarget")
+    
+    extraInfosLayout:AddInitializer(CreateSettingsListSectionHeaderInitializer(headers["general"]))
+    RegisterCheckbox(extraInfos, "showPlayerMount")
+    RegisterCheckbox(extraInfos, "showPlayerTarget")
 
-    playerInfoLayout:AddInitializer(CreateSettingsListSectionHeaderInitializer(headers["mythic"]))
-    RegisterCheckbox(playerInfo, "showMythicPlusScore")
+    extraInfosLayout:AddInitializer(CreateSettingsListSectionHeaderInitializer(headers["mythicRaid"]))
+    RegisterCheckbox(extraInfos, "showMythicPlusScore")
+
+    extraInfosLayout:AddInitializer(CreateSettingsListSectionHeaderInitializer(headers["tooltipIds"]))
+    RegisterCheckbox(extraInfos, "showUnitId")
+    RegisterCheckbox(extraInfos, "showSpellId")
+    RegisterCheckbox(extraInfos, "showMountId")
+    RegisterCheckbox(extraInfos, "showAuraId")
+    RegisterCheckbox(extraInfos, "showItemId")
+    RegisterCheckbox(extraInfos, "showToyId")
+    RegisterCheckbox(extraInfos, "showCurrencyId")
+    RegisterCheckbox(extraInfos, "showQuestId")
+    RegisterCheckbox(extraInfos, "showBattlePetId")
+    RegisterCheckbox(extraInfos, "showMacroId")
+
 
     Settings.RegisterAddOnCategory(general)
 end

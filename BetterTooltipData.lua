@@ -8,22 +8,22 @@ BetterTooltipsData = {
     ["addonName"] = "BetterTooltip",
     ["optionCategories"] = {
         ["deDE"] = {
-            ["visibleIds"] = "Sichtbare IDs",
-            ["playerInfos"] = "Spieler Informationen"
+            ["extraInfos"] = "Extra Informationen"
         },
         ["enEN"] = {
-            ["visibleIds"] = "Visible IDs",
-            ["playerInfos"] = "Player Informations"
+            ["extraInfos"] = "More Information"
         }
     },
     ["playerInfoHeader"] = {
         ["deDE"] = {
             ["general"] = "Generelle Informationen",
-            ["mythic"] = "Mythisch Plus"
+            ["mythicRaid"] = "Mythisch+ und Raid",
+            ["tooltipIds"] = "Sichtabre Tooltip IDs"
         },
         ["enEN"] = {
             ["general"] = "General Informations",
-            ["mythic"] = "Mythic Plus"
+            ["mythicRaid"] = "Mythic+ and Raid",
+            ["tooltipIds"] = "Visible Tooltip IDs"
         }
     }
 }
@@ -87,12 +87,12 @@ BetterTooltipOptions = {
         ["key"] = "Tooltip_Show_Unit_ID",
         ["default"] = true,
         ["deDE"] = {
-            ["name"] = "Zeige Einheiten ID",
+            ["name"] = "Einheiten ID",
             ["tooltip"] = "Fügt dem Tooltip die Einheiten ID hinzu",
             ["prefix"] = "Einheits-ID"
         },
         ["enEN"] = {
-            ["name"] = "Show Unit ID",
+            ["name"] = "Unit ID",
             ["tooltip"] = "Adds the Unit Id to the Tooltip",
             ["prefix"] = "Unit-ID"
         }
@@ -102,12 +102,12 @@ BetterTooltipOptions = {
         ["key"] = "Tooltip_Show_Spell_ID",
         ["default"] = true,
         ["deDE"] = {
-            ["name"] = "Zeige Zauber ID",
+            ["name"] = "Zauber ID",
             ["tooltip"] = "Fügt dem Tooltip die Zauber ID hinzu",
             ["prefix"] = "Zauber-ID"
         },
         ["enEN"] = {
-            ["name"] = "Show Spell ID",
+            ["name"] = "Spell ID",
             ["tooltip"] = "Adds the Spell Id to the Tooltip",
             ["prefix"] = "Spell-ID"
         }
@@ -117,12 +117,12 @@ BetterTooltipOptions = {
         ["key"] = "Tooltip_Show_Mount_ID",
         ["default"] = true,
         ["deDE"] = {
-            ["name"] = "Zeige Reittier ID",
+            ["name"] = "Reittier ID",
             ["tooltip"] = "Fügt dem Tooltip die Reittier ID hinzu",
             ["prefix"] = "Reittier-ID"
         },
         ["enEN"] = {
-            ["name"] = "Show Mount ID",
+            ["name"] = "Mount ID",
             ["tooltip"] = "Adds the Mount Id to the Tooltip",
             ["prefix"] = "Mount-ID"
         }
@@ -132,12 +132,12 @@ BetterTooltipOptions = {
         ["key"] = "Tooltip_Show_Aura_ID",
         ["default"] = true,
         ["deDE"] = {
-            ["name"] = "Zeige Aura ID",
+            ["name"] = "Aura ID",
             ["tooltip"] = "Fügt dem Tooltip die Aura ID hinzu",
             ["prefix"] = "Aura-ID"
         },
         ["enEN"] = {
-            ["name"] = "Show Aura ID",
+            ["name"] = "Aura ID",
             ["tooltip"] = "Adds the Aura Id to the Tooltip",
             ["prefix"] = "Aura-ID"
         }
@@ -147,12 +147,12 @@ BetterTooltipOptions = {
         ["key"] = "Tooltip_Show_Item_ID",
         ["default"] = true,
         ["deDE"] = {
-            ["name"] = "Zeige Item ID",
+            ["name"] = "Item ID",
             ["tooltip"] = "Fügt dem Tooltip die Item ID hinzu",
             ["prefix"] = "Item-ID"
         },
         ["enEN"] = {
-            ["name"] = "Show Item ID",
+            ["name"] = "Item ID",
             ["tooltip"] = "Adds the Item Id to the Tooltip",
             ["prefix"] = "Item-ID"
         }
@@ -162,12 +162,12 @@ BetterTooltipOptions = {
         ["key"] = "Tooltip_Show_Toy_ID",
         ["default"] = true,
         ["deDE"] = {
-            ["name"] = "Zeige Spielzeug ID",
+            ["name"] = "Spielzeug ID",
             ["tooltip"] = "Fügt dem Tooltip die Spielzeug ID hinzu",
             ["prefix"] = "Spielzeug-ID"
         },
         ["enEN"] = {
-            ["name"] = "Show Toy ID",
+            ["name"] = "Toy ID",
             ["tooltip"] = "Adds the Toy Id to the Tooltip",
             ["prefix"] = "Toy-ID"
         }
@@ -177,12 +177,12 @@ BetterTooltipOptions = {
         ["key"] = "Tooltip_Show_Currency_ID",
         ["default"] = true,
         ["deDE"] = {
-            ["name"] = "Zeige Währungs ID",
+            ["name"] = "Währungs ID",
             ["tooltip"] = "Fügt dem Tooltip die Währungs ID hinzu",
             ["prefix"] = "Währung-ID"
         },
         ["enEN"] = {
-            ["name"] = "Show Currency ID",
+            ["name"] = "Currency ID",
             ["tooltip"] = "Adds the Curreny Id to the Tooltip",
             ["prefix"] = "Currency-ID"
         }
@@ -192,12 +192,12 @@ BetterTooltipOptions = {
         ["key"] = "Tooltip_Show_Quest_ID",
         ["default"] = true,
         ["deDE"] = {
-            ["name"] = "Zeige Quest ID",
+            ["name"] = "Quest ID",
             ["tooltip"] = "Fügt dem Tooltip die Quest ID hinzu",
             ["prefix"] = "Quest-ID"
         },
         ["enEN"] = {
-            ["name"] = "Show Quest ID",
+            ["name"] = "Quest ID",
             ["tooltip"] = "Adds the Quest Id to the Tooltip",
             ["prefix"] = "Quest-ID"
         }
@@ -207,12 +207,12 @@ BetterTooltipOptions = {
         ["key"] = "Tooltip_Show_Battle_Pet_ID",
         ["default"] = true,
         ["deDE"] = {
-            ["name"] = "Zeige Haustier ID",
+            ["name"] = "Haustier ID",
             ["tooltip"] = "Fügt dem Tooltip die Haustier ID hinzu",
             ["prefix"] = "Haustier-ID"
         },
         ["enEN"] = {
-            ["name"] = "Show Battle Pet ID",
+            ["name"] = "Battle Pet ID",
             ["tooltip"] = "Adds the Battle Pet Id to the Tooltip",
             ["prefix"] = "Battlepet-ID"
         }
@@ -222,12 +222,12 @@ BetterTooltipOptions = {
         ["key"] = "Tooltip_Show_Macro_ID",
         ["default"] = false,
         ["deDE"] = {
-            ["name"] = "Zeige Makro ID",
+            ["name"] = "Makro ID",
             ["tooltip"] = "Fügt dem Tooltip die Makro ID hinzu",
             ["prefix"] = "Makro-ID"
         },
         ["enEN"] = {
-            ["name"] = "Show Macro ID",
+            ["name"] = "Macro ID",
             ["tooltip"] = "Adds the Macro ID to the Tooltip",
             ["prefix"] = "Macro-ID"
         }
