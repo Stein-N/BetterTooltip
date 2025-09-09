@@ -16,6 +16,13 @@ function BetterTooltipUtils:AddTooltipIdText(tooltip, text)
     tooltip:Show()
 end
 
+function BetterTooltipUtils:AddPrefixedId(tooltip, prefix, id)
+    if not tooltip or tooltip:IsForbidden() then return end
+    if prefix == nil or prefix == "" or id == nil or id == "" then return end
+
+    tooltip:AddDoubleLine("|cffffd100" .. prefix .. ":", "|cffffffff" .. id)
+end
+
 -- Simple Split Function
 function BetterTooltipUtils:SplitString(input, sep)
     local result = {}

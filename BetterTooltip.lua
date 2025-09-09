@@ -74,7 +74,7 @@ function BetterTooltip:AddUnitId(tooltip)
     if parts == nil or parts == {} then return end
 
     local prefix = GetPrefix("showUnitId") or "Unit-ID"
-    BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. parts[6])
+    BetterTooltipUtils:AddPrefixedId(tooltip, prefix, parts[6])
 end
 
 -- Generic function to add the Id to the Tooltip
@@ -82,7 +82,7 @@ function BetterTooltip:AddId(tooltip, data, prefixKey, defaultPrefix)
     if not data.id then return end
 
     local prefix = GetPrefix(prefixKey) or defaultPrefix
-    BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. data.id)
+    BetterTooltipUtils:AddPrefixedId(tooltip, prefix, data.id)
 end
 
 -- Add the current Mythic+ Score to the Tooltip
@@ -92,7 +92,7 @@ function BetterTooltip:AddMythicScore(tooltip, data)
 
         local prefix = GetPrefix("showMythicPlusScore")
         if summary then
-            BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. summary.currentSeasonScore)
+            BetterTooltipUtils:AddPrefixedId(tooltip, prefix, summary.currentSeasonScore)
         end
     end
 end
@@ -107,7 +107,7 @@ function BetterTooltip:AddPlayerMount(tooltip, data)
 
             if BetterTooltipUtils:IsAuraMount(aura) then
                 local prefix = GetPrefix("showPlayerMount")
-                BetterTooltipUtils:AddTooltipIdText(tooltip, "|cffffd100" .. prefix .. ": |r" .. aura.name)
+                BetterTooltipUtils:AddPrefixedId(tooltip, prefix, aura.name)
             end
         end
     end
