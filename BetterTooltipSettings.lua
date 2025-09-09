@@ -118,7 +118,7 @@ function BetterTooltipSettings:BuildOptionsMenu()
 
     -- == Extra Info Tab == --
     local headers = GetPlayerHeader()
-    
+
     extraInfosLayout:AddInitializer(CreateSettingsListSectionHeaderInitializer(headers["general"]))
     RegisterCheckbox(extraInfos, "showPlayerMount")
     RegisterCheckbox(extraInfos, "showPlayerTarget")
@@ -137,7 +137,6 @@ function BetterTooltipSettings:BuildOptionsMenu()
     RegisterCheckbox(extraInfos, "showQuestId")
     RegisterCheckbox(extraInfos, "showBattlePetId")
     RegisterCheckbox(extraInfos, "showMacroId")
-
 
     Settings.RegisterAddOnCategory(general)
 end
