@@ -78,12 +78,13 @@ local modifications = {
     { type = Enum.TooltipDataType.Item, option = "showItemId", fallback = "Item-ID" },
     { type = Enum.TooltipDataType.Toy, option = "showToyId", fallback = "Toy-ID" },
     { type = Enum.TooltipDataType.Currency, option = "showCurrencyId", fallback = "Currency-ID" },
-    { type = Enum.TooltipDataType.Quest, option = "showQuestId", fallback = "Quest-ID" }
+    { type = Enum.TooltipDataType.Quest, option = "showQuestId", fallback = "Quest-ID" },
+    { type = Enum.TooltipDataType.Macro, option = "showMacroId", fallback = "Macro-ID" }
 }
 
 -- Apply TooltipModififcations
 for _, modifier in ipairs(modifications) do
-    TooltipDataProcessor.AddTooltipPostCall(modifier.type, function(tooltip, data) 
+    TooltipDataProcessor.AddTooltipPostCall(modifier.type, function(tooltip, data)
         if BetterTooltip:IsEnabled(modifier.option) then
             BetterTooltip:AddId(tooltip, data, modifier.option, modifier.fallback)
         end

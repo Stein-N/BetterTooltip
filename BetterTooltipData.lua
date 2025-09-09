@@ -25,7 +25,7 @@ BetterTooltipOptions = {
     },
     visableIds = {
         "showUnitId", "showSpellId", "showMountId", "showAuraId", "showItemId",
-        "showToyId", "showCurrencyId", "showQuestId", "showBattlePetId"
+        "showToyId", "showCurrencyId", "showQuestId", "showBattlePetId", "showMacroId"
     },
     extraInfos = {
         "showMythicPlusScore", "showPlayerMount"
@@ -247,6 +247,21 @@ BetterTooltipOptions = {
             ["name"] = "Show Player Mount",
             ["tooltip"] = "Adds the current Player Mount to the Tooltip",
             ["prefix"] = "Mount"
+        }
+    },
+
+    showMacroId = {
+        ["key"] = "Tooltip_Show_Macro_ID",
+        ["default"] = false,
+        ["deDE"] = {
+            ["name"] = "Zeige Makro ID",
+            ["tooltip"] = "Fügt dem Tooltip die Makro ID hinzu",
+            ["prefix"] = "Makro-ID"
+        },
+        ["enEN"] = {
+            ["name"] = "Show Macro ID",
+            ["tooltip"] = "Adds the Macro ID to the Tooltip",
+            ["prefix"] = "Macro-ID"
         }
     }
 }
