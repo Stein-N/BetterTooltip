@@ -17,12 +17,10 @@ BetterTooltipsData = {
     ["playerInfoHeader"] = {
         ["deDE"] = {
             ["general"] = "Generelle Informationen",
-            ["mythicRaid"] = "Mythisch+ und Raid",
             ["tooltipIds"] = "Sichtabre Tooltip IDs"
         },
         ["enEN"] = {
             ["general"] = "General Informations",
-            ["mythicRaid"] = "Mythic+ and Raid",
             ["tooltipIds"] = "Visible Tooltip IDs"
         }
     }

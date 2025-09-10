@@ -122,8 +122,6 @@ function BetterTooltipSettings:BuildOptionsMenu()
     extraInfosLayout:AddInitializer(CreateSettingsListSectionHeaderInitializer(headers["general"]))
     RegisterCheckbox(extraInfos, "showPlayerMount")
     RegisterCheckbox(extraInfos, "showPlayerTarget")
-
-    extraInfosLayout:AddInitializer(CreateSettingsListSectionHeaderInitializer(headers["mythicRaid"]))
     RegisterCheckbox(extraInfos, "showMythicPlusScore")
 
     extraInfosLayout:AddInitializer(CreateSettingsListSectionHeaderInitializer(headers["tooltipIds"]))
