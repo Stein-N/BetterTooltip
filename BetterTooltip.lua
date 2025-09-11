@@ -5,6 +5,25 @@
 
 BetterTooltip = {}
 
+-- ============================ --
+-- ==    All Tooltiptypes    == --
+-- ============================ --
+
+local tooltipTypes = {
+    GameTooltip,
+    FriendsTooltip,
+    AutoCompleteBox,
+    PetBattlePrimaryAbilityTooltip, PetBattlePrimaryUnitTooltip, BattlePetTooltip, FloatingBattlePetTooltip, FloatingPetBattleAbilityTooltip,
+    FloatingGarrisonFollowerTooltip, FloatingGarrisonFollowerAbilityTooltip, FloatingGarrisonMissionTooltip, FloatingGarrisonShipyardFollowerTooltip,
+    GarrisonFollowerMissionAbilityWithoutCountersTooltip, GarrisonFollowerAbilityWithoutCountersTooltip,
+    ItemRefTooltip, ItemRefShoppingTooltip1, ItemRefShoppingTooltip2, ShoppingTooltip1, ShoppingTooltip2,
+    QuestScrollFrame.WarCampaignTooltip, QuestScrollFrame.StoryTooltip,
+    QueueStatusFrame,
+    EmbeddedItemTooltip,
+    NamePlateTooltip,
+    SettingsTooltip
+}
+
 -- Loads the given SavedVariables Key
 local function GetOptionValue(variable)
     local setting = BetterTooltipOptions[variable]
@@ -49,6 +68,18 @@ end
 function BetterTooltip:ShowTooltip()
     GameTooltip:Show()
     GameTooltip:SetScript("OnShow", nil)
+end
+
+-- Apply the Scaling to all Tooltips
+function BetterTooltip:ApplyScalingToTooltips()
+    for _, tooltip in pairs(tooltipTypes) do
+        if tooltip then
+            tooltip:SetScript("OnShow", function(self, data)
+                local initialValue = (self == SettingsTooltip) and 0.64 or 1
+                BetterTooltip:SetTooltipScale(self, initialValue)
+            end)
+        end
+    end
 end
 
 -- Apply the scaling based on the initial value
