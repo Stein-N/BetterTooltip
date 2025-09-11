@@ -51,6 +51,20 @@ function BetterTooltip:ShowTooltip()
     GameTooltip:SetScript("OnShow", nil)
 end
 
+-- Apply the scaling based on the initial value
+function BetterTooltip:SetTooltipScale(tooltip, initalValue)
+    if not tooltip then return end
+
+    local scale
+    if GetOptionValue("toggleScaling") then
+        scale = (GetOptionValue("tooltipScale") / 100) * initalValue
+    else
+        scale = initalValue
+    end
+
+    tooltip:SetScale(scale)
+end
+
 -- Deactivate the Tooltip Healthbar
 function BetterTooltip:HideHealthBar()
     if BetterTooltip:IsEnabled("hideTooltipHealthbar") then

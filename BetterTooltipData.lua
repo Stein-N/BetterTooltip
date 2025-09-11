@@ -55,6 +55,32 @@ BetterTooltipOptions = {
         }
     },
 
+    toggleScaling = {
+        ["key"] = "Tooltip_Toggle_Scaling",
+        ["default"] = false,
+        ["deDE"] = {
+            ["name"] = "Skalierung aktivieren",
+            ["tooltip"] = "Aktiviere die Skalierung aller Tooltips"
+        },
+        ["enEN"] = {
+            ["name"] = "Activate Scaling",
+            ["tooltip"] = "Activate the scaling for all Tooltips"
+        }
+    },
+
+    tooltipScale = {
+        ["key"] = "Tooltip_Scale",
+        ["default"] = 100,
+        ["deDE"] = {
+            ["name"] = "Tooltip Größe",
+            ["tooltip"] = "Verändere die Skalierung aller Tooltips"
+        },
+        ["enEN"] = {
+            ["name"] = "Tooltip Scale",
+            ["tooltip"] = "Change the Scale for all Tooltips"
+        }
+    },
+
     hideTooltipHealthbar = {
         ["key"] = "Tooltip_Hide_Healthbar",
         ["default"] = true,

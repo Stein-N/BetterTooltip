@@ -10,6 +10,24 @@ BetterTooltipDB = {}
 local frame = CreateFrame("Frame")
 local handler = {}
 
+-- ============================ --
+-- ==    All Tooltiptypes    == --
+-- ============================ --
+
+local tooltipTypes = {
+    GameTooltip,
+    FriendsTooltip,
+    AutoCompleteBox,
+    PetBattlePrimaryAbilityTooltip, PetBattlePrimaryUnitTooltip, BattlePetTooltip, FloatingBattlePetTooltip, FloatingPetBattleAbilityTooltip,
+    FloatingGarrisonFollowerTooltip, FloatingGarrisonFollowerAbilityTooltip, FloatingGarrisonMissionTooltip, FloatingGarrisonShipyardFollowerTooltip,
+    GarrisonFollowerMissionAbilityWithoutCountersTooltip, GarrisonFollowerAbilityWithoutCountersTooltip,
+    ItemRefTooltip, ItemRefShoppingTooltip1, ItemRefShoppingTooltip2, ShoppingTooltip1, ShoppingTooltip2,
+    QuestScrollFrame.WarCampaignTooltip, QuestScrollFrame.StoryTooltip,
+    QueueStatusFrame,
+    EmbeddedItemTooltip,
+    NamePlateTooltip,
+    SettingsTooltip
+}
 
 -- ============================== --
 -- ==    Event Handler Logic   == --
@@ -63,7 +81,6 @@ frame:SetScript("OnEvent", function(self, event, ...)
     if func then return func(...) end
 end)
 
-
 -- ============================ --
 -- ==   Tooltip Extra Data   == --
 -- ============================ --
@@ -86,6 +103,19 @@ for _, modifier in ipairs(modifications) do
             BetterTooltip:AddId(tooltip, data, modifier.option, modifier.fallback)
         end
     end)
+end
+
+-- Apply Scaling to all Tooltip Types
+for _, type in pairs(tooltipTypes) do
+    if type then
+        type:SetScript("OnShow", function(self, data)
+            if self == SettingsTooltip then
+                BetterTooltip:SetTooltipScale(self, 0.64)
+            else
+                BetterTooltip:SetTooltipScale(self, 1)
+            end
+        end)
+    end
 end
 
 -- Add extra Data to the Tooltip when a Unit is hovered

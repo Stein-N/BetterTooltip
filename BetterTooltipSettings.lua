@@ -73,7 +73,18 @@ local function RegisterDropdown(category, optionKey, func)
     Settings.CreateDropdown(category, setting, func, lang["tooltip"])
 end
 
+-- Create a new SLider inside the given Category
+local function RegisterSlider(category, optionKey, min, max, steps)
+    local option, lang = GetOption(optionKey)
+    local setting = RegisterSetting(category, option, lang)
+    setting:SetValueChangedCallback(UpdateSetting)
 
+    local sliderValues = Settings.CreateSliderOptions(min, max, steps)
+    sliderValues:SetLabelFormatter(MinimalSliderWithSteppersMixin.Label.Right, function(value)
+        return value .. "%"
+    end)
+    Settings.CreateSlider(category, setting, sliderValues, lang["tooltip"])
+end
 
 -- =========================== --
 -- ==   Dropdown Builder    == --
@@ -82,7 +93,7 @@ end
 -- Dropdown Options for AnchorPositions
 local function BuildAnchorOptions()
     local container = Settings.CreateControlTextContainer()
-    local option, lang = GetOption("anchorPosition")
+    local _, lang = GetOption("anchorPosition")
     local values = lang["values"]
 
     container:Add("ANCHOR_CURSOR_RIGHT", values[1])
@@ -113,6 +124,8 @@ function BetterTooltipSettings:BuildOptionsMenu()
     -- == General Tab == --
     RegisterCheckbox(general, "toggleAnchor")
     RegisterDropdown(general, "anchorPosition", BuildAnchorOptions)
+    RegisterCheckbox(general, "toggleScaling")
+    RegisterSlider(general, "tooltipScale", 100, 200, 5)
     RegisterCheckbox(general, "hideTooltipHealthbar")
     RegisterCheckbox(general, "hideTooltips")
 
