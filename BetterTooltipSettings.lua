@@ -125,7 +125,7 @@ function BetterTooltipSettings:BuildOptionsMenu()
     RegisterCheckbox(general, "toggleAnchor")
     RegisterDropdown(general, "anchorPosition", BuildAnchorOptions)
     RegisterCheckbox(general, "toggleScaling")
-    RegisterSlider(general, "tooltipScale", 100, 200, 5)
+    RegisterSlider(general, "tooltipScale", 5, 200, 5)
     RegisterCheckbox(general, "hideTooltipHealthbar")
     RegisterCheckbox(general, "hideTooltips")
 
