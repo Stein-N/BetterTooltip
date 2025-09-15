@@ -1,37 +1,29 @@
 # --- Konfiguration ---
 $addonName = "BetterTooltip"
-$tocFile = "./BetterTooltip.toc"
-$sourceFiles = @(
-    "BetterTooltip.toc",
-    "BetterTooltip.lua",
-    "BetterTooltipCore.lua",
-    "BetterTooltipData.lua",
-    "BetterTooltipSettings.lua",
-    "BetterTooltipUtils.lua"
-)
+$sourceFiles = Get-ChildItem -Path . -Recurse -Include *.lua, *.toc -File
 
 $destinationFolder = "./build"
 
-Write-Host "Lese Version aus '$tocFile'..."
+Write-Host "Read version from '$addonName.toc'..."
 $version = ""
 try {
-    $versionLine = Get-Content $tocFile | Where-Object { $_ -match "^\s*##\s*Version:" }
+    $versionLine = Get-Content "$addonName.toc" | Where-Object { $_ -match "^\s*##\s*Version:" }
 
     if ($versionLine) {
         $version = ($versionLine -split ":")[1].Trim()
-        Write-Host "✅ Version gefunden: $version"
+        Write-Host "Version found: $version"
     } else {
         $version = "0.0.0-dev"
-        Write-Warning "Keine '## Version:' Zeile in der .toc-Datei gefunden. Verwende '$version' als Fallback."
+        Write-Warning "No '## Version:' found in .toc-Datei. Using '$version' as fallback"
     }
 } catch {
     $version = "error-no-toc-found"
-    Write-Error "Fehler beim Lesen der .toc-Datei unter '$tocFile'. Breche ab."
+    Write-Error "Error while reading '$addonName.toc'. Task will be terminated"
     return
 }
 
 $zipFile = "./build/$($addonName)-$($version).zip"
-Write-Host "Der Name des ZIP-Archivs wird sein: '$zipFile'"
+Write-Host "ZIP-Archive name: '$zipFile'"
 
 if (Test-Path $destinationFolder) {
     Remove-Item -Recurse -Force $destinationFolder
@@ -45,7 +37,7 @@ foreach ($item in $sourceFiles) {
     }
 
     Copy-Item -Path $item -Destination $finalDestination -Recurse
-    Write-Host "Kopiere '$item' nach '$finalDestination'"
+    Write-Host "Copy '$item' to '$finalDestination'"
 }
 
 if (Test-Path $zipFile) {
@@ -54,7 +46,7 @@ if (Test-Path $zipFile) {
 
 Compress-Archive -Path "$destinationFolder/$addonName" -DestinationPath $zipFile
 
-Write-Host "Räume temporäre Dateien auf..."
+Write-Host "Delete temporary data..."
 Remove-Item -Recurse -Force $finalDestination
 
-Write-Host "ZIP-Archiv erstellt unter: $zipFile"
+Write-Host "ZIP-Archive created: $zipFile"
