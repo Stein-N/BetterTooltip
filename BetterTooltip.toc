@@ -1,6 +1,6 @@
 ## Interface: 110200, 110205
 ## Title: BetterTooltip
-## Version: 1.4.1
+## Version: 1.4.2
 ## Author: xStopho
 ## X-Curse-Project-ID: 1341522
 ## Category: UI
