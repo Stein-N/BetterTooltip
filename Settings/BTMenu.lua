@@ -34,7 +34,7 @@ end
 local function CreateCheckbox(key)
     local s, l = CreateSetting(key)
     if s and l then
-        return Settings.CreateCheckbox(_category, s, l.tooltip)
+        Settings.CreateCheckbox(_category, s, l.tooltip)
     end
 end
 
@@ -47,7 +47,8 @@ local function CreateSlider(cKey, sKey, min, max, step, suffix)
         function(v) return v .. (suffix or "") end)
 
     if cSet and cLang and sSet and sLang then
-        return CreateSettingsCheckboxSliderInitializer(cSet, cLang.label, cLang.tooltip, sSet, sOptions, sLang.label, sLang.tooltip)
+        local init = CreateSettingsCheckboxSliderInitializer(cSet, cLang.label, cLang.tooltip, sSet, sOptions, sLang.label, sLang.tooltip)
+        _layout:AddInitializer(init)
     end
 end
 
@@ -56,8 +57,15 @@ local function CreateDropdown(cKey, dKey, dOptions)
     local dSet = CreateSetting(dKey)
 
     if cSet and cLang and dSet then
-        return CreateSettingsCheckboxDropdownInitializer(cSet, cLang.label, cLang.tooltip, dSet, dOptions)
+        local init = CreateSettingsCheckboxDropdownInitializer(cSet, cLang.label, cLang.tooltip, dSet, dOptions)
+        _layout:AddInitializer(init)
+        return init
     end
+end
+
+local function CreateHeader(text)
+    local init = CreateSettingsListSectionHeaderInitializer(text)
+    _layout:AddInitializer(init)
 end
 
 local function BuildAnchorOptions()
@@ -69,22 +77,39 @@ local function BuildAnchorOptions()
     return c:GetData()
 end
 
+local function BuildIdOptions()
+    local c = Settings.CreateControlTextContainer()
+    c:AddCheckbox(1, "Spell")
+    c:AddCheckbox(2, "Mount")
+    c:AddCheckbox(3, "Aura")
+    c:AddCheckbox(4, "Item")
+    c:AddCheckbox(5, "Toy")
+    c:AddCheckbox(6, "Currency")
+    c:AddCheckbox(7, "Quest")
+    c:AddCheckbox(8, "Macro")
+    return c:GetData()
+end
+
 function BTMenu.BuildSettings()
     InitSettings()
 
     local header = GetLang("header")
 
-    _layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(header.general))
+    CreateHeader(header.general)
     CreateCheckbox("hideHealthbar")
     CreateCheckbox("hideTooltip")
 
-    local dropdown = CreateDropdown("toggleAnchor", "anchorPosition", BuildAnchorOptions)
-    _layout:AddInitializer(dropdown)
+    CreateDropdown("toggleAnchor", "anchorPosition", BuildAnchorOptions)
+    CreateSlider("toggleScaling", "tooltipScale", 5, 250, 5, "%")
 
-    local slider = CreateSlider("toggleScaling", "tooltipScale", 5, 250, 5, "%")
-    _layout:AddInitializer(slider)
+    CreateHeader(header.extra)
 
-    _layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(header.extra))
-    
+    -- Todo: rebuild with own template
+    local s = BTOptions.displayIds
+    local lang = GetLang("displayIds")
+    local proxy = Settings.RegisterProxySetting(_category, s.key, Settings.VarType.Number, lang.label, s.default, BTHelper.IdValueGetter, BTHelper.IdValueSetter)
+    local init = Settings.CreateDropdown(_category, proxy, BuildIdOptions)
+    init.getSelectionTextFunc = function(selections) if #selections == 0 then return "None" else return nil end end
+
     Settings.RegisterAddOnCategory(_category)
 end

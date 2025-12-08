@@ -10,6 +10,7 @@
 Data/BTData.lua
 Events/BTEvents.lua
 Settings/BTMenu.lua
+Settings/BTHelper.lua
 Modules/BTUtils.lua
 Modules/BTModifications.lua
 Core.lua
