@@ -3,7 +3,7 @@ BTData = {
 }
 
 BTOptions = {
-    toggleHealthbar = { key = "toggleHealthbar", default = false },
+    hideHealthbar = { key = "hideHealthbar", default = false },
     hideTooltip = { key = "hideTooltip", default = false },
     toggleAnchor = { key = "toggleAnchor", default = false },
     anchorPosition = { key = "anchorPosition", default = "ANCHOR_CURSOR_RIGHT" },
@@ -17,7 +17,7 @@ BTLocale = {
             general = "General",
             extra = "Extras"
         },
-        toggleHealthbar = {
+        hideHealthbar = {
             label = "Hide Healthbar",
             tooltip = "Hide the healthbar of all units on your tooltip"
         },
@@ -44,4 +44,6 @@ BTLocale = {
     }
 }
 
-BTPrefixes = {}
+BTPrefixes = {
+    enUS = {}
+}

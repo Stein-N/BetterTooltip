@@ -4,6 +4,8 @@ local handler = {}
 function handler.ADDON_LOADED(name)
     if name == BTData.addonName then
         BTMenu.BuildSettings()
+
+        BTModifications.SetTooltipAnchor()
     end
 end
 

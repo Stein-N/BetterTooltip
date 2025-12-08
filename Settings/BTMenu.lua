@@ -75,7 +75,7 @@ function BTMenu.BuildSettings()
     local header = GetLang("header")
 
     _layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(header.general))
-    CreateCheckbox("toggleHealthbar")
+    CreateCheckbox("hideHealthbar")
     CreateCheckbox("hideTooltip")
 
     local dropdown = CreateDropdown("toggleAnchor", "anchorPosition", BuildAnchorOptions)
