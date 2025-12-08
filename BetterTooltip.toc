@@ -1,19 +1,13 @@
-## Interface: 110200, 110205
+## Interface: 110200, 110205, 120000
 ## Title: BetterTooltip
-## Version: 1.4.2
+## Version: 2.0.0
 ## Author: xStopho
 ## X-Curse-Project-ID: 1341522
 ## Category: UI
 ## Notes: Simple and configurable Tooltip Addon
-## SavedVariables: BetterTooltipDB
+## SavedVariables: BTSettings
 
-## Complete Data
-BetterTooltipData.lua
-
-## All functions that must be loaded before Main 
-BetterTooltipSettings.lua
-BetterTooltipUtils.lua
-BetterTooltip.lua
-
-## Main Entrypoint
-BetterTooltipCore.lua
+Data/BTData.lua
+Events/BTEvents.lua
+Settings/BTMenu.lua
+Core.lua
