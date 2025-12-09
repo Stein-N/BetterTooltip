@@ -4,10 +4,10 @@ local _category, _layout = Settings.RegisterVerticalLayoutCategory(BTData.addonN
 local _lang = GetLocale()
 
 local function InitSettings()
-    for _, value in ipairs(BTOptions) do
+    for _, value in pairs(BTOptions) do
         if value and value.key then
             local key = value.key
-            if BTSettings and not BTSettings[key] then
+            if BTSettings and BTSettings[key] == nil then
                 BTSettings[key] = value.default
             end
         end
@@ -126,7 +126,6 @@ function BTMenu.BuildSettings()
 
     CreateHeader(header.extra)
 
-    -- Todo: rebuild with own template
     CreateCheckboxDropdown(BTOptions.displayIds, BTHelper.IdValueGetter, BTHelper.IdValueSetter, BuildIdOptions)
     CreateCheckboxDropdown(BTOptions.displayPlayerInfo, BTHelper.PlayerInfoGetter, BTHelper.PlayerInfoSetter, BuildPlayerInfoOptions)
 
