@@ -107,10 +107,16 @@ function BM.PlayerNameToClassColor(tooltip)
         local _, unit = tooltip:GetUnit()
         local _, class = UnitClass(unit)
         local color = RAID_CLASS_COLORS[class]
-        local line = _G["GameTooltipTextLeft1"]
-        if line then
-            line:SetText("|c" .. color.colorStr .. line:GetText())
+
+        local function colorLine(index)
+            local line = _G["GameTooltipTextLeft"..index]
+            if line then line:SetText("|c" .. color.colorStr .. line:GetText()) end
         end
+
+        colorLine(1)
+
+        local guildLine = GetGuildInfo(unit) and 4 or 3
+        colorLine(guildLine)
     end
 end
 
@@ -119,7 +125,7 @@ function BM.AddPlayerGuildRank(tooltip, key)
         local name, rank = GetGuildInfo("mouseover")
         local line = _G["GameTooltipTextLeft2"]
         if name ~= nil and line then
-            line:SetText(name .. " - " .. rank)
+            line:SetText("|c009999ff" .. name .. " - " .. rank)
         end
     end
 end
