@@ -22,4 +22,4 @@ for _, key in ipairs(tooltipMods) do
 end
 
 TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit,
-        function(t, d) BTModifications.AddUnitId(t, "unit") end)
+        function(t, _) BTModifications.AddUnitId(t, "unit") end)

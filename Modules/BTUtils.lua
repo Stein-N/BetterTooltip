@@ -22,11 +22,11 @@ function BTUtils.AddPrefixedText(tooltip, prefix, text)
     end
 end
 
-function BTUtils.SplitString(input, seperator)
+function BTUtils.SplitString(input, sep)
     local result = {}
-    seperator = seperator or "%s"
+    sep = sep or "%s"
 
-    for part in string.gmatch(input, "([^" .. seperator .. "]+)") do
+    for part in string.gmatch(input, "([^" .. sep .. "]+)") do
         table.insert(result, part)
     end
 

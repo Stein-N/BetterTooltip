@@ -7,7 +7,7 @@ local function InitSettings()
     for _, value in ipairs(BTOptions) do
         if value and value.key then
             local key = value.key
-            if BTSettings and BTSettings[key] then
+            if BTSettings and not BTSettings[key] then
                 BTSettings[key] = value.default
             end
         end
@@ -63,6 +63,13 @@ local function CreateDropdown(cKey, dKey, dOptions)
     end
 end
 
+local function CreateCheckboxDropdown(option, getter, setter, optionBuilder)
+    local lang = GetLang(option.key)
+    local proxy = Settings.RegisterProxySetting(_category, option.key, Settings.VarType.Number, lang.label, option.default, getter, setter)
+    local init = Settings.CreateDropdown(_category, proxy, optionBuilder)
+    init.getSelectionTextFunc = function(selections) if #selections == 0 then return "None" else return nil end end
+end
+
 local function CreateHeader(text)
     local init = CreateSettingsListSectionHeaderInitializer(text)
     _layout:AddInitializer(init)
@@ -80,6 +87,7 @@ end
 local function BuildIdOptions()
     local c = Settings.CreateControlTextContainer()
     local l = BTIdLocale[_lang] or BTIdLocale.enUS
+
     c:AddCheckbox(1, l.unit.label)
     c:AddCheckbox(2, l.spell.label)
     c:AddCheckbox(3, l.mount.label)
@@ -89,6 +97,18 @@ local function BuildIdOptions()
     c:AddCheckbox(7, l.currency.label)
     c:AddCheckbox(8, l.quest.label)
     c:AddCheckbox(9, l.macro.label)
+
+    return c:GetData()
+end
+
+local function BuildPlayerInfoOptions()
+    local c = Settings.CreateControlTextContainer()
+    local l = BTPlayerInfoLocale[_lang] or BTPlayerInfoLocale.enUS
+
+    c:AddCheckbox(1, l.mount.label)
+    c:AddCheckbox(2, l.target.label)
+    c:AddCheckbox(3, l.score.label)
+
     return c:GetData()
 end
 
@@ -107,11 +127,9 @@ function BTMenu.BuildSettings()
     CreateHeader(header.extra)
 
     -- Todo: rebuild with own template
-    local s = BTOptions.displayIds
-    local lang = GetLang("displayIds")
-    local proxy = Settings.RegisterProxySetting(_category, s.key, Settings.VarType.Number, lang.label, s.default, BTHelper.IdValueGetter, BTHelper.IdValueSetter)
-    local init = Settings.CreateDropdown(_category, proxy, BuildIdOptions)
-    init.getSelectionTextFunc = function(selections) if #selections == 0 then return "None" else return nil end end
+    CreateCheckboxDropdown(BTOptions.displayIds, BTHelper.IdValueGetter, BTHelper.IdValueSetter, BuildIdOptions)
+    CreateCheckboxDropdown(BTOptions.displayPlayerInfo, BTHelper.PlayerInfoGetter, BTHelper.PlayerInfoSetter, BuildPlayerInfoOptions)
+
 
     Settings.RegisterAddOnCategory(_category)
 end

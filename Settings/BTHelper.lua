@@ -17,3 +17,21 @@ function BTHelper.IdValueSetter(value)
         end
     end
 end
+
+function BTHelper.PlayerInfoGetter()
+    return BTSettings.displayPlayerInfo
+end
+
+function BTHelper.PlayerInfoSetter(value)
+    BTSettings.displayPlayerInfo = value
+    local temp = value
+    for i = 3, 1, -1 do
+        local obj = BTPlayerInfoValues[i]
+        if (temp - obj.value) >= 0 then
+            BTSettings.activePlayerInfo[obj.key] = true
+            temp = temp - obj.value
+        else
+            BTSettings.activePlayerInfo[obj.key] = false
+        end
+    end
+end
