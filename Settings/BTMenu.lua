@@ -14,14 +14,13 @@ local function InitSettings()
     end
 end
 
-local function GetLang(key)
-    local lang = BTOptionsLocal[_lang] or BTOptionsLocal.enUS
-    if lang then return lang[key] end
+local function GetLang()
+    return BTLocale[_lang] or BTLocale.enUS
 end
 
 local function CreateSetting(key)
     local option = BTOptions[key]
-    local lang = GetLang(key)
+    local lang = GetLang()[key]
 
     if option and lang then
         local set = Settings.RegisterAddOnSetting(_category, option.key, option.key,
@@ -64,7 +63,7 @@ local function CreateDropdown(cKey, dKey, dOptions)
 end
 
 local function CreateCheckboxDropdown(option, getter, setter, optionBuilder)
-    local lang = GetLang(option.key)
+    local lang = GetLang()[option.key]
     local proxy = Settings.RegisterProxySetting(_category, option.key, Settings.VarType.Number, lang.label, option.default, getter, setter)
     local init = Settings.CreateDropdown(_category, proxy, optionBuilder)
     init.getSelectionTextFunc = function(selections) if #selections == 0 then return "None" else return nil end end
@@ -86,7 +85,7 @@ end
 
 local function BuildIdOptions()
     local c = Settings.CreateControlTextContainer()
-    local l = BTIdLocale[_lang] or BTIdLocale.enUS
+    local l = GetLang()
 
     c:AddCheckbox(1, l.unit.label)
     c:AddCheckbox(2, l.spell.label)
@@ -103,7 +102,7 @@ end
 
 local function BuildPlayerInfoOptions()
     local c = Settings.CreateControlTextContainer()
-    local l = BTPlayerInfoLocale[_lang] or BTPlayerInfoLocale.enUS
+    local l = GetLang()
 
     c:AddCheckbox(1, l.mount.label)
     c:AddCheckbox(2, l.target.label)
@@ -116,7 +115,7 @@ end
 function BTMenu.BuildSettings()
     InitSettings()
 
-    local header = GetLang("header")
+    local header = GetLang()["header"]
 
     CreateHeader(header.general)
     CreateCheckbox("hideHealthbar")

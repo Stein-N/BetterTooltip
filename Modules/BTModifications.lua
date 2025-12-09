@@ -3,8 +3,8 @@ BM = BTModifications
 local _lang = GetLocale()
 
 local function GetPrefix(key)
-    local prefix = BTPrefixes[_lang][key] or BTPrefixes.enUS[key]
-    return prefix
+    local prefix = BTLocale[_lang][key] or BTLocale.enUS[key]
+    return prefix.label
 end
 
 function BM.SetTooltipAnchor(tooltip, parent)
