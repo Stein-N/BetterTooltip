@@ -21,7 +21,7 @@ BTOptionsLocal = {
         anchorPosition = { label = "", tooltip = "" },
         toggleScaling = { label = "Tooltip Scaling", tooltip = "Activate scaling for all tooltips" },
         tooltipScale = { label = "Tooltip Scale", tooltip = "Min: 5% Max 250%" },
-        displayIds = { label = "Show ID for", tooltip = "Add the id for all the choosen objects to the tooltip" }
+        displayIds = { label = "Show ID for", tooltip = "Add the id for all the chosen objects to the tooltip" }
     }
 }
 
