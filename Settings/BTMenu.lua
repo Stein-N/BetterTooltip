@@ -15,7 +15,7 @@ local function InitSettings()
 end
 
 local function GetLang(key)
-    local lang = BTLocale[_lang] or BTLocale.enUS
+    local lang = BTOptionsLocal[_lang] or BTOptionsLocal.enUS
     if lang then return lang[key] end
 end
 
@@ -79,15 +79,16 @@ end
 
 local function BuildIdOptions()
     local c = Settings.CreateControlTextContainer()
-    c:AddCheckbox(1, "Unit")
-    c:AddCheckbox(2, "Spell")
-    c:AddCheckbox(3, "Mount")
-    c:AddCheckbox(4, "Aura")
-    c:AddCheckbox(5, "Item")
-    c:AddCheckbox(6, "Toy")
-    c:AddCheckbox(7, "Currency")
-    c:AddCheckbox(8, "Quest")
-    c:AddCheckbox(9, "Macro")
+    local l = BTIdLocale[_lang] or BTIdLocale.enUS
+    c:AddCheckbox(1, l.unit.label)
+    c:AddCheckbox(2, l.spell.label)
+    c:AddCheckbox(3, l.mount.label)
+    c:AddCheckbox(4, l.aura.label)
+    c:AddCheckbox(5, l.item.label)
+    c:AddCheckbox(6, l.toy.label)
+    c:AddCheckbox(7, l.currency.label)
+    c:AddCheckbox(8, l.quest.label)
+    c:AddCheckbox(9, l.macro.label)
     return c:GetData()
 end
 
