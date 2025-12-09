@@ -22,4 +22,9 @@ for _, key in ipairs(tooltipMods) do
 end
 
 TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit,
-        function(t, _) BTModifications.AddUnitId(t, "unit") end)
+        function(t, _)
+            BTModifications.AddUnitId(t, "unit")
+            BTModifications.AddPlayerMount(t, "mount")
+            BTModifications.AddPlayerMythicScore(t, "score")
+            BTModifications.AddPlayerTarget(t, "target")
+        end)

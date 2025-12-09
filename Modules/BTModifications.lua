@@ -49,7 +49,7 @@ function BM.AddTooltipId(tooltip, data, key)
     if data.id then
         local prefix = GetPrefix(string.lower(key))
         if BTSettings.activeIds[key] then
-            BTUtils.AddPrefixedText(tooltip, prefix, data.id)
+            BTUtils.AddPrefixedText(tooltip, prefix .. "-ID", data.id)
         end
     end
 end
@@ -64,7 +64,45 @@ function BM.AddUnitId(tooltip, key)
             local prefix = GetPrefix(key)
 
             if BTSettings.activeIds[key] then
-                BTUtils.AddPrefixedText(tooltip, prefix, parts[6])
+                BTUtils.AddPrefixedText(tooltip, prefix .. "-ID", parts[6])
+            end
+        end
+    end
+end
+
+function BM.AddPlayerMount(tooltip, key)
+    if BTUtils.IsPlayerHovered(tooltip) then
+        for i = 1, 40 do
+            local aura = C_UnitAuras.GetAuraDataByIndex("mouseover", i)
+            if aura and aura.name then
+                if BTUtils.IsAuraMount(aura) and BTSettings.activePlayerInfo[key] then
+                    local prefix = GetPrefix(key)
+                    BTUtils.AddPrefixedText(tooltip, prefix, aura.name)
+                end
+            end
+        end
+    end
+end
+
+function BM.AddPlayerMythicScore(tooltip, key)
+    if BTUtils.IsPlayerHovered(tooltip) then
+        local summary = C_PlayerInfo.GetPlayerMythicPlusRatingSummary("player")
+        local prefix = GetPrefix(key)
+        if summary and BTSettings.activePlayerInfo[key] then
+            BTUtils.AddPrefixedText(tooltip, prefix, summary.currentSeasonScore or 100)
+        end
+    end
+end
+
+function BM.AddPlayerTarget(tooltip, key)
+    if BTUtils.IsPlayerHovered(tooltip) then
+        local _, unit = tooltip:GetUnit()
+
+        if not UnitIsUnit("player", unit) then
+            local target = UnitName(unit .. "target")
+            local prefix = GetPrefix(key)
+            if BTSettings.activePlayerInfo[key] then
+                BTUtils.AddPrefixedText(tooltip, prefix, target)
             end
         end
     end

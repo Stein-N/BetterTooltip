@@ -10,7 +10,9 @@ BTOptions = {
     toggleScaling = { key = "toggleScaling", default = false },
     tooltipScale = { key = "tooltipScale", default = 100 },
     displayIds = { key = "displayIds", default = 0 },
-    displayPlayerInfo = { key = "displayPlayerInfo", default = 0 }
+    activeIds = { key = "activeIds", default = {} },
+    displayPlayerInfo = { key = "displayPlayerInfo", default = 0 },
+    activePlayerInfo = { key = "activePlayerInfo", default = {} }
 }
 
 BTOptionsLocal = {
@@ -69,17 +71,16 @@ BTPlayerInfoValues = {
 
 BTPrefixes = {
     enUS = {
-        unit = "Unit-ID",
-        spell = "Spell-ID",
-        mount = "Mount-ID",
-        unitaura = "Aura-ID",
-        item = "Item-ID",
-        toy = "Toy-ID",
-        currency = "Currency-ID",
-        quest = "Quest-ID",
-        macro = "Macro-ID",
+        unit = "Unit",
+        spell = "Spell",
+        mount = "Mount",
+        unitaura = "Aura",
+        item = "Item",
+        toy = "Toy",
+        currency = "Currency",
+        quest = "Quest",
+        macro = "Macro",
         target = "Target",
-        targetMount = "Mount",
-        targetMythicScore = "Mythic Score"
+        score = "Mythic+ Score"
     }
 }
