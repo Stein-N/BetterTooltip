@@ -30,7 +30,7 @@ BTIdLocale = {
         unit = { label = "Unit", tooltip = "" },
         spell = { label = "Spell", tooltip = "" },
         mount = { label = "Mount", tooltip = ""},
-        aura = { label = "Aura", tooltip = "" },
+        unitaura = { label = "Aura", tooltip = "" },
         item = { label = "Item", tooltip = "" },
         toy = { label = "Toy", tooltip = "" },
         currency = { label = "Currency", tooltip = "" },
@@ -43,7 +43,7 @@ BTIdValues = {
     [1] = { key = "unit", value = 1 },
     [2] = { key = "spell", value = 2 },
     [3] = { key = "mount", value = 4 },
-    [4] = { key = "aura", value = 8 },
+    [4] = { key = "unitaura", value = 8 },
     [5] = { key = "item", value = 16 },
     [6] = { key = "toy", value = 32 },
     [7] = { key = "currency", value = 64 },
@@ -56,11 +56,14 @@ BTPrefixes = {
         unit = "Unit-ID",
         spell = "Spell-ID",
         mount = "Mount-ID",
-        aura = "Aura-ID",
+        unitaura = "Aura-ID",
         item = "Item-ID",
         toy = "Toy-ID",
         currency = "Currency-ID",
         quest = "Quest-ID",
-        macro = "Macro-ID"
+        macro = "Macro-ID",
+        target = "Target",
+        targetMount = "Mount",
+        targetMythicScore = "Mythic Score"
     }
 }
