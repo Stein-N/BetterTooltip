@@ -7,7 +7,7 @@ local function InitSettings()
     for _, value in ipairs(BTOptions) do
         if value and value.key then
             local key = value.key
-            if BTSettings and not BTSettings[key] then
+            if BTSettings and BTSettings[key] then
                 BTSettings[key] = value.default
             end
         end
@@ -79,14 +79,15 @@ end
 
 local function BuildIdOptions()
     local c = Settings.CreateControlTextContainer()
-    c:AddCheckbox(1, "Spell")
-    c:AddCheckbox(2, "Mount")
-    c:AddCheckbox(3, "Aura")
-    c:AddCheckbox(4, "Item")
-    c:AddCheckbox(5, "Toy")
-    c:AddCheckbox(6, "Currency")
-    c:AddCheckbox(7, "Quest")
-    c:AddCheckbox(8, "Macro")
+    c:AddCheckbox(1, "Unit")
+    c:AddCheckbox(2, "Spell")
+    c:AddCheckbox(3, "Mount")
+    c:AddCheckbox(4, "Aura")
+    c:AddCheckbox(5, "Item")
+    c:AddCheckbox(6, "Toy")
+    c:AddCheckbox(7, "Currency")
+    c:AddCheckbox(8, "Quest")
+    c:AddCheckbox(9, "Macro")
     return c:GetData()
 end
 
