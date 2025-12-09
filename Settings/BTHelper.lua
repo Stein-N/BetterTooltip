@@ -1,7 +1,7 @@
 BTHelper = {}
 
 function BTHelper.IdValueGetter()
-    return BTSettings.displayIds
+    return BTSettings.displayIds or 0
 end
 
 function BTHelper.IdValueSetter(value)
@@ -9,6 +9,8 @@ function BTHelper.IdValueSetter(value)
     local temp = value
     for i = 9, 1, -1 do
         local obj = BTIdValues[i]
+
+        if not BTSettings.activeIds then BTSettings.activeIds = {} end
         if (temp - obj.value) >= 0 then
             BTSettings.activeIds[obj.key] = true
             temp = temp - obj.value
@@ -19,7 +21,7 @@ function BTHelper.IdValueSetter(value)
 end
 
 function BTHelper.PlayerInfoGetter()
-    return BTSettings.displayPlayerInfo
+    return BTSettings.displayPlayerInfo or 0
 end
 
 function BTHelper.PlayerInfoSetter(value)
@@ -27,6 +29,8 @@ function BTHelper.PlayerInfoSetter(value)
     local temp = value
     for i = 3, 1, -1 do
         local obj = BTPlayerInfoValues[i]
+
+        if not BTSettings.activePlayerInfo then BTSettings.activePlayerInfo = {} end
         if (temp - obj.value) >= 0 then
             BTSettings.activePlayerInfo[obj.key] = true
             temp = temp - obj.value
