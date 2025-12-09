@@ -27,4 +27,7 @@ TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit,
             BTModifications.AddPlayerMount(t, "mount")
             BTModifications.AddPlayerMythicScore(t, "score")
             BTModifications.AddPlayerTarget(t, "target")
+
+            BTModifications.PlayerNameToClassColor(t)
+            BTModifications.AddPlayerGuildRank(t, "rank")
         end)

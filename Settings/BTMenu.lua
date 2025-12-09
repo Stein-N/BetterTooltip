@@ -108,6 +108,7 @@ local function BuildPlayerInfoOptions()
     c:AddCheckbox(1, l.mount.label)
     c:AddCheckbox(2, l.target.label)
     c:AddCheckbox(3, l.score.label)
+    c:AddCheckbox(4, l.rank.label)
 
     return c:GetData()
 end
@@ -126,6 +127,7 @@ function BTMenu.BuildSettings()
 
     CreateHeader(header.extra)
 
+    CreateCheckbox("toggleClassColor")
     CreateCheckboxDropdown(BTOptions.displayIds, BTHelper.IdValueGetter, BTHelper.IdValueSetter, BuildIdOptions)
     CreateCheckboxDropdown(BTOptions.displayPlayerInfo, BTHelper.PlayerInfoGetter, BTHelper.PlayerInfoSetter, BuildPlayerInfoOptions)
 

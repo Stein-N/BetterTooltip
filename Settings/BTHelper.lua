@@ -27,7 +27,7 @@ end
 function BTHelper.PlayerInfoSetter(value)
     BTSettings.displayPlayerInfo = value
     local temp = value
-    for i = 3, 1, -1 do
+    for i = 4, 1, -1 do
         local obj = BTPlayerInfoValues[i]
 
         if not BTSettings.activePlayerInfo then BTSettings.activePlayerInfo = {} end

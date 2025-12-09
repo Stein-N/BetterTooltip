@@ -9,6 +9,7 @@ BTOptions = {
     anchorPosition = { key = "anchorPosition", default = "ANCHOR_CURSOR_RIGHT" },
     toggleScaling = { key = "toggleScaling", default = false },
     tooltipScale = { key = "tooltipScale", default = 100 },
+    toggleClassColor = { key = "toggleClassColor", default = false },
     displayIds = { key = "displayIds", default = 0 },
     activeIds = { key = "activeIds", default = {} },
     displayPlayerInfo = { key = "displayPlayerInfo", default = 0 },
@@ -24,11 +25,13 @@ BTOptionsLocal = {
         anchorPosition = { label = "", tooltip = "" },
         toggleScaling = { label = "Tooltip Scaling", tooltip = "Activate scaling for all tooltips" },
         tooltipScale = { label = "Tooltip Scale", tooltip = "Min: 5% Max 250%" },
+        toggleClassColor = { label = "Class-Colored Name", tooltip = "Displays player names in their respective class colors for easier identification" },
         displayIds = { label = "Show ID for", tooltip = "Add the id for all the chosen objects to the tooltip" },
         displayPlayerInfo = { label = "Show Player info", tooltip = "Show extra information for hovered player." }
     }
 }
 
+-- Todo: change to BTLocale
 BTIdLocale = {
     enUS = {
         unit = { label = "Unit", tooltip = "" },
@@ -55,11 +58,13 @@ BTIdValues = {
     [9] = { key = "macro", value = 256 },
 }
 
+-- Todo: change to BTLocale
 BTPlayerInfoLocale = {
     enUS = {
         mount = { label = "Mount" },
         target = { label = "Target" },
-        score = { label = "Mythic+" }
+        score = { label = "Mythic+" },
+        rank = { label = "Rank" }
     }
 }
 
@@ -67,8 +72,10 @@ BTPlayerInfoValues = {
     [1] = { key = "mount", value = 1 },
     [2] = { key = "target", value = 2 },
     [3] = { key = "score", value = 4 },
+    [4] = { key = "rank", value = 8}
 }
 
+-- Todo: change to BTLocale
 BTPrefixes = {
     enUS = {
         unit = "Unit",
