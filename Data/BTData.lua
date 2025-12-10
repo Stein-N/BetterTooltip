@@ -40,7 +40,7 @@ BTLocale = {
         macro = { label = "Macro", tooltip = "" },
         target = { label = "Target", tooltip = "" },
         score = { label = "Mythic+ Score", tooltip = "" },
-        rank = { label = "Rank", tooltip = "" }
+        rank = { label = "Guild Rank", tooltip = "" }
     }
 }
 
@@ -53,7 +53,7 @@ BTIdValues = {
     [6] = { key = "toy", value = 32 },
     [7] = { key = "currency", value = 64 },
     [8] = { key = "quest", value = 128 },
-    [9] = { key = "macro", value = 256 },
+    [9] = { key = "macro", value = 256 }
 }
 
 BTPlayerInfoValues = {

@@ -45,10 +45,10 @@ function BM.ApplyTooltipHealthbar()
     end
 end
 
-function BM.AddTooltipId(tooltip, data, key)
-    if data.id and BTSettings.activeIds[key] then
+function BM.AddTooltipId(tooltip, id, key)
+    if id and BTSettings.activeIds[key] then
         local prefix = GetPrefix(string.lower(key))
-        BTUtils.AddPrefixedText(tooltip, prefix .. "-ID", data.id)
+        BTUtils.AddPrefixedText(tooltip, prefix .. "-ID", id)
     end
 end
 

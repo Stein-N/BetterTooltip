@@ -18,7 +18,7 @@ end)
 local tooltipMods = { "Spell", "Mount", "UnitAura", "Item", "Toy", "Currency", "Quest", "Macro" }
 for _, key in ipairs(tooltipMods) do
     TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType[key],
-            function(t, d) BTModifications.AddTooltipId(t, d, string.lower(key)) end)
+            function(t, d) BTModifications.AddTooltipId(t, d.id, string.lower(key)) end)
 end
 
 TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit,
@@ -31,3 +31,7 @@ TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit,
             BTModifications.ApplyTooltipColor(t)
             BTModifications.AddPlayerGuildRank(t, "rank")
         end)
+
+hooksecurefunc("QuestMapLogTitleButton_OnEnter", function(b)
+    BTModifications.AddTooltipId(GameTooltip, b.questID, "quest")
+end)
