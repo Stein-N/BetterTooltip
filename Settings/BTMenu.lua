@@ -126,7 +126,7 @@ function BTMenu.BuildSettings()
 
     CreateHeader(header.extra)
 
-    CreateCheckbox("toggleClassColor")
+    CreateCheckbox("toggleTooltipColor")
     CreateCheckboxDropdown(BTOptions.displayIds, BTHelper.IdValueGetter, BTHelper.IdValueSetter, BuildIdOptions)
     CreateCheckboxDropdown(BTOptions.displayPlayerInfo, BTHelper.PlayerInfoGetter, BTHelper.PlayerInfoSetter, BuildPlayerInfoOptions)
 

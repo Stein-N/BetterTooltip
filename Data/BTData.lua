@@ -9,7 +9,7 @@ BTOptions = {
     anchorPosition = { key = "anchorPosition", default = "ANCHOR_CURSOR_RIGHT" },
     toggleScaling = { key = "toggleScaling", default = false },
     tooltipScale = { key = "tooltipScale", default = 100 },
-    toggleClassColor = { key = "toggleClassColor", default = false },
+    toggleTooltipColor = { key = "toggleTooltipColor", default = false },
     displayIds = { key = "displayIds", default = 0 },
     activeIds = { key = "activeIds", default = {} },
     displayPlayerInfo = { key = "displayPlayerInfo", default = 0 },
@@ -25,7 +25,7 @@ BTLocale = {
         anchorPosition = { label = "", tooltip = "" },
         toggleScaling = { label = "Tooltip Scaling", tooltip = "Activate scaling for all tooltips" },
         tooltipScale = { label = "Tooltip Scale", tooltip = "Min: 5% Max 250%" },
-        toggleClassColor = { label = "Class-Colored Name", tooltip = "Displays player names in their respective class colors for easier identification" },
+        toggleTooltipColor = { label = "Tooltip Coloring", tooltip = "Applies Class Color to player name and class and Highlights the guild name if present" },
         displayIds = { label = "Show ID for", tooltip = "Add the id for all the chosen objects to the tooltip" },
         displayPlayerInfo = { label = "Show Player info", tooltip = "Show extra information for hovered player." },
 

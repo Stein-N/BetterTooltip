@@ -28,6 +28,6 @@ TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit,
             BTModifications.AddPlayerMount(t, "mount")
             BTModifications.AddPlayerTarget(t, "target")
 
-            BTModifications.PlayerNameToClassColor(t)
+            BTModifications.ApplyTooltipColor(t)
             BTModifications.AddPlayerGuildRank(t, "rank")
         end)

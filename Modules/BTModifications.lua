@@ -102,21 +102,24 @@ function BM.AddPlayerTarget(tooltip, key)
     end
 end
 
-function BM.PlayerNameToClassColor(tooltip)
-    if BTUtils.IsPlayerHovered(tooltip) and BTSettings.toggleClassColor then
+function BM.ApplyTooltipColor(tooltip)
+    if BTUtils.IsPlayerHovered(tooltip) and BTSettings.toggleTooltipColor then
         local _, unit = tooltip:GetUnit()
         local _, class = UnitClass(unit)
         local color = RAID_CLASS_COLORS[class]
 
-        local function colorLine(index)
+        local function colorLine(index, c)
             local line = _G["GameTooltipTextLeft"..index]
-            if line then line:SetText("|c" .. color.colorStr .. line:GetText()) end
+            if line then line:SetText("|c" .. c .. line:GetText()) end
         end
 
-        colorLine(1)
+        colorLine(1, color.colorStr)
 
-        local guildLine = GetGuildInfo(unit) and 4 or 3
-        colorLine(guildLine)
+        local name = GetGuildInfo(unit)
+        if name then
+            colorLine(2, "009999ff")
+            colorLine(4, color.colorStr)
+        else colorLine(3, color.colorStr) end
     end
 end
 
@@ -125,7 +128,7 @@ function BM.AddPlayerGuildRank(tooltip, key)
         local name, rank = GetGuildInfo("mouseover")
         local line = _G["GameTooltipTextLeft2"]
         if name ~= nil and line then
-            line:SetText("|c009999ff" .. name .. " - " .. rank)
+            line:SetText(line:GetText() .. " - " .. rank)
         end
     end
 end
