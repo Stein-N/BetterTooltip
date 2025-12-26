@@ -45,20 +45,11 @@ BTLocale = {
 }
 
 BTIdValues = {
-    [1] = { key = "unit", value = 1 },
-    [2] = { key = "spell", value = 2 },
-    [3] = { key = "mount", value = 4 },
-    [4] = { key = "unitaura", value = 8 },
-    [5] = { key = "item", value = 16 },
-    [6] = { key = "toy", value = 32 },
-    [7] = { key = "currency", value = 64 },
-    [8] = { key = "quest", value = 128 },
-    [9] = { key = "macro", value = 256 }
+    "unit", "spell", "mount", "unitaura",
+    "item", "toy", "currency", "quest",
+    "macro"
 }
 
 BTPlayerInfoValues = {
-    [1] = { key = "mount", value = 1 },
-    [2] = { key = "target", value = 2 },
-    [3] = { key = "score", value = 4 },
-    [4] = { key = "rank", value = 8}
+    "mount", "target", "score", "rank"
 }

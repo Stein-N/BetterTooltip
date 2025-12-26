@@ -83,31 +83,13 @@ local function BuildAnchorOptions()
     return c:GetData()
 end
 
-local function BuildIdOptions()
+local function BuildCheckboxOptions(table)
     local c = Settings.CreateControlTextContainer()
     local l = GetLang()
 
-    c:AddCheckbox(1, l.unit.label)
-    c:AddCheckbox(2, l.spell.label)
-    c:AddCheckbox(3, l.mount.label)
-    c:AddCheckbox(4, l.unitaura.label)
-    c:AddCheckbox(5, l.item.label)
-    c:AddCheckbox(6, l.toy.label)
-    c:AddCheckbox(7, l.currency.label)
-    c:AddCheckbox(8, l.quest.label)
-    c:AddCheckbox(9, l.macro.label)
-
-    return c:GetData()
-end
-
-local function BuildPlayerInfoOptions()
-    local c = Settings.CreateControlTextContainer()
-    local l = GetLang()
-
-    c:AddCheckbox(1, l.mount.label)
-    c:AddCheckbox(2, l.target.label)
-    c:AddCheckbox(3, l.score.label)
-    c:AddCheckbox(4, l.rank.label)
+    for index, value in ipairs(table) do
+        c:AddCheckbox(index, l[value].label)
+    end
 
     return c:GetData()
 end
@@ -127,8 +109,18 @@ function BTMenu.BuildSettings()
     CreateHeader(header.extra)
 
     CreateCheckbox("toggleTooltipColor")
-    CreateCheckboxDropdown(BTOptions.displayIds, BTHelper.IdValueGetter, BTHelper.IdValueSetter, BuildIdOptions)
-    CreateCheckboxDropdown(BTOptions.displayPlayerInfo, BTHelper.PlayerInfoGetter, BTHelper.PlayerInfoSetter, BuildPlayerInfoOptions)
+    CreateCheckboxDropdown(
+            BTOptions.displayIds,
+            function() return BTHelper.IdGetter("displayIds") end,
+            function(value) BTHelper.IdSetter("displayIds", "activeIds", BTIdValues, value) end,
+            function() return BuildCheckboxOptions(BTIdValues) end
+    )
+    CreateCheckboxDropdown(
+            BTOptions.displayPlayerInfo,
+            function() return BTHelper.IdGetter("displayPlayerInfo") end,
+            function(value) BTHelper.IdSetter("displayPlayerInfo", "activePlayerInfo", BTPlayerInfoValues, value) end,
+            function() return BuildCheckboxOptions(BTPlayerInfoValues) end
+    )
 
 
     Settings.RegisterAddOnCategory(_category)
