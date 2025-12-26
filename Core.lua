@@ -22,7 +22,8 @@ for _, key in ipairs(tooltipMods) do
                 if not UnitAffectingCombat("player") then
                     BTModifications.AddTooltipId(t, d.id, string.lower(key))
                 end
-            end)
+            end
+    )
 end
 
 TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit,

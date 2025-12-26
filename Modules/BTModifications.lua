@@ -55,6 +55,8 @@ end
 function BM.AddUnitId(tooltip, key)
     if tooltip and tooltip.GetUnit and BTSettings.activeIds[key] then
         local _, unit = tooltip:GetUnit()
+        if not unit then return end -- Save measure if the unit is null
+
         local guid = UnitGUID(unit)
 
         if guid ~= nil and guid ~= "" then
