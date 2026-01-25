@@ -54,16 +54,17 @@ end
 
 function BM.AddUnitId(tooltip, key)
     if tooltip and tooltip.GetUnit and BTSettings.activeIds[key] then
-        local _, unit = tooltip:GetUnit()
-        if not unit then return end -- Save measure if the unit is null
+        if tooltip.GetUnit ~= nil then
+            local _, unit = tooltip:GetUnit()
 
-        local guid = UnitGUID(unit)
+            local guid = UnitGUID(unit)
 
-        if guid ~= nil and guid ~= "" then
-            local parts = BTUtils.SplitString(guid, "%-")
-            local prefix = GetPrefix(key)
+            if guid ~= nil and guid ~= "" then
+                local parts = BTUtils.SplitString(guid, "%-")
+                local prefix = GetPrefix(key)
 
-            BTUtils.AddPrefixedText(tooltip, prefix .. "-ID", parts[6])
+                BTUtils.AddPrefixedText(tooltip, prefix .. "-ID", parts[6])
+            end
         end
     end
 end
