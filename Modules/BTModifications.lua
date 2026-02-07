@@ -95,34 +95,38 @@ end
 
 function BM.AddPlayerTarget(tooltip, key)
     if BTUtils.IsPlayerHovered(tooltip) and BTSettings.activePlayerInfo[key] then
-        local _, unit = tooltip:GetUnit()
+        if tooltip.GetUnit ~= nil then
+            local _, unit = tooltip:GetUnit()
 
-        if not UnitIsUnit("player", unit) then
-            local target = UnitName(unit .. "target")
-            local prefix = GetPrefix(key)
-            BTUtils.AddPrefixedText(tooltip, prefix, target)
+            if not UnitIsUnit("player", unit) then
+                local target = UnitName(unit .. "target")
+                local prefix = GetPrefix(key)
+                BTUtils.AddPrefixedText(tooltip, prefix, target)
+            end
         end
     end
 end
 
 function BM.ApplyTooltipColor(tooltip)
     if BTUtils.IsPlayerHovered(tooltip) and BTSettings.toggleTooltipColor then
-        local _, unit = tooltip:GetUnit()
-        local _, class = UnitClass(unit)
-        local color = RAID_CLASS_COLORS[class]
+        if tooltip.GetUnit ~= nil then
+            local _, unit = tooltip:GetUnit()
+            local _, class = UnitClass(unit)
+            local color = RAID_CLASS_COLORS[class]
 
-        local function colorLine(index, c)
-            local line = _G["GameTooltipTextLeft"..index]
-            if line then line:SetText("|c" .. c .. line:GetText()) end
+            local function colorLine(index, c)
+                local line = _G["GameTooltipTextLeft"..index]
+                if line then line:SetText("|c" .. c .. line:GetText()) end
+            end
+
+            colorLine(1, color.colorStr)
+
+            local name = GetGuildInfo(unit)
+            if name then
+                colorLine(2, "009999ff")
+                colorLine(4, color.colorStr)
+            else colorLine(3, color.colorStr) end
         end
-
-        colorLine(1, color.colorStr)
-
-        local name = GetGuildInfo(unit)
-        if name then
-            colorLine(2, "009999ff")
-            colorLine(4, color.colorStr)
-        else colorLine(3, color.colorStr) end
     end
 end
 

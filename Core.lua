@@ -28,13 +28,14 @@ end
 
 TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit,
         function(t, _)
+            BTModifications.ApplyTooltipColor(t)
+
             if not UnitAffectingCombat("player") and not (InCombatLockdown() or IsInInstance()) then
                 BTModifications.AddUnitId(t, "unit")
                 BTModifications.AddPlayerMythicScore(t, "score")
                 BTModifications.AddPlayerMount(t, "mount")
                 BTModifications.AddPlayerTarget(t, "target")
 
-                BTModifications.ApplyTooltipColor(t)
                 BTModifications.AddPlayerGuildRank(t, "rank")
             end
         end)
