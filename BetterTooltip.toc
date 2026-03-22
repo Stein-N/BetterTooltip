@@ -8,6 +8,7 @@
 ## SavedVariables: BTSettings
 
 # Data
+Data\Constants.lua
 
 # Utils
 
