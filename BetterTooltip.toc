@@ -3,14 +3,13 @@
 ## Version: 2.0.4
 ## Author: xStopho
 ## X-Curse-Project-ID: 1341522
-## Category: UI
+## Category: Better UI
 ## Notes: Simple and configurable Tooltip Addon
 ## SavedVariables: BTSettings
 
-Data/BTData.lua
-Events/BTEvents.lua
-Settings/BTMenu.lua
-Settings/BTHelper.lua
-Modules/BTUtils.lua
-Modules/BTModifications.lua
+# Data
+
+# Utils
+
+# Core
 Core.lua

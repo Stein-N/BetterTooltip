@@ -1,45 +1,38 @@
-BTSettings = {}
+local addonName, addon = ...
 
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 
-f:SetScript("OnEvent", function(self, event, ...)
-    BTEvents.OnEvent(event, ...)
-end)
+f:SetScript("OnEvent", function(_, event, ...)
+    local name = ...
+    if event == "ADDON_LOADED" and name == addonName then
+        -- Initialize addon Tables
+        addon.Events = {}
+        addon.Modules = {}
 
-hooksecurefunc("GameTooltip_SetDefaultAnchor", BTModifications.SetTooltipAnchor)
+        -- Register Module Events
+        if next(addon.Events) ~= nil then
+            for eName, _ in ipairs(addon.Events) do
+                f:RegisterEvent(eName)
+            end
+        end
 
-hooksecurefunc(GameTooltip, "Show", function(self)
-    BTModifications.SetTooltipScale(self)
-    BTModifications.HideTooltipInCombat(self)
-    BTModifications.ApplyTooltipHealthbar()
-end)
-
-local tooltipMods = { "Spell", "Mount", "UnitAura", "Item", "Toy", "Currency", "Quest", "Macro" }
-for _, key in ipairs(tooltipMods) do
-    TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType[key],
-            function(t, d)
-                if not UnitAffectingCombat("player") then
-                    BTModifications.AddTooltipId(t, d.id, string.lower(key))
+        -- Initialize Modules
+        if next(addon.Modules) ~= nil then
+            for _, module in pairs(addon.Modules) do
+                if module.Init ~= nil then
+                    module.Init()
                 end
             end
-    )
-end
+        end
 
-TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit,
-        function(t, _)
-            BTModifications.ApplyTooltipColor(t)
+        f:UnregisterEvent("ADDON_LOADED")
+    end
 
-            if not UnitAffectingCombat("player") and not (InCombatLockdown() or IsInInstance()) then
-                BTModifications.AddUnitId(t, "unit")
-                BTModifications.AddPlayerMythicScore(t, "score")
-                BTModifications.AddPlayerMount(t, "mount")
-                BTModifications.AddPlayerTarget(t, "target")
-
-                BTModifications.AddPlayerGuildRank(t, "rank")
-            end
-        end)
-
-hooksecurefunc("QuestMapLogTitleButton_OnEnter", function(b)
-    BTModifications.AddTooltipId(GameTooltip, b.questID, "quest")
+    -- Trigger Events registered by Modules
+    if addon.Events[event] ~= nil then
+        for _, func in ipairs(addon.Events[event]) do
+            if func then func(...) end
+        end
+    end
 end)
