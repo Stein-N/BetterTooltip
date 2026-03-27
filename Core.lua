@@ -1,10 +1,20 @@
 local addonName, addon = ...
+BTSettings = {}
 
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
 
 f:SetScript("OnEvent", function(_, event, ...)
     local name = ...
+
+    if event == "PLAYER_ENTERING_WORLD" then
+        local _, type = IsInInstance()
+        local rTypes = { "party", "raid", "arena", "pvp", "scenario" }
+
+        addon.IsRestrictedArea = tContains(rTypes, type)
+    end
+
     if event == "ADDON_LOADED" and name == addonName then
         -- Initialize addon Tables
         addon.Events = {}
@@ -26,6 +36,10 @@ f:SetScript("OnEvent", function(_, event, ...)
             end
         end
 
+        -- Initialize the default settings
+        addon.InitSettingsMenu()
+
+        -- remove the ADDON_LOADED event, reduces event trigger if more addons get loaded after this one
         f:UnregisterEvent("ADDON_LOADED")
     end
 

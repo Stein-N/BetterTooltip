@@ -11,6 +11,12 @@
 Data\Constants.lua
 
 # Utils
+Utils\AddOnUtils.lua
+Utils\TooltipUtils.lua
+
+# Settings
+Settings\SettingUtils.lua
+Settings\SettingsMenu.lua
 
 # Core
 Core.lua
