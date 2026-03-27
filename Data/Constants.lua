@@ -53,6 +53,6 @@ addon.Locale = {
     }
 }
 
-addon.TooltipTypes = { "player", "unit", "spell", "mount", "unitaura", "item", "toy", "currency", "quest", "macro" }
+addon.TooltipTypes = { "player", "unit", "spell", "mount", "unitaura", "item", "toy", "macro" }
 addon.ExtraInfos = { "unit", "spell", "mount", "unitaura", "item", "toy", "currency", "quest", "macro", "icon" }
 addon.PlayerInfo = { "mount", "target", "score", "rank" }
