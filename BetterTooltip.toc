@@ -18,5 +18,8 @@ Utils\TooltipUtils.lua
 Settings\SettingUtils.lua
 Settings\SettingsMenu.lua
 
+# Modules
+Modules\GameTooltipModule.lua
+
 # Core
 Core.lua
