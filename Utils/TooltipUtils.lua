@@ -1,3 +1,4 @@
+local _, addon = ...
 TooltipUtils = {}
 
 --- Checks if the given Tooltip is valid
@@ -9,7 +10,8 @@ end
 ---Checks if the given string exists and isn't empty
 ---@param string string
 local function ValidText(string)
-    return string ~= nil and string:match("%S")
+    string = tostring(string)
+    return string ~= nil and string:match("%w+")
 end
 
 ---Checks if the hovered Object is a player unit
@@ -37,9 +39,40 @@ end
 ---@param tooltip GameTooltip
 ---@param prefix string
 ---@param text string
-function TooltipUtils.AddPrefixedLine(tooltip, prefix, text)
+function TooltipUtils.AddPrefixedLine(tooltip, prefix, text, textColor)
     if ValidTooltip(tooltip) and ValidText(prefix) and ValidText(text) then
-        tooltip:AddDoubleLine("|cffffd100" .. prefix .. ":", "|cffffffff" .. text)
+        tooltip:AddDoubleLine("|cffffd100" .. prefix .. ":", (textColor or "|cffffffff") .. text)
         tooltip:Show()
+    end
+end
+
+---Get the Region and Category of an player
+---@param tooltip GameTooltip
+function TooltipUtils.GetPlayerRegion(tooltip)
+    if ValidTooltip(tooltip) and tooltip.GetUnit and TooltipUtils.IsPlayerHovered(tooltip) then
+        local _, unit = tooltip:GetUnit()
+
+        if unit ~= nil then
+            local _, realm = UnitFullName(unit)
+            local regionName = GetCurrentRegionName()
+
+            if not realm ~= nil then
+                realm = GetNormalizedRealmName()
+            end
+
+            realm = realm:gsub("[%s']", ""):lower()
+
+            local regionData = addon.Regions[regionName]
+
+            if regionData ~= nil and regionData[realm] ~= nil then
+                local realmData = regionData[realm]
+                local regionLang = addon.GetLocale("serverRegion")
+                local realmLang = addon.GetLocale("categories")
+
+                return regionLang[regionName], realmLang[realmData.category]
+            end
+        end
+
+        return "Unknown Region", { category = "N/A", locale = "N/A" }
     end
 end

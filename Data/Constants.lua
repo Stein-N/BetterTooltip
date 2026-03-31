@@ -24,6 +24,27 @@ addon.Locale = {
             general = "General",
             extra = "More Information"
         },
+        serverRegion = {
+            US = "North America",
+            KR = "Korea",
+            EU = "Europe",
+            TW = "Taiwan"
+        },
+        categories = {
+            united_states = "United States",
+            oceanic = "Oceanic",
+            brazil = "Brazil",
+            latin_america = "Latin America",
+            german = "German",
+            english = "English",
+            french = "French",
+            russian = "Russian",
+            spanish = "Spanish",
+            italian = "Italian",
+            korea = "Korea",
+            taiwan = "Taiwan",
+            global = "Global"
+        },
 
         hideHealthbar = { label = "Hide Healthbar", tooltip = "Hide the Tooltip Healthbar." },
         toggleAnchor = { label = "Cursor Anchor", tooltip = "Anchor most Tooltips to the cursor" },
@@ -49,10 +70,12 @@ addon.Locale = {
         target = { label = "Target", tooltip = "Display the targets name of the Hovered Player" },
         score = { label = "M+ Score", tooltip = "Display the score of the current Mythic plus season" },
         rank = { label = "Guildrank", tooltip = "Add the rank next to the guild name" },
-        icon = { label = "Icon", tooltip = "" }
+        icon = { label = "Icon", tooltip = "" },
+        region = { label = "Region", tooltip = "Show the Language/Region of the player" },
+        npc = { label = "NPC", tooltip = "" }
     }
 }
 
 addon.TooltipTypes = { "player", "unit", "spell", "mount", "unitaura", "item", "toy", "macro" }
 addon.ExtraInfos = { "unit", "spell", "mount", "unitaura", "item", "toy", "currency", "quest", "macro", "icon" }
-addon.PlayerInfo = { "mount", "target", "score", "rank" }
+addon.PlayerInfo = { "mount", "target", "score", "rank", "region" }

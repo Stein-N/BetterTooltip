@@ -6,9 +6,11 @@
 ## Category: Better UI
 ## Notes: Simple and configurable Tooltip Addon
 ## SavedVariables: BTSettings
+## Dependencies: Blizzard_GroupFinder
 
 # Data
 Data\Constants.lua
+Data\RegionData.lua
 
 # Utils
 Utils\AddOnUtils.lua
@@ -20,6 +22,7 @@ Settings\SettingsMenu.lua
 
 # Modules
 Modules\GameTooltipModule.lua
+Modules\PlayerTooltipModule.lua
 
 # Core
 Core.lua

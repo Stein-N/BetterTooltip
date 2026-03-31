@@ -12,7 +12,7 @@ f:SetScript("OnEvent", function(_, event, ...)
         local _, type = IsInInstance()
         local rTypes = { "party", "raid", "arena", "pvp", "scenario" }
 
-        addon.IsRestrictedArea = tContains(rTypes, type)
+        addon.RestrictedArea = tContains(rTypes, type)
     end
 
     if event == "ADDON_LOADED" and name == addonName then
