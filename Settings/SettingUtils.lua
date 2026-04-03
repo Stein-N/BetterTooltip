@@ -44,7 +44,7 @@ function SettingUtils.CreateCheckboxOptionBuilder(entryTable, addTooltip)
         local container = Settings.CreateControlTextContainer()
 
         for index, value in ipairs(entryTable) do
-            local lang = addon.GetLocale(value)
+            local lang = addon.Locale[value]
             container:AddCheckbox(index, lang.label, addTooltip and lang.tooltip or nil)
         end
 

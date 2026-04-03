@@ -45,34 +45,3 @@ function TooltipUtils.AddPrefixedLine(tooltip, prefix, text, textColor)
         tooltip:Show()
     end
 end
-
----Get the Region and Category of an player
----@param tooltip GameTooltip
-function TooltipUtils.GetPlayerRegion(tooltip)
-    if ValidTooltip(tooltip) and tooltip.GetUnit and TooltipUtils.IsPlayerHovered(tooltip) then
-        local _, unit = tooltip:GetUnit()
-
-        if unit ~= nil then
-            local _, realm = UnitFullName(unit)
-            local regionName = GetCurrentRegionName()
-
-            if not realm ~= nil then
-                realm = GetNormalizedRealmName()
-            end
-
-            realm = realm:gsub("[%s']", ""):lower()
-
-            local regionData = addon.Regions[regionName]
-
-            if regionData ~= nil and regionData[realm] ~= nil then
-                local realmData = regionData[realm]
-                local regionLang = addon.GetLocale("serverRegion")
-                local realmLang = addon.GetLocale("categories")
-
-                return regionLang[regionName], realmLang[realmData.category]
-            end
-        end
-
-        return "Unknown Region", { category = "N/A", locale = "N/A" }
-    end
-end

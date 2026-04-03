@@ -8,12 +8,16 @@
 ## SavedVariables: BTSettings
 ## Dependencies: Blizzard_GroupFinder
 
+# Core
+Core.lua
+
 # Data
 Data\Constants.lua
+Data\Locales.lua
 Data\RegionData.lua
 
 # Utils
-Utils\AddOnUtils.lua
+Utils\RegionUtils.lua
 Utils\TooltipUtils.lua
 
 # Settings
@@ -23,6 +27,3 @@ Settings\SettingsMenu.lua
 # Modules
 Modules\GameTooltipModule.lua
 Modules\PlayerTooltipModule.lua
-
-# Core
-Core.lua

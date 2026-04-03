@@ -1,6 +1,14 @@
 local addonName, addon = ...
 BTSettings = {}
 
+addon.Modules = {}
+
+---Register a new Module that gets initialized when the event ADDON_LOADED Event was triggered
+---@param  module table
+function addon.AddModule(module)
+    table.insert(addon.Modules, module)
+end
+
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -18,13 +26,6 @@ f:SetScript("OnEvent", function(_, event, ...)
     if event == "ADDON_LOADED" and name == addonName then
         BetterTooltipLocals:Init()
         BetterTooltipRegions:Init()
-
-        -- Register Module Events
-        if next(addon.Events) ~= nil then
-            for eName, _ in ipairs(addon.Events) do
-                f:RegisterEvent(eName)
-            end
-        end
 
         -- Initialize Modules
         if next(addon.Modules) ~= nil then

@@ -34,7 +34,7 @@ end
 ---@param key string
 local function CreateSetting(key)
     local option = addon.Settings[key]
-    local lang = addon.GetLocale(key)
+    local lang = addon.Locale[key]
 
     if option ~= nil and lang ~= nil then
         local setting = Settings.RegisterAddOnSetting(_category, key, key, BTSettings, type(option), lang.label, option)
@@ -46,7 +46,7 @@ end
 ---Create a separation Header
 ---@param key string
 local function CreateHeader(key)
-    local lang = addon.GetLocale("header")
+    local lang = addon.Locale.header
     local init = CreateSettingsListSectionHeaderInitializer(lang[key])
     _layout:AddInitializer(init)
     return init
@@ -103,7 +103,7 @@ end
 ---@param entryTable table
 ---@param optionBuilder function
 local function CreateMultiChoiceDropdown(variables, key, entryTable, addTooltips)
-    local lang = addon.GetLocale(key)
+    local lang = addon.Locale[key]
     local proxy = Settings.RegisterProxySetting(_category, key, Settings.VarType.Number, lang.label, addon.Settings[key],
             SettingUtils.CreateGetter(variables, key), SettingUtils.CreateSetter(variables, key, entryTable))
     local init = Settings.CreateDropdown(_category, proxy, SettingUtils.CreateCheckboxOptionBuilder(entryTable, addTooltips), lang.tooltip)
