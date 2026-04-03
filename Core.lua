@@ -16,6 +16,9 @@ f:SetScript("OnEvent", function(_, event, ...)
     end
 
     if event == "ADDON_LOADED" and name == addonName then
+        BetterTooltipLocals:Init()
+        BetterTooltipRegions:Init()
+
         -- Register Module Events
         if next(addon.Events) ~= nil then
             for eName, _ in ipairs(addon.Events) do

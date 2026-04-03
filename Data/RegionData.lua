@@ -1,6 +1,6 @@
 local _, addon = ...
 
-addon.Regions = {
+BetterTooltipRegions = {
     -- United States
     US = {
         ["kilrogg"] = { category = "united_states", locale = "enUS" },
@@ -572,3 +572,8 @@ addon.Regions = {
         ["oldblanchy"] = { category = "global", locale = "zhTW" }
     }
 }
+
+function BetterTooltipRegions:Init()
+    local region = GetCurrentRegionName()
+    addon.Region = self[region] or {}
+end

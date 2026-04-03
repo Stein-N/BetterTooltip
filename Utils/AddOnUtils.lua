@@ -1,14 +1,7 @@
 local _, addon = ...
-local _lang = GetLocale()
 
 addon.Modules = {}
 addon.Events = {}
-
----Return the localized string for a specific key
-function addon.GetLocale(key)
-    local lang = addon.Locale[_lang] or addon.Locale.enUS
-    return lang[key]
-end
 
 ---Splits the given string at the given separator
 ---@param input string
