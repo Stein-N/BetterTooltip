@@ -9,6 +9,7 @@ function PlayerTooltipModule.AddMountName(tooltip)
         if aura ~= nil and aura.name and aura.spellId then
             if C_MountJournal.GetMountFromSpell(aura.spellId) ~= nil then
                 local lang = addon.Locale.mount
+
                 TooltipUtils.AddPrefixedLine(tooltip, lang.label, aura.name)
                 return
             end
@@ -110,11 +111,11 @@ function PlayerTooltipModule.ApplyColor(tooltip)
 end
 
 function PlayerTooltipModule:Init()
-    TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, function(tooltip, _)
+    TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, function(tooltip)
         if not TooltipUtils.IsPlayerHovered(tooltip) then return end
 
         -- Player Infos will not be displayed when
-        if not (InCombatLockdown() and addon.RestrictedArea) then
+        if not (InCombatLockdown() or addon.RestrictedArea) then
             PlayerTooltipModule.AddMythicScore(tooltip)
             PlayerTooltipModule.AddTargetName(tooltip)
             PlayerTooltipModule.AddMountName(tooltip)

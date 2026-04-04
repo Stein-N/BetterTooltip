@@ -19,5 +19,5 @@ addon.Settings = {
 }
 
 addon.TooltipTypes = { "player", "unit", "spell", "mount", "unitaura", "item", "toy", "macro" }
-addon.ExtraInfos = { "unit", "spell", "mount", "unitaura", "item", "toy", "currency", "quest", "macro", "icon" }
+addon.ExtraInfos = { "unit", "spell", "mount", "unitaura", "item", "toy", "currency", "quest", "macro", "achievement", "quest", "icon" }
 addon.PlayerInfo = { "mount", "target", "score", "rank", "language" }

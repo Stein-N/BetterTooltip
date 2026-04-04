@@ -47,7 +47,8 @@ BetterTooltipLocals = {
         rank = { label = "Guildrank", tooltip = "Add the rank next to the guild name" },
         icon = { label = "Icon", tooltip = "" },
         language = { label = "Language", tooltip = "Show the Language of the player" },
-        npc = { label = "NPC", tooltip = "" }
+        npc = { label = "NPC", tooltip = "" },
+        achievement = { label = "Achievement", tooltip = "" }
     }
 }
 

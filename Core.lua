@@ -42,11 +42,4 @@ f:SetScript("OnEvent", function(_, event, ...)
         -- remove the ADDON_LOADED event, reduces event trigger if more addons get loaded after this one
         f:UnregisterEvent("ADDON_LOADED")
     end
-
-    -- Trigger Events registered by Modules
-    if addon.Events[event] ~= nil then
-        for _, func in ipairs(addon.Events[event]) do
-            if func then func(...) end
-        end
-    end
 end)

@@ -17,6 +17,7 @@ Data\Locales.lua
 Data\RegionData.lua
 
 # Utils
+Utils\IdUtils.lua
 Utils\RegionUtils.lua
 Utils\TooltipUtils.lua
 
@@ -27,3 +28,4 @@ Settings\SettingsMenu.lua
 # Modules
 Modules\GameTooltipModule.lua
 Modules\PlayerTooltipModule.lua
+Modules\IdTooltipModule.lua

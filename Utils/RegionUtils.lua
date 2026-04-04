@@ -21,8 +21,7 @@ function RegionUtils:GetLanguage(realmSlug)
 end
 
 function RegionUtils:GetLanguageFromUnit(unit)
-    local guid = UnitGUID(unit)
-    if guid ~= nil then
+    if unit ~= nil then
         local _, realm = UnitFullName(unit)
         local slug = self:GetRealmSlug(realm or GetNormalizedRealmName())
 
