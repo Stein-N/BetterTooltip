@@ -99,7 +99,7 @@ function PlayerTooltipModule.ApplyColor(tooltip)
         local _, unit = tooltip:GetUnit()
 
         local _, class = UnitClass(unit)
-        local color = RAID_CLASS_COLORS[class:upper()]:GenerateHexColor()
+        local color = RAID_CLASS_COLORS[class]:GenerateHexColor()
 
         local function editLine(index, c)
             local line = _G["GameTooltipTextLeft" .. index]
