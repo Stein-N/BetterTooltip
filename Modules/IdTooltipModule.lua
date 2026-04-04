@@ -47,14 +47,28 @@ function IdTooltipModule.AddIconID(tooltip, data, key)
     end
 end
 
+local function HideTooltipInFight(tooltip, key)
+    if UnitAffectingCombat("player") and BTSettings.hideTooltipActive[key] then
+        tooltip:Hide()
+        return true
+    end
+    return false
+end
+
 function IdTooltipModule:Init()
     AddPostProcessor(types.Unit, function(tooltip, _)
-        IdTooltipModule.AddUnitID(tooltip)
+        if TooltipUtils.IsPlayerHovered(tooltip) then return end
+
+        if not HideTooltipInFight(tooltip, "unit") then
+            IdTooltipModule.AddUnitID(tooltip)
+        end
     end)
 
     AddPostProcessor(types.Spell, function(tooltip, data)
-        IdTooltipModule.AddID(tooltip, data, "spell")
-        IdTooltipModule.AddIconID(tooltip, data, "spell")
+        if not HideTooltipInFight(tooltip, "spell") then
+            IdTooltipModule.AddID(tooltip, data, "spell")
+            IdTooltipModule.AddIconID(tooltip, data, "spell")
+        end
     end)
 
     AddPostProcessor(types.Mount, function(tooltip, data)
@@ -63,36 +77,52 @@ function IdTooltipModule:Init()
     end)
 
     AddPostProcessor(types.Currency, function(tooltip, data)
-        IdTooltipModule.AddID(tooltip, data, "currency")
-        IdTooltipModule.AddIconID(tooltip, data, "currency")
+        if not HideTooltipInFight(tooltip, "currency") then
+            IdTooltipModule.AddID(tooltip, data, "currency")
+            IdTooltipModule.AddIconID(tooltip, data, "currency")
+        end
     end)
 
     AddPostProcessor(types.UnitAura, function(tooltip, data)
-        IdTooltipModule.AddID(tooltip, data, "unitaura")
-        IdTooltipModule.AddIconID(tooltip, data, "spell")
+        if not HideTooltipInFight(tooltip, "unitaura") then
+            if not (InCombatLockdown() or addon.RestrictedArea) then
+                IdTooltipModule.AddID(tooltip, data, "unitaura")
+                IdTooltipModule.AddIconID(tooltip, data, "spell")
+            end
+        end
     end)
 
     AddPostProcessor(types.Macro, function(tooltip, data)
-        IdTooltipModule.AddID(tooltip, data, "macro")
-        IdTooltipModule.AddIconID(tooltip, data, "macro")
+        if not HideTooltipInFight(tooltip, "macro") then
+            IdTooltipModule.AddID(tooltip, data, "macro")
+            IdTooltipModule.AddIconID(tooltip, data, "macro")
+        end
     end)
 
     AddPostProcessor(types.Item, function(tooltip, data)
-        IdTooltipModule.AddID(tooltip, data, "item")
-        IdTooltipModule.AddIconID(tooltip, data, "item")
+        if not HideTooltipInFight(tooltip, "item") then
+            IdTooltipModule.AddID(tooltip, data, "item")
+            IdTooltipModule.AddIconID(tooltip, data, "item")
+        end
     end)
 
     AddPostProcessor(types.Toy, function(tooltip, data)
-        IdTooltipModule.AddID(tooltip, data, "toy")
-        IdTooltipModule.AddIconID(tooltip, data, "spell")
+        if not HideTooltipInFight(tooltip, "toy") then
+            IdTooltipModule.AddID(tooltip, data, "toy")
+            IdTooltipModule.AddIconID(tooltip, data, "spell")
+        end
     end)
 
     AddPostProcessor(types.Achievement, function(tooltip, data)
-        IdTooltipModule.AddID(tooltip, data, "achievement")
+        if not HideTooltipInFight(tooltip, "achievement") then
+            IdTooltipModule.AddID(tooltip, data, "achievement")
+        end
     end)
 
     AddPostProcessor(types.Quest, function(tooltip, data)
-        IdTooltipModule.AddID(tooltip, data, "quest")
+        if not HideTooltipInFight(tooltip, "quest") then
+            IdTooltipModule.AddID(tooltip, data, "quest")
+        end
     end)
 
     hooksecurefunc("QuestMapLogTitleButton_OnEnter", function(b)
@@ -103,7 +133,9 @@ function IdTooltipModule:Init()
     end)
 
     AddPostProcessor(types.QuestPartyProgress, function(tooltip, data)
-        IdTooltipModule.AddID(tooltip, data, "quest")
+        if not HideTooltipInFight(tooltip, "quest") then
+            IdTooltipModule.AddID(tooltip, data, "quest")
+        end
     end)
 end
 

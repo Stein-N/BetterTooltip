@@ -22,7 +22,10 @@ function TooltipUtils.IsPlayerHovered(tooltip)
     end
 
     local _, unit = tooltip:GetUnit()
-    return unit and UnitIsPlayer(unit)
+    local guid = UnitGUID(unit)
+    local type = strsplit("-", guid)
+
+    return type == "Player"
 end
 
 ---Adds a single line at the end of the given tooltip
@@ -44,4 +47,9 @@ function TooltipUtils.AddPrefixedLine(tooltip, prefix, text, textColor)
         tooltip:AddDoubleLine("|cffffd100" .. prefix .. ":", (textColor or "|cffffffff") .. text)
         tooltip:Show()
     end
+end
+
+function TooltipUtils.HideTooltip(tooltip, key)
+    if not BTSettings.hideTooltipActive[key] then return end
+    tooltip:Hide()
 end

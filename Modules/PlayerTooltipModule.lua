@@ -114,6 +114,11 @@ function PlayerTooltipModule:Init()
     TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, function(tooltip)
         if not TooltipUtils.IsPlayerHovered(tooltip) then return end
 
+        if BTSettings.hideTooltipActive.player and UnitAffectingCombat("player") then
+            tooltip:Hide()
+            return
+        end
+
         -- Player Infos will not be displayed when
         if not (InCombatLockdown() or addon.RestrictedArea) then
             PlayerTooltipModule.AddMythicScore(tooltip)
