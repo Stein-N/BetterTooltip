@@ -1,6 +1,14 @@
 local _, addon = ...
 PlayerTooltipModule = {}
 
+local function IsUnitPlayer(unit)
+    if unit == nil then return false end
+    local guid = UnitGUID(unit)
+    local type = strsplit("-", guid)
+
+    return type:lower() == "player"
+end
+
 function PlayerTooltipModule.AddMountName(tooltip)
     if not BTSettings.displayPlayerInfoActive.mount then return end
 
@@ -33,28 +41,28 @@ end
 
 function PlayerTooltipModule.AddTargetName(tooltip)
     if not BTSettings.displayPlayerInfoActive.target then return end
+    if not tooltip.GetUnit then return end
 
-    if tooltip.GetUnit ~= nil then
-        local _, unit = tooltip:GetUnit()
+    local _, unit = tooltip:GetUnit()
+    if unit == nil then return end
 
-        if unit ~= nil and not UnitIsUnit("player", unit) then
-            local name = UnitName(unit .. "target")
+    local targetUnit = unit .. "target"
+    local targetName = UnitName(targetUnit)
+    if targetName == nil then return end
 
-            if name ~= nil then
-                local class = UnitClass(unit .. "target")
-                local color = RAID_CLASS_COLORS[class:upper()]
-                local lang = addon.Locale.target
+    local lang = addon.Locale.target
+    local _, class = UnitClass(targetUnit)
+    if class == nil then return end
 
-                if color ~= nil then
-                    local colorString = "|c" .. color:GenerateHexColor()
-                    TooltipUtils.AddPrefixedLine(tooltip, lang.label, name, colorString)
-                    return
-                end
+    local color = RAID_CLASS_COLORS[class]
 
-                local npcTag = addon.Locale.npc
-                TooltipUtils.AddPrefixedLine(tooltip, lang.label, name .. " (" .. npcTag.label ..")")
-            end
-        end
+    if color ~= nil and IsUnitPlayer(targetUnit) then
+        local colorString = "|c" .. color:GenerateHexColor()
+        TooltipUtils.AddPrefixedLine(tooltip, lang.label, targetName, colorString)
+    else
+        local npcLabel = addon.Locale.npc.label
+        local formattedName = string.format("%s (%s)", targetName, npcLabel)
+        TooltipUtils.AddPrefixedLine(tooltip, lang.label, formattedName)
     end
 end
 
@@ -119,7 +127,6 @@ function PlayerTooltipModule:Init()
             return
         end
 
-        -- Player Infos will not be displayed when
         if not (InCombatLockdown() or addon.RestrictedArea) then
             PlayerTooltipModule.AddMythicScore(tooltip)
             PlayerTooltipModule.AddTargetName(tooltip)
@@ -130,31 +137,6 @@ function PlayerTooltipModule:Init()
         PlayerTooltipModule.AddGuildRank(tooltip)
         PlayerTooltipModule.AddLanguage(tooltip)
     end)
-
-
-    --hooksecurefunc("LFGListUtil_SetSearchEntryTooltip", function(tooltip, resultID)
-    --    if not BTSettings.displayPlayerInfoActive.region or resultID == nil then return end
-    --
-    --    local resultInfo = C_LFGList.GetSearchResultInfo(resultID)
-    --    if resultInfo ~= nil then
-    --        local _, realm = strsplit("-", resultInfo.leaderName)
-    --        local regionName = GetCurrentRegionName()
-    --        realm = realm:gsub("[%s']", ""):lower()
-    --
-    --        local regionData = addon.Regions[regionName]
-    --
-    --        if regionData ~= nil and regionData[realm] then
-    --            local realmData = regionData[realm]
-    --            local regionLang = addon.Locale.server
-    --            local realmLang = addon.Locale("categories")
-    --            local lang = addon.Locale("region")
-    --
-    --            if regionLang[regionName] ~= nil and realmLang[realmData.category] then
-    --                TooltipUtils.AddPrefixedLine(tooltip, lang.label, regionLang[regionName] .. " - " .. realmLang[realmData.category])
-    --            end
-    --        end
-    --    end
-    --end)
 end
 
 addon.AddModule(PlayerTooltipModule)

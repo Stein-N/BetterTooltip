@@ -1,6 +1,6 @@
 # --- Configuration ---
 # The script now automatically detects the .toc file and reads metadata from it.
-$sourceFiles = Get-ChildItem -Path . -Recurse -Include *.lua, *.toc -File
+$sourceFiles = Get-ChildItem -Path . -Recurse -Include *.lua, *.toc, *.tga -File
 $destinationFolder = "./build"
 
 # --- Find .toc file ---

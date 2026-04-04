@@ -28,4 +28,5 @@ Settings\SettingsMenu.lua
 # Modules
 Modules\GameTooltipModule.lua
 Modules\PlayerTooltipModule.lua
+Modules\LFGListTooltipModule.lua
 Modules\IdTooltipModule.lua

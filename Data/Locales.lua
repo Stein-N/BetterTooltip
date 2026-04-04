@@ -7,8 +7,8 @@ BetterTooltipLocals = {
             extra = "More Information"
         },
         languages = {
-            enUS = "English (US)",
-            enGB = "English (GB)",
+            enUS = "English",
+            enGB = "English",
             deDE = "German",
             frFR = "French",
             ptPT = "Polish",

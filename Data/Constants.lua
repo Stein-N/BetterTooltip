@@ -8,7 +8,7 @@ addon.Settings = {
     tooltipScale = 100,
     tooltipColor = true,
 
-    hideTooltip = 971,
+    hideTooltip = 4073,
     hideTooltipActive = {},
 
     displayExtraInfo = 0,

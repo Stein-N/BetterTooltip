@@ -17,15 +17,18 @@ end
 ---Checks if the hovered Object is a player unit
 ---@param tooltip GameTooltip
 function TooltipUtils.IsPlayerHovered(tooltip)
-    if not (tooltip or tooltip.GetUnit) then
-        return false
+    if tooltip ~= nil and tooltip.GetUnit ~= nil then
+        local _, unit = tooltip:GetUnit()
+
+        if unit ~= nil then
+            local guid = UnitGUID(unit)
+            local type = strsplit("-", guid)
+
+            return type:lower() == "player"
+        end
     end
 
-    local _, unit = tooltip:GetUnit()
-    local guid = UnitGUID(unit)
-    local type = strsplit("-", guid)
-
-    return type == "Player"
+    return false
 end
 
 ---Adds a single line at the end of the given tooltip
@@ -47,9 +50,4 @@ function TooltipUtils.AddPrefixedLine(tooltip, prefix, text, textColor)
         tooltip:AddDoubleLine("|cffffd100" .. prefix .. ":", (textColor or "|cffffffff") .. text)
         tooltip:Show()
     end
-end
-
-function TooltipUtils.HideTooltip(tooltip, key)
-    if not BTSettings.hideTooltipActive[key] then return end
-    tooltip:Hide()
 end
