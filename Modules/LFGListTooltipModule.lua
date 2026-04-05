@@ -10,10 +10,10 @@ function LFGListTooltipModule.AddTooltipLanguage(tooltip, resultID)
 end
 
 function LFGListTooltipModule.AddMemberLanguage(member, appID, index)
-    local language = RegionUtils:GetLangFlagFromApplicant(appID, index)
+    local flag = RegionUtils:GetLangFlagFromApplicant(appID, index)
 
-    if member.Name ~= nil then
-        member.Name:SetText(language .. member.Name:GetText())
+    if member.Name ~= nil and flag ~= nil then
+        member.Name:SetText(flag .. member.Name:GetText())
     end
 end
 

@@ -44,9 +44,12 @@ function RegionUtils:GetLangFlagFromApplicant(appID, memberIndex)
     if fullName ~= nil then
         local _, realm = strsplit("-", fullName)
         local slug = self:GetRealmSlug(realm or GetNormalizedRealmName())
-        local locale = addon.Region[slug].locale
 
-        return "|TInterface\\AddOns\\BetterTooltip\\Media\\" .. locale .. "_flag:10:18|t "
+        if slug ~= nil then
+            local locale = addon.Region[slug].locale
+
+            return "|TInterface\\AddOns\\BetterTooltip\\Media\\" .. locale .. "_flag:10:18|t "
+        end
     end
 end
 
