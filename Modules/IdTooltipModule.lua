@@ -13,14 +13,17 @@ function IdTooltipModule.AddUnitID(tooltip)
 
     if tooltip.GetUnit ~= nil then
         local _, unit = tooltip:GetUnit()
-        local guid = UnitGUID(unit)
 
-        if guid ~= nil then
-            local _, _, _, _, _, id = strsplit("%-", guid)
-            local lang = addon.Locale.unit
+        if unit ~= nil then
+            local guid = UnitGUID(unit)
 
-            if id ~= nil then
-                TooltipUtils.AddPrefixedLine(tooltip, lang.label, id)
+            if guid ~= nil then
+                local _, _, _, _, _, id = strsplit("%-", guid)
+                local lang = addon.Locale.unit
+
+                if id ~= nil then
+                    TooltipUtils.AddPrefixedLine(tooltip, lang.label, id)
+                end
             end
         end
     end
