@@ -20,11 +20,8 @@ function TooltipUtils.IsPlayerHovered(tooltip)
     if tooltip ~= nil and tooltip.GetUnit ~= nil then
         local _, unit = tooltip:GetUnit()
 
-        if unit ~= nil then
-            local guid = UnitGUID(unit)
-            local type = strsplit("-", guid)
-
-            return type:lower() == "player"
+        if unit ~= nil and not issecretvalue(unit) then
+            return UnitIsPlayer(unit)
         end
     end
 

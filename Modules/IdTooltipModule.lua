@@ -63,7 +63,9 @@ function IdTooltipModule:Init()
         if TooltipUtils.IsPlayerHovered(tooltip) then return end
 
         if not HideTooltipInFight(tooltip, "unit") then
-            IdTooltipModule.AddUnitID(tooltip)
+            if not (InCombatLockdown() or addon.RestrictedArea) then
+                IdTooltipModule.AddUnitID(tooltip)
+            end
         end
     end)
 
