@@ -14,16 +14,11 @@ function IdTooltipModule.AddUnitID(tooltip)
     if tooltip.GetUnit ~= nil then
         local _, unit = tooltip:GetUnit()
 
-        if unit ~= nil then
-            local guid = UnitGUID(unit)
-
-            if guid ~= nil then
-                local _, _, _, _, _, id = strsplit("%-", guid)
+        if unit ~= nil and not issecretvalue(unit) then
+            local unitID = UnitCreatureID(unit)
+            if unitID ~= nil then
                 local lang = addon.Locale.unit
-
-                if id ~= nil then
-                    TooltipUtils.AddPrefixedLine(tooltip, lang.label, id)
-                end
+                TooltipUtils.AddPrefixedLine(tooltip, lang.label, unitID)
             end
         end
     end
@@ -63,9 +58,7 @@ function IdTooltipModule:Init()
         if TooltipUtils.IsPlayerHovered(tooltip) then return end
 
         if not HideTooltipInFight(tooltip, "unit") then
-            if not (InCombatLockdown() or addon.RestrictedArea) then
-                IdTooltipModule.AddUnitID(tooltip)
-            end
+            IdTooltipModule.AddUnitID(tooltip)
         end
     end)
 
