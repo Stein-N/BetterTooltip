@@ -1,2 +1,2 @@
-### v3.0.1
- - fixing lua error when hovering a unit in fight
+### v3.0.2
+ - finally, fixing lua error spam in instances
