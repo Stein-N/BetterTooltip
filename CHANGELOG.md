@@ -1,2 +1,3 @@
-### v3.0.3
- - finally, fixing lua error spam in instances
+### v3.1.0
+  - mythic+ rating setting gets applied correctly
+  - show mythic plus contribution from units

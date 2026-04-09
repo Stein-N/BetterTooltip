@@ -26,7 +26,7 @@ function PlayerTooltipModule.AddMountName(tooltip)
 end
 
 function PlayerTooltipModule.AddMythicScore(tooltip)
-    if not BTSettings.displayPlayerInfoActive.rank then return end
+    if not BTSettings.displayPlayerInfoActive.score then return end
 
     local summary = C_PlayerInfo.GetPlayerMythicPlusRatingSummary("mouseover")
     if summary ~= nil and summary.currentSeasonScore ~= 0 then

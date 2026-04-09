@@ -12,6 +12,7 @@ end
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:RegisterEvent("CHALLENGE_MODE_START")
 
 f:SetScript("OnEvent", function(_, event, ...)
     local name = ...
@@ -21,6 +22,14 @@ f:SetScript("OnEvent", function(_, event, ...)
         local rTypes = { "party", "raid", "arena", "pvp", "scenario" }
 
         addon.RestrictedArea = tContains(rTypes, type)
+    end
+
+    if event == "CHALLENGE_MODE_START" then
+        local mapID = C_ChallengeMode.GetActiveChallengeMapID()
+        if mapID ~= nil then
+            DungeonData:LoadDungeonData(mapID)
+            MobFingerprints:LoadFingerprints(mapID)
+        end
     end
 
     if event == "ADDON_LOADED" and name == addonName then

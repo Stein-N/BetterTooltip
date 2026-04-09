@@ -126,6 +126,7 @@ function addon.InitSettingsMenu()
     CreateHeader("extra")
     CreateMultiChoiceDropdown(BTSettings, "displayExtraInfo", addon.ExtraInfos, false)
     CreateMultiChoiceDropdown(BTSettings, "displayPlayerInfo", addon.PlayerInfo, true)
+    CreateMultiChoiceDropdown(BTSettings, "displayMythicPlusInfo", addon.MythicPlusInfo, true)
 
     Settings.RegisterAddOnCategory(_category)
 end

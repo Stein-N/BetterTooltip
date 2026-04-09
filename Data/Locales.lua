@@ -31,6 +31,7 @@ BetterTooltipLocals = {
         hideTooltip = { label = "Hide Tooltip", tooltip = "Decide which Tooltip should be hidden while fighting" },
         displayExtraInfo = { label = "Show IDs for", tooltip = "Shows the id inside the Tooltip" },
         displayPlayerInfo = { label = "Show Player Info", tooltip = "Shows extra information for hovered player." },
+        displayMythicPlusInfo = { label = "Show Mythic Plus Info", tooltip = "Display how many points/percent a single unit provides in Mythic plus dungeons." },
 
         player = { label = "Player", tooltip = "Player Tooltip" },
         unit = { label = "Unit", tooltip = "" },
@@ -48,7 +49,11 @@ BetterTooltipLocals = {
         icon = { label = "Icon", tooltip = "" },
         language = { label = "Language", tooltip = "Show the Language of the player" },
         npc = { label = "NPC", tooltip = "" },
-        achievement = { label = "Achievement", tooltip = "" }
+        achievement = { label = "Achievement", tooltip = "" },
+        contributes = {label = "M+ Contribution", tooltip = "" },
+
+        forcesProgressNumerical = { label = "Forces Contribution (Numerical)", tooltip = "Shows the amount a single unit contributes in numbers." },
+        forcesProgressPercentage = { label = "Forces Contribution (Percentage)", tooltip = "Shows the amount a single unit contributes in percentage." },
     }
 }
 

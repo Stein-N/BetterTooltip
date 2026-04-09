@@ -1,6 +1,27 @@
 local name, addon = ...
 IdUtils = {}
 
+function IdUtils.GetIdFromGUID(guid)
+    if guid ~= nil and not issecretvalue(guid) then
+        local _, _, _, _, _, id = strsplit("-", guid)
+        return id
+    end
+
+    return nil
+end
+
+function IdUtils.GetIdFromUnit(unit)
+    if unit ~= nil and not issecretvalue(unit) then
+        local id = UnitCreatureID(unit)
+        if id == nil then
+            local guid = UnitGUID(unit)
+            id = IdUtils.GetIdFromGUID(guid)
+        end
+
+        return id
+    end
+end
+
 function IdUtils.spell(spellID)
     if spellID ~= nil then
         local spellInfo = C_Spell.GetSpellInfo(spellID)
