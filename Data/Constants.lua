@@ -23,5 +23,5 @@ addon.Settings = {
 
 addon.TooltipTypes = { "player", "unit", "spell", "mount", "unitaura", "item", "toy", "currency", "quest", "macro", "achievement", "quest" }
 addon.ExtraInfos = { "unit", "spell", "mount", "unitaura", "item", "toy", "currency", "quest", "macro", "achievement", "quest", "icon" }
-addon.PlayerInfo = { "mount", "target", "score", "rank", "language" }
+addon.PlayerInfo = { "mount", "target", "score", "rank", "language", "itemLevel" }
 addon.MythicPlusInfo = { "forcesProgressNumerical", "forcesProgressPercentage" }

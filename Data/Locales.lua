@@ -51,6 +51,8 @@ BetterTooltipLocals = {
         npc = { label = "NPC", tooltip = "" },
         achievement = { label = "Achievement", tooltip = "" },
         contributes = {label = "M+ Contribution", tooltip = "" },
+        itemLevel = { label = "Item Level", tooltip = "Show the current Item Level, needs some time to load and is throttled." },
+        loading = { label = "Loading...", tooltip = "" },
 
         forcesProgressNumerical = { label = "Forces Contribution (Numerical)", tooltip = "Shows the amount a single unit contributes in numbers." },
         forcesProgressPercentage = { label = "Forces Contribution (Percentage)", tooltip = "Shows the amount a single unit contributes in percentage." },

@@ -48,3 +48,23 @@ function TooltipUtils.AddPrefixedLine(tooltip, prefix, text, textColor)
         tooltip:Show()
     end
 end
+
+---@param tooltip GameTooltip
+---@param iLvl string
+function TooltipUtils.UpdateItemLevelLine(tooltip, iLvl)
+    if ValidTooltip(tooltip) and ValidText(iLvl) then
+        local lang = addon.Locale.itemLevel
+        local pattern = lang.label .. ":"
+
+        for i = tooltip:NumLines(), 1, -1 do
+            local tipName = tooltip:GetName()
+            local leftText = _G[tipName .."TextLeft" .. i]:GetText()
+            if type(leftText) == "string" and leftText:find(pattern) then
+                local iLvlText = _G[tipName .. "TextRight" .. i]
+                iLvlText:SetText("|cffffffff" .. iLvl)
+
+                return
+            end
+        end
+    end
+end

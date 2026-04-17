@@ -2,7 +2,7 @@ local _, addon = ...
 PlayerTooltipModule = {}
 
 local function IsUnitPlayer(unit)
-    if unit == nil then return false end
+    if unit == nil or issecretvalue(unit) then return false end
     local guid = UnitGUID(unit)
     local type = strsplit("-", guid)
 
@@ -118,8 +118,41 @@ function PlayerTooltipModule.ApplyColor(tooltip)
     end
 end
 
+addon.itemLevelCache = {}
+local _lastRequest = 0
+function PlayerTooltipModule.AddItemLevel(tooltip, guid)
+    if not BTSettings.displayPlayerInfoActive.itemLevel then return end
+
+    local unit = select(2, tooltip:GetUnit())
+    if unit ~= nil and guid ~= nil then
+        if not UnitExists(unit) or not CanInspect(unit) then return end
+        local prefix = addon.Locale.itemLevel
+        local loading = addon.Locale.loading
+
+        if addon.itemLevelCache[guid] then
+            TooltipUtils.AddPrefixedLine(tooltip, prefix.label, addon.itemLevelCache[guid])
+
+            return
+        end
+
+        if InspectFrame then INSPECTED_UNIT = unit end
+        local now = GetTime()
+        local throttle = now - _lastRequest
+
+        if throttle >= 1 then
+            _lastRequest = now
+            NotifyInspect(unit)
+        else
+            C_Timer.After(1, function() NotifyInspect(unit) end)
+            _lastRequest = now + 1
+        end
+
+        TooltipUtils.AddPrefixedLine(tooltip, prefix.label, loading.label)
+    end
+end
+
 function PlayerTooltipModule:Init()
-    TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, function(tooltip)
+    TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, function(tooltip, data)
         if not TooltipUtils.IsPlayerHovered(tooltip) then return end
 
         if BTSettings.hideTooltipActive.player and UnitAffectingCombat("player") then
@@ -127,14 +160,16 @@ function PlayerTooltipModule:Init()
             return
         end
 
+        PlayerTooltipModule.ApplyColor(tooltip)
+        PlayerTooltipModule.AddGuildRank(tooltip)
+        PlayerTooltipModule.AddItemLevel(tooltip, data.guid)
+
         if not (InCombatLockdown() or addon.RestrictedArea) then
             PlayerTooltipModule.AddMythicScore(tooltip)
             PlayerTooltipModule.AddTargetName(tooltip)
             PlayerTooltipModule.AddMountName(tooltip)
         end
 
-        PlayerTooltipModule.ApplyColor(tooltip)
-        PlayerTooltipModule.AddGuildRank(tooltip)
         PlayerTooltipModule.AddLanguage(tooltip)
     end)
 end

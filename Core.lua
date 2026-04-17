@@ -11,6 +11,7 @@ end
 
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
+f:RegisterEvent("INSPECT_READY")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:RegisterEvent("CHALLENGE_MODE_START")
 
@@ -30,6 +31,26 @@ f:SetScript("OnEvent", function(_, event, ...)
             DungeonData:LoadDungeonData(mapID)
             MobFingerprints:LoadFingerprints(mapID)
         end
+    end
+
+    if event == "INSPECT_READY" then
+        local guid = ...
+        local unitToken = UnitTokenFromGUID(guid)
+
+        if unitToken ~= nil and not issecretvalue(unitToken) then
+            local iLvl = C_PaperDollInfo.GetInspectItemLevel(unitToken)
+
+            if iLvl ~= nil and iLvl > 0 then
+                addon.itemLevelCache[guid] = iLvl
+
+                local tooltipUnit = select(2, GameTooltip:GetUnit())
+                if tooltipUnit ~= nil and not issecretvalue(tooltipUnit) and UnitGUID(tooltipUnit) == guid then
+                    TooltipUtils.UpdateItemLevelLine(GameTooltip, iLvl)
+                end
+            end
+        end
+
+        ClearInspectPlayer()
     end
 
     if event == "ADDON_LOADED" and name == addonName then
