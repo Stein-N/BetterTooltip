@@ -117,6 +117,8 @@ function PlayerTooltipModule.AddItemLevel(tooltip, guid)
     if not BTSettings.displayPlayerInfoActive.itemLevel then return end
 
     if guid ~= nil then
+        addon.RegisterTempEvent("INSPECT_READY")
+
         if not UnitExists("mouseover") or not CanInspect("mouseover") then return end
         local prefix = addon.Locale.itemLevel
         local loading = addon.Locale.loading

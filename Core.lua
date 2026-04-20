@@ -3,16 +3,21 @@ BTSettings = {}
 
 addon.Modules = {}
 
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+
 ---Register a new Module that gets initialized when the event ADDON_LOADED Event was triggered
 ---@param  module table
 function addon.AddModule(module)
     table.insert(addon.Modules, module)
 end
 
-local f = CreateFrame("Frame")
-f:RegisterEvent("ADDON_LOADED")
-f:RegisterEvent("INSPECT_READY")
-f:RegisterEvent("PLAYER_ENTERING_WORLD")
+function addon.RegisterTempEvent(event)
+    if event ~= nil then
+        f:RegisterEvent(event)
+    end
+end
 
 f:SetScript("OnEvent", function(_, event, ...)
     local name = ...
@@ -43,6 +48,8 @@ f:SetScript("OnEvent", function(_, event, ...)
         if InspectFrame and not InspectFrame:IsShown() then
             ClearInspectPlayer()
         end
+
+        f:UnregisterEvent("INSPECT_READY")
     end
 
     if event == "ADDON_LOADED" and name == addonName then
