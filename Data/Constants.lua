@@ -7,6 +7,8 @@ addon.Settings = {
     toggleScaling = false,
     tooltipScale = 100,
     tooltipColor = true,
+    mountColor = true,
+    mountColorStyle = "SYMBOL",
 
     hideTooltip = 4073,
     hideTooltipActive = {},

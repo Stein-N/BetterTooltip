@@ -14,20 +14,6 @@ local function ValidText(string)
     return string ~= nil and string:match("%w+")
 end
 
----Checks if the hovered Object is a player unit
----@param tooltip GameTooltip
-function TooltipUtils.IsPlayerHovered(tooltip)
-    if tooltip ~= nil and tooltip.GetUnit ~= nil then
-        local _, unit = tooltip:GetUnit()
-
-        if unit ~= nil and not issecretvalue(unit) then
-            return UnitIsPlayer(unit)
-        end
-    end
-
-    return false
-end
-
 ---Adds a single line at the end of the given tooltip
 ---@param tooltip GameTooltip
 ---@param text string
@@ -43,7 +29,7 @@ end
 ---@param prefix string
 ---@param text string
 function TooltipUtils.AddPrefixedLine(tooltip, prefix, text, textColor)
-    if ValidTooltip(tooltip) and ValidText(prefix) and ValidText(text) then
+    if ValidTooltip(tooltip) then
         tooltip:AddDoubleLine("|cffffd100" .. prefix .. ":", (textColor or "|cffffffff") .. text)
         tooltip:Show()
     end

@@ -1,6 +1,6 @@
 ## Interface: 120000, 120001, 120005
 ## Title: BetterTooltip
-## Version: 3.2.0
+## Version: 3.2.5-BETA
 ## Author: xStopho
 ## X-Curse-Project-ID: 1341522
 ## Category: Better UI
@@ -13,12 +13,11 @@ Core.lua
 
 # Data
 Data\Constants.lua
-Data\DungeonData.lua
 Data\Locales.lua
-Data\MobFingerprints.lua
 Data\RegionData.lua
 
 # Utils
+Utils\BTUtils.lua
 Utils\IdUtils.lua
 Utils\RegionUtils.lua
 Utils\TooltipUtils.lua

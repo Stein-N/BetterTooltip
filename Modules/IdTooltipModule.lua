@@ -11,16 +11,10 @@ end
 function IdTooltipModule.AddUnitID(tooltip)
     if not BTSettings.displayExtraInfoActive.unit then return end
 
-    if tooltip.GetUnit ~= nil then
-        local _, unit = tooltip:GetUnit()
-
-        if unit ~= nil and not issecretvalue(unit) then
-            local unitID = UnitCreatureID(unit)
-            if unitID ~= nil then
-                local lang = addon.Locale.unit
-                TooltipUtils.AddPrefixedLine(tooltip, lang.label, unitID)
-            end
-        end
+    local unitID = UnitCreatureID("mouseover")
+    if unitID ~= nil then
+        local lang = addon.Locale.unit
+        TooltipUtils.AddPrefixedLine(tooltip, lang.label, unitID)
     end
 end
 
@@ -55,7 +49,7 @@ end
 
 function IdTooltipModule:Init()
     AddPostProcessor(types.Unit, function(tooltip, _)
-        if TooltipUtils.IsPlayerHovered(tooltip) then return end
+        if BTUtils.IsPlayerHovered() then return end
 
         if not HideTooltipInFight(tooltip, "unit") then
             IdTooltipModule.AddUnitID(tooltip)

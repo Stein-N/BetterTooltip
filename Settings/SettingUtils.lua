@@ -55,10 +55,21 @@ end
 --- Create Dropdown options for Cursor Anchor
 function SettingUtils.BuildAnchorOptions()
     local c = Settings.CreateControlTextContainer()
+    local lang = addon.Locale.anchorPositions
 
-    c:Add("ANCHOR_CURSOR_LEFT", "Left")
-    c:Add("ANCHOR_CURSOR", "Center")
-    c:Add("ANCHOR_CURSOR_RIGHT", "Right")
+    c:Add("ANCHOR_CURSOR_LEFT", lang.left.label)
+    c:Add("ANCHOR_CURSOR", lang.center.label)
+    c:Add("ANCHOR_CURSOR_RIGHT", lang.right.label)
+
+    return c:GetData()
+end
+
+function SettingUtils.BuildMountColorOptions()
+    local c = Settings.CreateControlTextContainer()
+    local lang = addon.Locale.mountColorStyles
+
+    c:Add("COLOR", lang.color.label, lang.color.tooltip)
+    c:Add("SYMBOL", lang.symbol.label, lang.symbol.tooltip)
 
     return c:GetData()
 end
