@@ -128,7 +128,7 @@ function addon.InitSettingsMenu()
     CreateHeader("extra")
     CreateMultiChoiceDropdown(BTSettings, "displayExtraInfo", addon.ExtraInfos, false)
     CreateMultiChoiceDropdown(BTSettings, "displayPlayerInfo", addon.PlayerInfo, true)
-    CreateCheckboxSingleChoiceDropdown("mountColor", "mountColorStyle", SettingUtils.BuildMountColorOptions)
+    --CreateCheckboxSingleChoiceDropdown("mountColor", "mountColorStyle", SettingUtils.BuildMountColorOptions)
     CreateMultiChoiceDropdown(BTSettings, "displayMythicPlusInfo", addon.MythicPlusInfo, true)
 
     Settings.RegisterAddOnCategory(_category)
