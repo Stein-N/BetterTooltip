@@ -1,6 +1,14 @@
 local _, addon = ...
 PlayerTooltipModule = {}
 
+local function GetUnit()
+    if OrbitPlayerFrame and OrbitPlayerFrame.isMouseOver then
+        return "player"
+    end
+
+    return UnitExists("mouseover") and "mouseover" or "player"
+end
+
 local function IsUnitPlayer(unit)
     if unit == nil or issecretvalue(unit) then return false end
     local guid = UnitGUID(unit)
@@ -11,9 +19,10 @@ end
 
 function PlayerTooltipModule.AddMountName(tooltip)
     if not BTSettings.displayPlayerInfoActive.mount then return end
+    local unitToken = GetUnit()
 
     for i = 1, 10 do
-        local aura = C_UnitAuras.GetAuraDataByIndex("mouseover", i)
+        local aura = C_UnitAuras.GetAuraDataByIndex(unitToken, i)
         if aura ~= nil and aura.name and aura.spellId then
             local mountID = C_MountJournal.GetMountFromSpell(aura.spellId)
 
@@ -31,8 +40,9 @@ end
 
 function PlayerTooltipModule.AddMythicScore(tooltip)
     if not BTSettings.displayPlayerInfoActive.score then return end
+    local unitToken = GetUnit()
 
-    local summary = C_PlayerInfo.GetPlayerMythicPlusRatingSummary("mouseover")
+    local summary = C_PlayerInfo.GetPlayerMythicPlusRatingSummary(unitToken)
     if summary ~= nil and summary.currentSeasonScore ~= 0 then
         local lang = addon.Locale.score
 
@@ -45,9 +55,9 @@ end
 
 function PlayerTooltipModule.AddTargetName(tooltip)
     if not BTSettings.displayPlayerInfoActive.target then return end
-    if not tooltip.GetUnit then return end
+    local unitToken = GetUnit()
 
-    local targetUnit = "mouseover" .. "target"
+    local targetUnit = unitToken .. "target"
     local targetName = UnitName(targetUnit)
     if targetName == nil then return end
 
@@ -69,8 +79,9 @@ end
 
 function PlayerTooltipModule.AddLanguage(tooltip)
     if not BTSettings.displayPlayerInfoActive.language then return end
+    local unitToken = GetUnit()
 
-    local language = RegionUtils:GetLanguageFromUnit("mouseover")
+    local language = RegionUtils:GetLanguageFromUnit(unitToken)
     local lang = addon.Locale.language
 
     if language ~= nil then
@@ -80,29 +91,31 @@ end
 
 function PlayerTooltipModule.AddGuildRank()
     if not BTSettings.displayPlayerInfoActive.rank then return end
+    local unitToken = GetUnit()
 
-    local name, rank = GetGuildInfo("mouseover")
+    local name, rank = GetGuildInfo(unitToken)
     local line = _G["GameTooltipTextLeft2"]
 
-    if name ~= nil and rank ~= nil and line ~= nil then
+    if name ~= nil and rank ~= nil and line ~= nil and line:GetText() ~= nil then
         line:SetText(line:GetText() .. " - " .. rank)
     end
 end
 
 function PlayerTooltipModule.ApplyColor()
     if not BTSettings.tooltipColor then return end
+    local unitToken = GetUnit()
 
-    local _, class = UnitClass("mouseover")
+    local _, class = UnitClass(unitToken)
     local color = RAID_CLASS_COLORS[class]:GenerateHexColor()
 
     local function editLine(index, c)
         local line = _G["GameTooltipTextLeft" .. index]
-        if line then line:SetText("|c" .. c .. line:GetText()) end
+        if line and line:GetText() ~= nil then line:SetText("|c" .. c .. line:GetText()) end
     end
 
     editLine(1, color)
 
-    local guildName = GetGuildInfo("mouseover")
+    local guildName = GetGuildInfo(unitToken)
     if guildName then
         editLine(2, "009999ff")
         editLine(4, color)
@@ -115,11 +128,12 @@ addon.itemLevelCache = {}
 local _lastRequest = 0
 function PlayerTooltipModule.AddItemLevel(tooltip, guid)
     if not BTSettings.displayPlayerInfoActive.itemLevel then return end
+    local unitToken = GetUnit()
 
     if guid ~= nil then
         addon.RegisterTempEvent("INSPECT_READY")
 
-        if not UnitExists("mouseover") or not CanInspect("mouseover") then return end
+        if not UnitExists(unitToken) or not CanInspect(unitToken) then return end
         local prefix = addon.Locale.itemLevel
         local loading = addon.Locale.loading
 
@@ -129,15 +143,15 @@ function PlayerTooltipModule.AddItemLevel(tooltip, guid)
             return
         end
 
-        if InspectFrame and not InspectFrame:IsShown() then INSPECTED_UNIT = "mouseover" end
+        if InspectFrame and not InspectFrame:IsShown() then INSPECTED_UNIT = unitToken end
         local now = GetTime()
         local throttle = now - _lastRequest
 
         if throttle >= 1 then
             _lastRequest = now
-            NotifyInspect("mouseover")
+            NotifyInspect(unitToken)
         else
-            C_Timer.After(1, function() NotifyInspect("mouseover") end)
+            C_Timer.After(1, function() NotifyInspect(unitToken) end)
             _lastRequest = now + 1
         end
 
