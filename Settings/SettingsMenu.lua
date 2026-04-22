@@ -109,8 +109,6 @@ local function CreateMultiChoiceDropdown(variables, key, entryTable, addTooltips
     local init = Settings.CreateDropdown(_category, proxy, SettingUtils.CreateCheckboxOptionBuilder(entryTable, addTooltips), lang.tooltip)
     init.getSelectionTextFunc = function(selections) if #selections == 0 then return "None" else return nil end end
 
-    print(init.Control ~= nil)
-
     return init
 end
 

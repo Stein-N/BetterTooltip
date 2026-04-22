@@ -1,3 +1,2 @@
-### v3.1.0
-  - mythic+ rating setting gets applied correctly
-  - show mythic plus contribution from units
+### v3.2.5
+  - Use Blizzards own API to get forces contribution in mythic+
