@@ -2,10 +2,6 @@ local _, addon = ...
 PlayerTooltipModule = {}
 
 local function GetUnit()
-    if OrbitPlayerFrame and OrbitPlayerFrame.isMouseOver then
-        return "player"
-    end
-
     return UnitExists("mouseover") and "mouseover" or "player"
 end
 
@@ -131,8 +127,6 @@ function PlayerTooltipModule.AddItemLevel(tooltip, guid)
     local unitToken = GetUnit()
 
     if guid ~= nil then
-        addon.RegisterTempEvent("INSPECT_READY")
-
         if not UnitExists(unitToken) or not CanInspect(unitToken) then return end
         local prefix = addon.Locale.itemLevel
         local loading = addon.Locale.loading
@@ -143,19 +137,24 @@ function PlayerTooltipModule.AddItemLevel(tooltip, guid)
             return
         end
 
-        if InspectFrame and not InspectFrame:IsShown() then INSPECTED_UNIT = unitToken end
-        local now = GetTime()
-        local throttle = now - _lastRequest
+        if InspectFrame and not InspectFrame:IsShown() then
+            addon.RegisterTempEvent("INSPECT_READY")
 
-        if throttle >= 1 then
-            _lastRequest = now
-            NotifyInspect(unitToken)
-        else
-            C_Timer.After(1, function() NotifyInspect(unitToken) end)
-            _lastRequest = now + 1
+            local now = GetTime()
+            local throttle = now - _lastRequest
+
+            if throttle >= 1 then
+                _lastRequest = now
+                NotifyInspect(unitToken)
+            else
+                C_Timer.After(1, function() NotifyInspect(unitToken) end)
+                _lastRequest = now + 1
+            end
+
+            INSPECTED_UNIT = unitToken
+
+            TooltipUtils.AddPrefixedLine(tooltip, prefix.label, loading.label)
         end
-
-        TooltipUtils.AddPrefixedLine(tooltip, prefix.label, loading.label)
     end
 end
 
