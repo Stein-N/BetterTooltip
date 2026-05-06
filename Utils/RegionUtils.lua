@@ -14,9 +14,12 @@ end
 
 function RegionUtils:GetLanguage(realmSlug)
     if realmSlug ~= nil or realmSlug ~= "" then
-        local langCode = addon.Region[realmSlug].locale
+        local langCode = addon.Region[realmSlug]
+        if not langCode then
+            return nil
+        end
 
-        return addon.Locale.languages[langCode]
+        return addon.Locale.languages[langCode.locale]
     end
 end
 
