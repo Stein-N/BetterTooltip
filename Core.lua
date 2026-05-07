@@ -19,6 +19,12 @@ function addon.RegisterTempEvent(event)
     end
 end
 
+local function ClearInspectFrame()
+    if InspectFrame and not InspectFrame:IsShown() then
+        ClearInspectPlayer()
+    end
+end
+
 f:SetScript("OnEvent", function(_, event, ...)
     local name = ...
 
@@ -31,6 +37,12 @@ f:SetScript("OnEvent", function(_, event, ...)
 
     if event == "INSPECT_READY" then
         local guid = ...
+
+        if issecretvalue(guid) then
+            ClearInspectFrame()
+            return
+        end
+
         local unitToken = UnitTokenFromGUID(guid)
 
         if unitToken ~= nil and not issecretvalue(unitToken) then
@@ -45,10 +57,7 @@ f:SetScript("OnEvent", function(_, event, ...)
             end
         end
 
-        if InspectFrame and not InspectFrame:IsShown() then
-            ClearInspectPlayer()
-        end
-
+        ClearInspectFrame()
         f:UnregisterEvent("INSPECT_READY")
     end
 
