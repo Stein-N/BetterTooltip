@@ -1,2 +1,3 @@
-### v3.2.5
-  - Use Blizzards own API to get forces contribution in mythic+
+### v3.2.9
+  - fix lua error for Language display
+  - fix lua error for item Level display
