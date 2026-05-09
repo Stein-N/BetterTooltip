@@ -5,7 +5,7 @@ addon.Modules = {}
 
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
-f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:RegisterEvent("ADDON_RESTRICTION_STATE_CHANGED")
 
 ---Register a new Module that gets initialized when the event ADDON_LOADED Event was triggered
 ---@param  module table
@@ -26,13 +26,9 @@ local function ClearInspectFrame()
 end
 
 f:SetScript("OnEvent", function(_, event, ...)
-    local name = ...
-
-    if event == "PLAYER_ENTERING_WORLD" then
-        local _, type = IsInInstance()
-        local rTypes = { "party", "raid", "arena", "pvp", "scenario" }
-
-        addon.RestrictedArea = tContains(rTypes, type)
+    if event == "ADDON_RESTRICTION_STATE_CHANGED" then
+        local _, state = ...
+        addon.RestrictedArea = (state ~= 0)
     end
 
     if event == "INSPECT_READY" then
@@ -61,7 +57,11 @@ f:SetScript("OnEvent", function(_, event, ...)
         f:UnregisterEvent("INSPECT_READY")
     end
 
-    if event == "ADDON_LOADED" and name == addonName then
+    if event == "ADDON_LOADED" then
+        local name = ...
+
+        if name ~= addonName then return end
+
         BetterTooltipLocals:Init()
         BetterTooltipRegions:Init()
 
